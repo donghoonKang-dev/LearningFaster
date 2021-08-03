@@ -1,19 +1,13 @@
 import React from 'react';
 import Hello from './Hello';
-import './App.css'
+import Wrapper from './Wrapper';
 
 function App() {
-  const style = {
-    backgroundColor: 'black',
-    color: 'aqua'
-  }
   return (
-    <div>
-      {/*주석*/}
+    <Wrapper>
+      <Hello name="choco" color="red" />
       <Hello />
-      <div style={style}>React</div>
-      <div className="gray-box"></div>
-    </div>
+    </Wrapper>
   );
 }
 

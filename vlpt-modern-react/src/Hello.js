@@ -1,12 +1,14 @@
 import React from 'react'
 
-export default function Hello() {
-  const name = 'choco'
+export default function Hello({ color, name }) {
   return (
-    <div>
-      <h1>{name}</h1>
-      <h2>안녕하세요</h2>
+    <div style={{ color }}>
+      <h1>안녕하세요 {name}</h1>
     </div>
   )
 }
- 
+
+Hello.defaultProps = {
+  name: '이름없음',
+  color: 'pink'
+} 
