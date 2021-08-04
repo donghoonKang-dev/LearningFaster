@@ -19,17 +19,20 @@ function App() {
     {
       id: 1,
       username: 'noa',
-      email: 'believer.noa@gmail.com'
+      email: 'believer.noa@gmail.com',
+      active: true
     },
     {
       id: 2,
       username: 'choco',
-      email: 'believer.choco@gmail.com'
+      email: 'believer.choco@gmail.com',
+      active: true
     },
     {
       id: 3,
       username: 'durun',
-      email: 'believer.durun@gmail.com'
+      email: 'believer.durun@gmail.com',
+      active: true
     },
   ]);
 
@@ -48,6 +51,16 @@ function App() {
     });
     nextId.current += 1;
   }
+  const onRemove = id => {
+    setUsers(users.filter(user => user.id !== id));
+  }
+  const onToggle = id => {
+    setUsers(
+      users.map(user =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
   return (
     <>
       <CreateUser
@@ -56,7 +69,7 @@ function App() {
         onChange={onChane}
         onCreate={onCreate}
          />
-      <UserList users={users} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </>
   );
 }
