@@ -5,7 +5,7 @@ import Wrapper from './Wrapper';
 function App() {
   return (
     <Wrapper>
-      <Hello name="choco" color="red" />
+      <Hello name="choco" color="red" isSpecial="true" />
       <Hello />
     </Wrapper>
   );
