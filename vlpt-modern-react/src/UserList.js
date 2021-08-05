@@ -1,6 +1,6 @@
 import React from 'react'
 
-function User({ user, onRemove, onToggle }){
+const User = React.memo( ({ user, onRemove, onToggle }) => {
   return (
     <div>
       <b
@@ -15,14 +15,16 @@ function User({ user, onRemove, onToggle }){
       <span>({user.email})</span>
       <button onClick={() => onRemove(user.id)}>삭제</button>
     </div>
-  )
-}
-export default function UserList({ users, onRemove, onToggle }) {
+  );
+});
+const UserList = ({ users, onRemove, onToggle }) => {
   return (
     <div>
       {users.map(user => (
         <User user={user} key={user.id} onRemove={onRemove} onToggle={onToggle} />
       ))}
     </div>
-  )
-}
+  );
+};
+
+export default React.memo(UserList);
