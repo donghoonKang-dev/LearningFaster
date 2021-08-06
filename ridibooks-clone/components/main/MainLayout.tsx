@@ -5,9 +5,9 @@ import { MainLayoutContainer } from './styles';
 export default function MainLayout(): JSX.Element {
   return (
     <MainLayoutContainer>
-      <div className="mainHeaderBg">
-        <MainHeader />
-      </div>
+      <div className="mainHeaderBg"> </div>
+      <div className="mainHeaderBorder"> </div>
+      <MainHeader />
     </MainLayoutContainer>
-  )
+  );
 }
