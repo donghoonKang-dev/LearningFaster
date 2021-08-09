@@ -6,6 +6,13 @@ const DECREASE = 'DECREASE';
 export const increase = () => ({ type: INCREASE });
 export const decrease = () => ({ type: DECREASE });
 
+export const increaseAsync = () => dispatch => {
+  setTimeout(() => dispatch(increase()), 3000);
+}
+export const decreaseAsync = () => dispatch => {
+  setTimeout(() => dispatch(decrease()), 3000);
+}
+
 // 초깃값
 const initialState = 0;
 
