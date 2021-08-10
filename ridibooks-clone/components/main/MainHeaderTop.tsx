@@ -32,7 +32,9 @@ export default function MainHeaderTop(): JSX.Element {
         {isInputClicked && (
           <div className="resent_search_container">
             <div className="resent_search_top">최근 검색어</div>
-            <div className="resent_search_mid">최근 검색어 내역이 없습니다.</div>
+            <div className="resent_search_mid">
+              <span>최근 검색어 내역이 없습니다.</span>
+            </div>
             <div className="resent_search_bottom">검색어 저장 끄기</div>
           </div>
         )}

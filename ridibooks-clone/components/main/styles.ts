@@ -91,9 +91,39 @@ export const MainHeaderTopContainer = styled.div`
       left: 0;
       width: 23.75rem;
       height: 15.125rem;
+      z-index: 3;
       background-color: #ffffff;
+      color: #000000;
       box-shadow: 0.1rem 0.2rem 0.5rem #50575c;
       border-radius: 3px;
+      .resent_search_top {
+        width: 100%;
+        height: 17%;
+        color: #808991;
+        padding: 12px 0px 12px 16px;
+        font-size: 0.875rem;
+      }
+      .resent_search_mid {
+        width: 100%;
+        height: 66%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          height: 1rem;
+          color: #9ea7ad;
+          font-size: 0.875rem;
+        }
+      }
+      .resent_search_bottom {
+        width: 100%;
+        height: 17%;
+        background-color: #f2f4f5;
+        color: #808991;
+        border-radius: 0 0 3px 3px;
+        font-size: 0.875rem;
+        padding: 12px 16px;
+      }
     }
   }
   .user_button_wrapper {
