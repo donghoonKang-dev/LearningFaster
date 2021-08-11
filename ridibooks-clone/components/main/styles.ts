@@ -84,6 +84,9 @@ export const MainHeaderTopContainer = styled.div`
       border-radius: 0px 3px 3px 0px;
       outline: none;
       font-size: 1rem;
+      :focus + .resent_search_container {
+        display: initial;
+      }
     }
     .resent_search_container {
       position: absolute;
@@ -96,6 +99,7 @@ export const MainHeaderTopContainer = styled.div`
       color: #000000;
       box-shadow: 0.1rem 0.2rem 0.5rem #50575c;
       border-radius: 3px;
+      display: none;
       .resent_search_top {
         width: 100%;
         height: 17%;
@@ -123,6 +127,7 @@ export const MainHeaderTopContainer = styled.div`
         border-radius: 0 0 3px 3px;
         font-size: 0.875rem;
         padding: 12px 16px;
+        cursor: pointer;
       }
     }
   }

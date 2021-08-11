@@ -11,6 +11,7 @@ export default function MainHeaderBottom(): JSX.Element {
       <button>일반</button>
       <button>로맨스</button>
       <button>판타지</button>
+      <button>만화</button>
       <button>BL</button>
     </MainHeaderBottomContainer>
   );
