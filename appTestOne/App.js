@@ -6,14 +6,22 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View, Image, Button} from 'react-native';
 
 const App = () => {
+  const [isPressed, setIsPressed] = useState(false);
+
+  const onClickIcon = () => {
+    setIsPressed(!isPressed);
+  };
+
   return (
     <View style={styles.container}>
-      <Image source={require('./assets/appleLogo.jpg')} style={styles.logo} />
-      <Text style={styles.hallo}>Hallo</Text>
+      {isPressed && (
+        <Image source={require('./assets/appleLogo.jpg')} style={styles.logo} />
+      )}
+      <Button title="Hallo" onPress={onClickIcon} />
     </View>
   );
 };
@@ -23,10 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  hallo: {
-    marginTop: 20,
-    fontSize: 50,
   },
   logo: {
     width: 100,
