@@ -6,36 +6,32 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, Image, Button} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './components/HomeScreen';
+import MainScreen from './components/MainScreen';
+import HookScreen from './components/HookScreen';
+import PostScreen from './components/PostScreen';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [isPressed, setIsPressed] = useState(false);
-
-  const onClickIcon = () => {
-    setIsPressed(!isPressed);
-  };
-
   return (
-    <View style={styles.container}>
-      {isPressed && (
-        <Image source={require('./assets/appleLogo.jpg')} style={styles.logo} />
-      )}
-      <Button title="Hallo" onPress={onClickIcon} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Home'}}
+        />
+        {/* initial params 설정 가능 */}
+        <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="Hook" component={HookScreen} />
+        <Stack.Screen name="Post" component={PostScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-});
 
 export default App;
