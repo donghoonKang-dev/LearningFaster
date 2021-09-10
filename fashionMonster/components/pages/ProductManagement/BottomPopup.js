@@ -20,8 +20,8 @@ const BottomPopup = ({ isOpen, onClose, onTouchOutside }) => {
 
   return (
     <Modal
-      animationType={'fade'}
       transparent={true}
+      animationType='fade'
       visible={isOpen}
       onRequestClose={onClose}
     >
@@ -40,7 +40,6 @@ const BottomPopup = ({ isOpen, onClose, onTouchOutside }) => {
 const styles = StyleSheet.create({
   translucentArea: {
     flex: 1,
-    justifyContent: 'flex-end',
     backgroundColor: THEME_BLACK,
     opacity: 0.2,
   },
