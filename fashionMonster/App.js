@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
 } from 'react-native';
 import Header from './components/common/Header';
+import BottomNavigator from './components/common/BottomNavigator';
 import BottomPopup from './components/common/BottomPopup';
 
 const THEME_PURPLE = '#6A0DAD';
@@ -34,17 +31,12 @@ const App = () => {
       <SafeAreaView style={styles.mainSafeAreaContainer}>
         <StatusBar barStyle="light-content"/>
         <Header iconClick={showLogOutPopup}/>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic">
-          <View>
-            <Text>이것은 홈입니다.</Text>
-          </View>
-          <BottomPopup 
-            isOpen={logOutPopupOpen}
-            onClose={logOut}
-            onTouchOutside={closeLogOutPopup} 
-          />
-        </ScrollView>
+        <BottomNavigator />
+        <BottomPopup 
+          isOpen={logOutPopupOpen}
+          onClose={logOut}
+          onTouchOutside={closeLogOutPopup} 
+        />
       </SafeAreaView>
     </>
   );

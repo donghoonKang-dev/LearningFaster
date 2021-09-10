@@ -29,7 +29,7 @@ const Header = ({iconClick}) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 60,
+    height: 50,
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',

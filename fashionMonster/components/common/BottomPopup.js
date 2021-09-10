@@ -48,10 +48,12 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 15,
     paddingHorizontal: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     backgroundColor: THEME_WHITE,
   },
   logoutText: {
-    marginBottom: 20,
+    marginBottom: 32,
     color: THEME_BLACK,
     fontSize: 20,
     fontWeight: '300',
