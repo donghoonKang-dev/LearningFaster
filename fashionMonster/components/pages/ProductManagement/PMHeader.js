@@ -10,7 +10,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 const THEME_PURPLE = '#6A0DAD';
 const THEME_WHITE = '#FFFFFF';
 
-const Header = ({iconClick}) => {
+const PMHeader = ({iconClick}) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerTextContainer}>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default PMHeader;

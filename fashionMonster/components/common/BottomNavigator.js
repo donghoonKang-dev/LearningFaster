@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ProductManagement from '../pages/ProductManagement';
-import ProductRegistration from '../pages/ProductRegistration';
+import ProductManagement from '../pages/ProductManagement/ProductManagement';
+import ProductRegistration from '../pages/ProductRegistration/ProductRegistration';
 
 const THEME_PURPLE = '#6A0DAD';
 const THEME_GRAY = '#808080';
