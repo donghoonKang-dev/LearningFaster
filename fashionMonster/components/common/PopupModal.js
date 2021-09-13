@@ -31,31 +31,33 @@ const PopupModal = ({ title, desc, isModalVisible, onClose }) => {
       visible={isModalVisible}
       onRequestClose={onClose}
     >
-      <TouchableOpacity
-        disabled={true}
-        style={styles.container}
-      >
-        <View style={styles.modal}>
-          <View style={styles.textView}>
-            {title && <Text style={styles.textHeader}>{title}</Text>}
-            <Text style={styles.textDesc}>{desc}</Text>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+        <TouchableOpacity
+          disabled={true}
+          style={styles.container}
+        >
+          <View style={styles.modal}>
+            <View style={styles.textView}>
+              {title && <Text style={styles.textHeader}>{title}</Text>}
+              <Text style={styles.textDesc}>{desc}</Text>
+            </View>
+            <View style={styles.buttonsView}>
+              <TouchableOpacity 
+                style={styles.buttonFrame}
+                onPress={() => closeModal('Cancel')}
+              >
+                <Text style={styles.firstButton}>취소</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.buttonFrame}
+                onPress={() => closeModal('OK')}
+              >
+                <Text style={styles.secondButton}>확인</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.buttonsView}>
-            <TouchableOpacity 
-              style={styles.buttonFrame}
-              onPress={() => closeModal('Cancel')}
-            >
-              <Text style={styles.firstButton}>취소</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.buttonFrame}
-              onPress={() => closeModal('OK')}
-            >
-              <Text style={styles.secondButton}>확인</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </Modal>
   )
 };
