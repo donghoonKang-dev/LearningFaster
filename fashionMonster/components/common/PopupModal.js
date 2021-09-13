@@ -31,7 +31,7 @@ const PopupModal = ({ title, desc, isModalVisible, onClose }) => {
       visible={isModalVisible}
       onRequestClose={onClose}
     >
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)'}}>
         <TouchableOpacity
           disabled={true}
           style={styles.container}

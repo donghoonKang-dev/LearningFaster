@@ -24,8 +24,8 @@ const PMHeader = ({iconClick}) => {
       </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   headerContainer: {

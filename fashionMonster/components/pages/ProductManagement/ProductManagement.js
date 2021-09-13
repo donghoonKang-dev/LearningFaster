@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import Header from './PMHeader';
+import SearchBar from './SearchBar';
 import BottomPopup from './BottomPopup';
 
 const ProductManagement = () => {
@@ -23,6 +24,7 @@ const ProductManagement = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic">
         <View>
+          <SearchBar />
           <Text>상품 관리 페이지 입니다.</Text>
         </View>
         <BottomPopup 
