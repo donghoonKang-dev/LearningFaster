@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Text, Keyboard } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-const THEME_PURPLE = '#6A0DAD';
-const THEME_WHITE = '#FFFFFF';
 const THEME_LIGHTGRAY = '#E0E0E0'
 const THEME_GRAY = '#808080';
 
-const SearchBar = () => {
+const SearchBar = ({ pressed, searchBarOpen, searchBarClose }) => {
   const [text, setText] = useState('');
-  const [isPressed, setIsPressed] = useState(false);
 
-  const onTogglePressed = () => {
-    setIsPressed(prev => !prev);
+  const onClickCancel = () => {
+    searchBarClose();
+    Keyboard.dismiss();
+    setText('');
   }
-
   return (
     <View style={styles.searchBarContainer}>
-      <View style={{...styles.searchBox,width: (isPressed ? '85%' : '100%')}}>
+      <View style={{...styles.searchBox,width: (pressed ? '85%' : '100%')}}>
         <FeatherIcon name="search" size={20} color={THEME_GRAY} />
         <TextInput
           style={styles.textInput}
           onChangeText={setText}
           value={text}
-          onPressIn={onTogglePressed}
+          onPressIn={searchBarOpen}
           placeholder="상품명을 입력해주세요."
           keyboardType="default"
         />
       </View>
-      {isPressed &&
-        <TouchableWithoutFeedback onPress={onTogglePressed}>
+      {pressed &&
+        <TouchableWithoutFeedback onPress={onClickCancel}>
           <Text style={styles.cancelText}>취소</Text>
         </TouchableWithoutFeedback>}
     </View>
@@ -48,14 +46,14 @@ const styles = StyleSheet.create({
   searchBox: {
     height: 40,
     flexDirection: 'row',
-    paddingVertical: 5,
     paddingHorizontal: 15,
     alignItems: 'center',
     borderRadius: 15,
     backgroundColor: THEME_LIGHTGRAY,
   },
   textInput: {
-    height: 30,
+    width: '100%',
+    height: '100%',
     marginHorizontal: 10,
   },
   cancelText: {

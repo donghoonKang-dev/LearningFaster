@@ -16,6 +16,7 @@ const BottomNavigator = () => {
       <Tab.Navigator screenOptions={() => ({
         header: () => { return null; },
         headerBackgroundContainerStyle: { height: 0 },
+        position: 'absolute',
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: false,
         tabBarStyle: {
