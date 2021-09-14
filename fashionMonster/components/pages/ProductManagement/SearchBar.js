@@ -37,6 +37,7 @@ const SearchBar = ({ pressed, searchBarOpen, searchBarClose }) => {
 const styles = StyleSheet.create({
   searchBarContainer: {
     height: 50,
+    marginTop: 5,
     paddingVertical: 5,
     paddingHorizontal: 10,
     flexDirection: 'row',
