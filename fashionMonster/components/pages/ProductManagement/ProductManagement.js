@@ -3,8 +3,9 @@ import { View, Text } from 'react-native';
 import Header from './PMHeader';
 import SearchBar from './SearchBar';
 import SearchList from './SearchList';
-import BottomPopup from './BottomPopup';
 import FilterContainer from './FilterContainer';
+import ProductList from './ProductList';
+import BottomPopup from './BottomPopup';
 
 const ProductManagement = () => {
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
@@ -48,8 +49,10 @@ const ProductManagement = () => {
   return (
     <>
       <Header iconClick={showLogOutPopup} />
-      <View
-        contentInsetAdjustmentBehavior="automatic">
+      <View 
+        style={{ flex: 1 }}
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <SearchBar
           pressed={isSearchBarClicked}
           searchBarOpen={searchBarOpen}
@@ -57,10 +60,10 @@ const ProductManagement = () => {
         />
         {isSearchBarClicked ?
           <SearchList />:
-          <>
+          <View style={{ flex: 1 }}>
             <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup}/>
-            <Text>상품 관리 페이지 입니다.</Text>
-          </>
+            <ProductList />
+          </View>
         }
         {logOutPopupOpen &&
           <BottomPopup

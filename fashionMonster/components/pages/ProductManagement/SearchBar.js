@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Text, Keyboard } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-const THEME_LIGHTGRAY = '#E0E0E0'
+const THEME_LIGHTGRAY = '#E0E0E0';
 const THEME_GRAY = '#808080';
 
 const SearchBar = ({ pressed, searchBarOpen, searchBarClose }) => {
