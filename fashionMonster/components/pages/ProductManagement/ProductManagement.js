@@ -32,12 +32,17 @@ const ProductManagement = () => {
   const sortByDate = () => {
     setSelectedFilter('sortByDate');
     setFilterPopupOpen(false);
-    alert('등록일순 정렬 되었습니다.');
+    alert('최근 등록일순 정렬 되었습니다.');
   };
-  const sortByName = () => {
-    setSelectedFilter('sortByName');
+  const sortByPriceAsc = () => {
+    setSelectedFilter('sortByPriceAsc');
     setFilterPopupOpen(false);
-    alert('이름순 정렬 되었습니다.');
+    alert('가격 낮은순 정렬 되었습니다.');
+  };
+  const sortByPriceDsc = () => {
+    setSelectedFilter('sortByPriceDsc');
+    setFilterPopupOpen(false);
+    alert('가격 높은순 정렬 되었습니다.');
   };
   const searchBarOpen = () => {
     setIsSearchBarClicked(true)
@@ -62,7 +67,7 @@ const ProductManagement = () => {
           <SearchList />:
           <View style={{ flex: 1 }}>
             <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup}/>
-            <ProductList />
+            <ProductList selectedFilter={selectedFilter} />
           </View>
         }
         {logOutPopupOpen &&
@@ -79,7 +84,8 @@ const ProductManagement = () => {
             isOpen={filterPopupOpen}
             sortBy={selectedFilter}
             sortByDate={sortByDate}
-            sortByName={sortByName}
+            sortByPriceAsc={sortByPriceAsc}
+            sortByPriceDsc={sortByPriceDsc}
             onTouchOutside={closeFilterPopup} 
           />
         }

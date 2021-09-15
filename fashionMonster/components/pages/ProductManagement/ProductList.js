@@ -1,60 +1,19 @@
-import React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, FlatList } from 'react-native';
 import ProductListItem from './ProductListItem';
+import DATA from '../../../assets/data/data';
 
-const DATA = [
-  {
-    id: 'product1',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품1',
-    uploadDate: '2021-09-08 14:49:34',
-    price: '11111644',
-  },
-  {
-    id: 'product2',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품2',
-    uploadDate: '2021-09-07 14:49:34',
-    price: '252345',
-  },
-  {
-    id: 'product3',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품3',
-    uploadDate: '2021-09-06 14:49:34',
-    price: '11564',
-  },
-  {
-    id: 'product4',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품4',
-    uploadDate: '2021-09-05 14:49:34',
-    price: '90234587',
-  },
-  {
-    id: 'product5',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품5',
-    uploadDate: '2021-09-04 14:49:34',
-    price: '3489567',
-  },
-  {
-    id: 'product6',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품6',
-    uploadDate: '2021-09-03 14:49:34',
-    price: '3452',
-  },
-  {
-    id: 'product7',
-    imgSrc: require('../../../assets/image/pylee.gif'),
-    name: '상품7',
-    uploadDate: '2021-09-02 14:49:34',
-    price: '150000',
-  },
-];
+const dateParser = (dateString) => {
+  const date = dateString.slice(0, 10);
+  const time = dateString.slice(11);
 
-const ProductList = () => {
+  const dates = date.split('-')
+  const times = time.split(':')
+
+  return parseInt(dates.join('') + times.join(''));
+};
+
+const ProductList = ({ selectedFilter }) => {
   const renderItem = ({ item }) => (
     <ProductListItem
       imgSrc={item.imgSrc}
@@ -66,11 +25,27 @@ const ProductList = () => {
 
   return (
     <View style={styles.listContainer}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      { selectedFilter === 'sortByDate' && 
+        <FlatList
+          data={DATA.sort((x,y) => dateParser(y.uploadDate) - dateParser(x.uploadDate))}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      }
+      { selectedFilter === 'sortByPriceAsc' && 
+        <FlatList
+          data={DATA.sort((x,y) => parseInt(x.price) - parseInt(y.price))}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      }
+      { selectedFilter === 'sortByPriceDsc' && 
+        <FlatList
+          data={DATA.sort((x,y) => parseInt(y.price) - parseInt(x.price))}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      }
     </View>
   );
 };

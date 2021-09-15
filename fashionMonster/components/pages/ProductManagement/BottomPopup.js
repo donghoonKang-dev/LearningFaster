@@ -13,16 +13,31 @@ const THEME_WHITE = '#FFFFFF';
 const THEME_GRAY = '#808080';
 const THEME_BLACK = '#000000';
 
-const BottomPopup = ({ name, sortBy, isOpen, onClose, sortByDate, sortByName, onTouchOutside }) => {
+const BottomPopup = ({ 
+  name, 
+  sortBy, 
+  isOpen,
+  onClose,
+  sortByDate,
+  sortByPriceAsc,
+  sortByPriceDsc,
+  onTouchOutside }) => {
   const [sortByDateColor, setSortByDateColor] = useState(THEME_GRAY);
-  const [sortByNameColor, setSortByNameColor] = useState(THEME_GRAY);
-  
+  const [sortByPriceAscColor, setSortByPriceAscColor] = useState(THEME_GRAY);
+  const [sortByPriceDscColor, setSortByPriceDscColor] = useState(THEME_GRAY);
+
   useEffect(() => {
     if (sortBy === 'sortByDate') {
       setSortByDateColor(THEME_PURPLE);
-      setSortByNameColor(THEME_GRAY);
+      setSortByPriceAscColor(THEME_GRAY);
+      setSortByPriceDscColor(THEME_GRAY);
+    } else if (sortBy === 'sortByPriceAsc') {
+      setSortByPriceAscColor(THEME_PURPLE);
+      setSortByDateColor(THEME_GRAY);
+      setSortByPriceDscColor(THEME_GRAY);
     } else {
-      setSortByNameColor(THEME_PURPLE);
+      setSortByPriceDscColor(THEME_PURPLE);
+      setSortByPriceAscColor(THEME_GRAY);
       setSortByDateColor(THEME_GRAY);
     }
   }, [sortBy]);
@@ -70,9 +85,13 @@ const BottomPopup = ({ name, sortBy, isOpen, onClose, sortByDate, sortByName, on
               <MCIcon name="new-box" size={20} color={sortByDateColor} />
               <Text style={[styles.dateFilterText, { color: sortByDateColor }]}>최신등록순</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.selectContainer} onPress={sortByName}>
-              <MCIcon name="sort-alphabetical-ascending" size={20} color={sortByNameColor} />
-              <Text style={[styles.nameFilterText, { color: sortByNameColor }]}>이름순</Text>
+            <TouchableOpacity style={styles.selectContainer} onPress={sortByPriceAsc}>
+              <MCIcon name="sort-numeric-ascending" size={20} color={sortByPriceAscColor} />
+              <Text style={[styles.nameFilterText, { color: sortByPriceAscColor }]}>가격 낮은순</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.selectContainer} onPress={sortByPriceDsc}>
+              <MCIcon name="sort-numeric-descending" size={20} color={sortByPriceDscColor} />
+              <Text style={[styles.nameFilterText, { color: sortByPriceDscColor }]}>가격 높은순</Text>
             </TouchableOpacity>
           </View>
         </Modal>)
