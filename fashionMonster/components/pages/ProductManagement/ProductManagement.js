@@ -7,6 +7,8 @@ import FilterContainer from './FilterContainer';
 import ProductList from './ProductList';
 import BottomPopup from './BottomPopup';
 
+const THEME_WHITE = '#FFFFFF';
+
 const ProductManagement = () => {
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
@@ -55,7 +57,7 @@ const ProductManagement = () => {
     <>
       <Header iconClick={showLogOutPopup} />
       <View 
-        style={{ flex: 1 }}
+        style={{ flex: 1, backgroundColor: THEME_WHITE }}
         contentInsetAdjustmentBehavior="automatic"
       >
         <SearchBar
