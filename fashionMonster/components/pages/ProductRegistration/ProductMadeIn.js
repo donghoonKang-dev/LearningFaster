@@ -60,14 +60,14 @@ const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
       fontSize: 14,
       height: '100%', 
-      width: 300,
+      width: 250,
       color: THEME_BLACK,
       backgroundColor: THEME_LIGHTGRAY,
   },
   inputAndroid: {
       fontSize: 16,
       height: '100%',
-      width: 300,
+      width: 250,
       color: THEME_BLACK,
       backgroundColor: THEME_LIGHTGRAY,
   },

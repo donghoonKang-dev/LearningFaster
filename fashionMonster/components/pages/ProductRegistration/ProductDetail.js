@@ -3,12 +3,13 @@ import { StyleSheet, View,Text, TextInput } from 'react-native';
 
 const THEME_LIGHTGRAY = '#EFEFEF';
 
-const ProductDetail = () => {
+const ProductDetail = ({ refScroll }) => {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상세 설명</Text>
       <View style={styles.detailInputContainer}>
         <TextInput
+          ref={refScroll}
           placeholder="상세설명은 선택사항입니다."
           style={{ height: '100%', width: '100%' }}
         />

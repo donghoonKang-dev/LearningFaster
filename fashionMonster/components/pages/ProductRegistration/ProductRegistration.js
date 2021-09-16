@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Header from './PRHeader';
 import ProductImage from './ProductImage';
 import ProductName from './ProductName';
@@ -16,25 +17,29 @@ import ProductDetail from './ProductDetail';
 const THEME_WHITE = '#FFFFFF';
 
 const ProductRegistration = () => {
+  const refScroll = useRef(null);
+
   return (
     <>
       <Header />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.pageContainer}>
-          <ProductImage />
-          <ProductName />
-          <ProductPrice />
-          <ProductCategory />
-          <ProductColor />
-          <ProductSize />
-          <ProductActualSize />
-          <ProductMixRate />
-          <ProductMadeIn />
-          <ProductMinimumOrder />
-          <ProductDetail />
-        </View>
-      </ScrollView>
+      <KeyboardAwareScrollView innerRef={ value => { refScroll.current = value } }>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic">
+          <View style={styles.pageContainer}>
+            <ProductImage />
+            <ProductName />
+            <ProductPrice />
+            <ProductCategory />
+            <ProductColor />
+            <ProductSize />
+            <ProductActualSize />
+            <ProductMixRate />
+            <ProductMadeIn />
+            <ProductMinimumOrder />
+            <ProductDetail refScroll={refScroll} />
+          </View>
+        </ScrollView>
+      </KeyboardAwareScrollView>
     </>
   );
 };
