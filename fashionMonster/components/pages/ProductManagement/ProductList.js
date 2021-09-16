@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import ProductListItem from './ProductListItem';
 import DATA from '../../../assets/data/data';

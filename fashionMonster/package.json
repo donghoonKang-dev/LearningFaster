@@ -10,10 +10,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.1.0",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "react": "17.0.2",
     "react-native": "0.65.1",
+    "react-native-picker-select": "7.0.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.7.0",
     "react-native-swipeout": "^2.3.6",
