@@ -13,8 +13,7 @@ import ProductMixRate from '../components/Input/ProductMixRate';
 import ProductMadeIn from '../components/Input/ProductMadeIn';
 import ProductMinimumOrder from '../components/Input/ProductMinimumOrder';
 import ProductDetail from '../components/Input/ProductDetail';
-
-const THEME_WHITE = '#FFFFFF';
+import { THEME_WHITE } from '../styles/color';
 
 const ProductRegistration = () => {
   const refScroll = useRef(null);

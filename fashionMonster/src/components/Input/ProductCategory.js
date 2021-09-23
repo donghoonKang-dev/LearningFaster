@@ -1,43 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import '@react-native-picker/picker';
 import EntIcon from 'react-native-vector-icons/Entypo';
-import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK } from '../../styles/color';
-
-const PRODUCT_CATEGORY = [
-  { label: '여성상의', value: 'womanTop', key: 1},
-  { label: '남성상의', value: 'manTop', key: 2 },
-  { label: '여성 아우터', value: 'womanOuter', key: 3 },
-  { label: '남성 아우터', value: 'manOuter', key: 4 },
-  { label: '여성하의', value: 'womanBottom', key: 5 },
-  { label: '남성하의', value: 'manBottom', key: 6 },
-  { label: '원피스', value: 'onePiece', key: 7 },
-  { label: '스커트', value: 'skirt', key: 8 },
-  { label: '여성가방', value: 'womanBag', key: 9 },
-  { label: '남성가방', value: 'manBag', key: 10 },
-  { label: '여성신발', value: 'womanShoes', key: 11 },
-  { label: '남성신발', value: 'manShoes', key: 12 },
-  { label: '여성 악세사리', value: 'womanAcc', key: 13 },
-  { label: '남성 악세사리', value: 'manAcc', key: 14 },
-];
+import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
+import { category } from '../../assets/data/productCategory';
 
 function ProductCategory() {
+  const [main, setMain] = useState('');
+  const [sub, setSub] = useState('');
+  const [middle, setMiddle] = useState('');
+  const [fullName, setFullName] = useState('');
+
+  function selectMainCategory(value) {
+    setMain(value);
+    setMiddle(category.find(v => v.label === value).middle);
+  };
+
+  async function selectSubCategory(value) {
+    setSub(value);
+    setFullName(fullName => fullName + main + ' / ' + sub);
+  };
+
+  useEffect(() => {
+    if(sub) setFullName(main + ' / ' + sub);
+  }, [main, sub]);
+
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 카테고리</Text>
       <View style={styles.inputContainer}>
         <RNPickerSelect
-          placeholder={{ label: '카테고리를 선택해주세요.' }}
+          placeholder={{ label: '메인 카테고리를 선택해주세요.' }}
+          items={category}
           style={pickerSelectStyles}
-          onValueChange={(value) => console.log(value)}
-          items={PRODUCT_CATEGORY}
+          onValueChange={(value) => {selectMainCategory(value)}}
           fixAndroidTouchableBug={true}
           textInputProps={{ underlineColorAndroid: 'transparent'}}
           useNativeAndroidPickerStyle={false}
         />
         <EntIcon name="select-arrows" size={20} color={THEME_GRAY} />
       </View>
+      <View style={styles.inputContainer}>
+        <RNPickerSelect
+          placeholder={{ label: '세부 카테고리를 선택해주세요.' }}
+          items={middle}
+          style={pickerSelectStyles}
+          onValueChange={(value) => {selectSubCategory(value)}}
+          fixAndroidTouchableBug={true}
+          textInputProps={{ underlineColorAndroid: 'transparent'}}
+          useNativeAndroidPickerStyle={false}
+        />
+        <EntIcon name="select-arrows" size={20} color={THEME_GRAY} />
+      </View>
+      {fullName !== '' &&
+        <View style={styles.categoryContainer}>
+          <Text style={styles.categoryText}>{'> ' + fullName}</Text>
+        </View>
+      }
     </View>
   );
 };
@@ -61,6 +81,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 8,
     backgroundColor: THEME_LIGHTGRAY,
+  },
+  categoryContainer: {
+    width: '100%',
+    height: 40,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    borderRadius: 8,
+    backgroundColor: THEME_PURPLE,
+  },
+  categoryText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: THEME_WHITE,
   },
 });
 
