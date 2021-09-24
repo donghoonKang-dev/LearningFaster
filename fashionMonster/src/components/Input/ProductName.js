@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { THEME_LIGHTGRAY } from '../../styles/color';
 
-function ProductName() {
-  const [name, setName] = useState('');
-
+function ProductName({ name, setName }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품명</Text>

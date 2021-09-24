@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Header from '../components/Header/PRHeader';
@@ -15,20 +15,42 @@ import ProductMinimumOrder from '../components/Input/ProductMinimumOrder';
 import ProductDetail from '../components/Input/ProductDetail';
 import { THEME_WHITE } from '../styles/color';
 
-const ProductRegistration = () => {
+function ProductRegistration() {
   const refScroll = useRef(null);
+
+  const [images, setImages] = useState([]);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
+
+  const deleteImage = (id) => {
+    setImages(images.filter(image => image.id !== id))
+  };
 
   return (
     <>
       <Header />
-      <KeyboardAwareScrollView innerRef={ value => { refScroll.current = value } }>
+      <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic">
           <View style={styles.pageContainer}>
-            <ProductImage />
-            <ProductName />
-            <ProductPrice />
-            <ProductCategory />
+            <ProductImage
+              images={images}
+              setImages={setImages}
+              deleteImage={deleteImage}
+            />
+            <ProductName
+              name={name}
+              setName={setName}
+            />
+            <ProductPrice
+              price={price}
+              setPrice={setPrice}
+            />
+            <ProductCategory
+              fullName={category}
+              setFullName={setCategory}
+            />
             <ProductColor />
             <ProductSize />
             <ProductActualSize />

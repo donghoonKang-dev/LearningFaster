@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   StyleSheet,
   View,
@@ -11,13 +11,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { THEME_PURPLE, THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
-function ProductImage() {
-  const [images, setImages] = useState([]);
-
-  const deleteImage = (id) => {
-    setImages(images.filter(image => image.id !== id))
-  };
-
+function ProductImage({ images, setImages, deleteImage }) {
   const renderImage = (assets, index) => {
     return (
       <View>

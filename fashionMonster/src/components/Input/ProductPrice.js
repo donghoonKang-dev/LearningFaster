@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { THEME_LIGHTGRAY } from '../../styles/color';
 
-function ProductPrice() {
-  const [price, setPrice] = useState('');
-
+function ProductPrice({ price, setPrice }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 가격 (도매 단가)</Text>

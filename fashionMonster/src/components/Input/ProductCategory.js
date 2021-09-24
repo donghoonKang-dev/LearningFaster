@@ -6,11 +6,10 @@ import EntIcon from 'react-native-vector-icons/Entypo';
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 import { category } from '../../assets/data/productCategory';
 
-function ProductCategory() {
+function ProductCategory({ fullName, setFullName }) {
   const [main, setMain] = useState('');
   const [sub, setSub] = useState('');
   const [middle, setMiddle] = useState('');
-  const [fullName, setFullName] = useState('');
 
   function selectMainCategory(value) {
     setMain(value);
@@ -23,7 +22,7 @@ function ProductCategory() {
   };
 
   useEffect(() => {
-    if(sub) setFullName(main + ' / ' + sub);
+    if (sub) setFullName(main + ' / ' + sub);
   }, [main, sub]);
 
   return (
@@ -34,9 +33,9 @@ function ProductCategory() {
           placeholder={{ label: '메인 카테고리를 선택해주세요.' }}
           items={category}
           style={pickerSelectStyles}
-          onValueChange={(value) => {selectMainCategory(value)}}
+          onValueChange={(value) => { selectMainCategory(value) }}
           fixAndroidTouchableBug={true}
-          textInputProps={{ underlineColorAndroid: 'transparent'}}
+          textInputProps={{ underlineColorAndroid: 'transparent' }}
           useNativeAndroidPickerStyle={false}
         />
         <EntIcon name="select-arrows" size={20} color={THEME_GRAY} />
@@ -46,9 +45,9 @@ function ProductCategory() {
           placeholder={{ label: '세부 카테고리를 선택해주세요.' }}
           items={middle}
           style={pickerSelectStyles}
-          onValueChange={(value) => {selectSubCategory(value)}}
+          onValueChange={(value) => { selectSubCategory(value) }}
           fixAndroidTouchableBug={true}
-          textInputProps={{ underlineColorAndroid: 'transparent'}}
+          textInputProps={{ underlineColorAndroid: 'transparent' }}
           useNativeAndroidPickerStyle={false}
         />
         <EntIcon name="select-arrows" size={20} color={THEME_GRAY} />
@@ -100,18 +99,18 @@ const styles = StyleSheet.create({
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-      fontSize: 14,
-      height: '100%', 
-      width: 250,
-      color: THEME_BLACK,
-      backgroundColor: THEME_LIGHTGRAY,
+    fontSize: 14,
+    height: '100%',
+    width: 250,
+    color: THEME_BLACK,
+    backgroundColor: THEME_LIGHTGRAY,
   },
   inputAndroid: {
-      fontSize: 16,
-      height: '100%',
-      width: 250,
-      color: THEME_BLACK,
-      backgroundColor: THEME_LIGHTGRAY,
+    fontSize: 16,
+    height: '100%',
+    width: 250,
+    color: THEME_BLACK,
+    backgroundColor: THEME_LIGHTGRAY,
   },
 });
 
