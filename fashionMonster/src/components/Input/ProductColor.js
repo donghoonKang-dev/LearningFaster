@@ -1,14 +1,24 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import ColorButton from '../Button/ColorButton';
-import { colors } from '../../assets/data/colors';
+import { colors as colorData } from '../../assets/data/colors';
 
-function ProductColor() {
+function ProductColor({ colors, onChangeColor }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 색상</Text>
       <View style={styles.buttonContainer}>
-        {colors.map((colorName) => (<ColorButton colorName={colorName} />))}
+        {
+          colorData.map(
+            (color) => (
+              <ColorButton
+                colorData={color}
+                onChangeColor={onChangeColor}
+                selected={colors.findIndex(v => v.id === color.id) !== -1}
+              />
+            )
+          )
+        }
       </View>
     </View>
   );

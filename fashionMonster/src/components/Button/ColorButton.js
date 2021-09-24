@@ -1,30 +1,25 @@
-import React, { useState } from 'react'
-import { 
+import React from 'react'
+import {
   StyleSheet,
   View,
   Text,
-  TouchableWithoutFeedback } from 'react-native';
-import getColor from '../../utils/getColor';
+  TouchableWithoutFeedback
+} from 'react-native';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
-function ColorButton({ colorName }) {
-  const [isSelected, setIsSelected] = useState(false);
-
-  const { background, color } = getColor(colorName);
-
-  function onPress() {
-    setIsSelected(!isSelected);
-  };
-
+function ColorButton({
+  colorData,
+  onChangeColor,
+  selected }) {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={() => onChangeColor(colorData)}>
       <View
-        style={[styles.colorBox, isSelected ? { backgroundColor: background } : null]}
+        style={[styles.colorBox, selected ? { backgroundColor: colorData.background } : null]}
       >
-        <Text 
-          style={[styles.colorText, isSelected ? { color: color } : null]}
+        <Text
+          style={[styles.colorText, selected ? { color: colorData.color } : null]}
         >
-          {colorName}
+          {colorData.value}
         </Text>
       </View>
     </TouchableWithoutFeedback>

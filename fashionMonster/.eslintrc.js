@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community', 'eslint:recommended', 'plugin:prettier/recommended', 'airbnb'],
+  extends: ['@react-native-community', 'eslint:recommended', 'plugin:prettier/recommended'],
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': [

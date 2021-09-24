@@ -22,9 +22,17 @@ function ProductRegistration() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [colors, setColors] = useState([]);
 
   const deleteImage = (id) => {
     setImages(images.filter(image => image.id !== id))
+  };
+
+  const onChangeColor = (colorData) => {
+    const isExist = colors.findIndex(color => color.id === colorData.id) !== -1;
+    isExist
+      ? setColors(prev => prev.filter(v => v.id !== colorData.id))
+      : setColors([...colors, colorData]);
   };
 
   return (
@@ -51,7 +59,10 @@ function ProductRegistration() {
               fullName={category}
               setFullName={setCategory}
             />
-            <ProductColor />
+            <ProductColor
+              colors={colors}
+              onChangeColor={onChangeColor}
+            />
             <ProductSize />
             <ProductActualSize />
             <ProductMixRate />
