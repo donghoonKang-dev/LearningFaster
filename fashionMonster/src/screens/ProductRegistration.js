@@ -18,10 +18,10 @@ import { THEME_WHITE } from '../styles/color';
 
 function ProductRegistration() {
   const refScroll = useRef(null);
-  const nextSizeId = useRef(1);
+  const nextManualSizeId = useRef(1);
 
-  const initialSizeState = [{
-    id: nextSizeId.current++,
+  const initialManualSizeState = [{
+    id: nextManualSizeId.current++,
     size: '',
   }];
 
@@ -30,7 +30,8 @@ function ProductRegistration() {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [colors, setColors] = useState([]);
-  const [sizes, setSizes] = useState(initialSizeState);
+  const [manualSizes, setManualSizes] = useState(initialManualSizeState);
+  const [sizes, setSizes] = useState([]);
 
   function deleteImage(id) {
     setImages(images.filter(image => image.id !== id))
@@ -49,6 +50,14 @@ function ProductRegistration() {
     isExist
       ? setColors(prev => prev.filter(v => v.id !== colorData.id))
       : setColors([...colors, colorData]);
+  };
+
+  function onChangeSize(sizeData) {
+    const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
+    isExist
+      ? setSizes(prev => prev.filter(v => v.id !== sizeData.id))
+      : setSizes([...sizes, sizeData]);
+    console.log(sizes);
   };
 
   return (
@@ -81,11 +90,13 @@ function ProductRegistration() {
             />
             <ProductSize
               sizes={sizes}
-              setSizes={setSizes}
+              onChangeSize={onChangeSize}
+              manualSizes={manualSizes}
+              setManualSizes={setManualSizes}
               category={category}
               selectSizeKindOf={selectSizeKindOf}
             />
-            {selectSizeKindOf(category) !== 'others' &&
+            {selectSizeKindOf(category) === 'clothes' &&
               <ProductActualSize />
             }
             <ProductMixRate />

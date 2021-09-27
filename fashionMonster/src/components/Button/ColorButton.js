@@ -7,10 +7,7 @@ import {
 } from 'react-native';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
-function ColorButton({
-  colorData,
-  onChangeColor,
-  selected }) {
+function ColorButton({ colorData, onChangeColor, selected }) {
   return (
     <TouchableWithoutFeedback onPress={() => onChangeColor(colorData)}>
       <View

@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
-import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
+import { THEME_LIGHTGRAY, THEME_GRAY, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
-function SizeButton({ sizeText }) {
+function SizeButton({ sizeData, onChangeSize, selected }) {
   return (
-    <TouchableWithoutFeedback>
-      {sizeText === 'FREE'
+    <TouchableWithoutFeedback onPress={() => onChangeSize(sizeData)}>
+      {sizeData.value === 'FREE'
         ?
-        <View style={[styles.sizeBox, { width: '100%' }]}>
-          <Text style={styles.sizeText}>{sizeText}</Text>
+        <View style={[styles.sizeBox, { width: '100%' }, selected && styles.selectedBox]}>
+          <Text style={[styles.sizeText, selected && styles.selectedText]}>{sizeData.value}</Text>
         </View>
         :
-        <View style={styles.sizeBox}>
-          <Text style={styles.sizeText}>{sizeText}</Text>
+        <View style={[styles.sizeBox, selected && styles.selectedBox]}>
+          <Text style={[styles.sizeText, selected && styles.selectedText]}>{sizeData.value}</Text>
         </View>
       }
     </TouchableWithoutFeedback>
@@ -33,6 +33,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: THEME_GRAY,
   },
+  selectedBox: {
+    backgroundColor: THEME_PURPLE,
+  },
+  selectedText: {
+    color: THEME_WHITE,
+  }
 });
 
 export default SizeButton;

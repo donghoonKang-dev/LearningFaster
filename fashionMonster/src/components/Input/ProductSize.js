@@ -5,7 +5,7 @@ import ManualSizeInput from './ManualSizeInput';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 import { clothesSize, shoesSize } from '../../assets/data/sizes';
 
-function ProductSize({ sizes, setSizes, category, selectSizeKindOf }) {
+function ProductSize({ sizes, onChangeSize, manualSizes, setManualSizes, category, selectSizeKindOf }) {
   const kindOf = selectSizeKindOf(category);
 
   return (
@@ -18,7 +18,14 @@ function ProductSize({ sizes, setSizes, category, selectSizeKindOf }) {
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
           <View style={styles.buttonContainer}>
-            {clothesSize.map((size) => <SizeButton key={size.id} sizeText={size.value} />)}
+            {clothesSize.map((size) =>
+              <SizeButton
+                key={size.id}
+                sizeData={size}
+                onChangeSize={onChangeSize}
+                selected={sizes.findIndex(v => v.id === size.id) !== -1}
+              />
+            )}
           </View>
         </>
       }
@@ -33,7 +40,7 @@ function ProductSize({ sizes, setSizes, category, selectSizeKindOf }) {
       {category !== '' && kindOf === 'others' &&
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 추가해주세요.</Text>
-          <ManualSizeInput sizes={sizes} setSizes={setSizes} />
+          <ManualSizeInput sizes={manualSizes} setSizes={setManualSizes} />
         </>
       }
     </View>
