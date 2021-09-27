@@ -1,10 +1,10 @@
 export const category = [
   {
     key: 1,
-    label:'여성상의',
-    value:'여성상의',
+    label: '여성상의',
+    value: '여성상의',
     middle: [
-      { label: '반팔 티셔츠', value: '반팔 티셔츠', key: 1201},
+      { label: '반팔 티셔츠', value: '반팔 티셔츠', key: 1201 },
       { label: '긴팔 티셔츠', value: '긴팔 티셔츠', key: 1202 },
       { label: '민소매 티셔츠', value: '민소매 티셔츠', key: 1203 },
       { label: '셔츠 / 블라우스', value: '셔츠 / 블라우스', key: 1204 },
@@ -17,10 +17,10 @@ export const category = [
   },
   {
     key: 2,
-    label:'남성상의',
-    value:'남성상의',
+    label: '남성상의',
+    value: '남성상의',
     middle: [
-      { label: '반팔 티셔츠', value: '반팔 티셔츠', key: 1201},
+      { label: '반팔 티셔츠', value: '반팔 티셔츠', key: 1201 },
       { label: '긴팔 티셔츠', value: '긴팔 티셔츠', key: 1202 },
       { label: '민소매 티셔츠', value: '민소매 티셔츠', key: 1203 },
       { label: '셔츠 / 블라우스', value: '셔츠 / 블라우스', key: 1204 },
@@ -33,10 +33,10 @@ export const category = [
   },
   {
     key: 3,
-    label:'여성 아우터',
-    value:'여성 아우터',
+    label: '여성 아우터',
+    value: '여성 아우터',
     middle: [
-      { label: '후드 집업', value: '후드 집업', key: 3401},
+      { label: '후드 집업', value: '후드 집업', key: 3401 },
       { label: '블루종 / MA-1', value: '블루종 / MA-1', key: 3402 },
       { label: '레더 / 라이더 자켓', value: '레더 / 라이더 자켓', key: 3403 },
       { label: '트러커 자켓', value: '트러커 자켓', key: 3404 },
@@ -45,7 +45,7 @@ export const category = [
       { label: '아노락 / 바람막이', value: '아노락 / 바람막이', key: 3407 },
       { label: '폴리스', value: '폴리스', key: 3408 },
       { label: '트레이닝 점퍼', value: '트레이닝 점퍼', key: 3409 },
-      { label: '스타디움 점퍼', value: '스타디움 점퍼', key: 3410},
+      { label: '스타디움 점퍼', value: '스타디움 점퍼', key: 3410 },
       { label: '코트', value: '코트', key: 3411 },
       { label: '숏 패딩', value: '숏 패딩', key: 3412 },
       { label: '롱 패딩', value: '롱 패딩', key: 3413 },
@@ -57,10 +57,10 @@ export const category = [
   },
   {
     key: 4,
-    label:'남성 아우터',
-    value:'남성 아우터',
+    label: '남성 아우터',
+    value: '남성 아우터',
     middle: [
-      { label: '후드 집업', value: '후드 집업', key: 3401},
+      { label: '후드 집업', value: '후드 집업', key: 3401 },
       { label: '블루종 / MA-1', value: '블루종 / MA-1', key: 3402 },
       { label: '레더 / 라이더 자켓', value: '레더 / 라이더 자켓', key: 3403 },
       { label: '트러커 자켓', value: '트러커 자켓', key: 3404 },
@@ -69,7 +69,7 @@ export const category = [
       { label: '아노락 / 바람막이', value: '아노락 / 바람막이', key: 3407 },
       { label: '폴리스', value: '폴리스', key: 3408 },
       { label: '트레이닝 점퍼', value: '트레이닝 점퍼', key: 3409 },
-      { label: '스타디움 점퍼', value: '스타디움 점퍼', key: 3410},
+      { label: '스타디움 점퍼', value: '스타디움 점퍼', key: 3410 },
       { label: '코트', value: '코트', key: 3411 },
       { label: '숏 패딩', value: '숏 패딩', key: 3412 },
       { label: '롱 패딩', value: '롱 패딩', key: 3413 },
@@ -81,10 +81,10 @@ export const category = [
   },
   {
     key: 5,
-    label:'여성하의',
-    value:'여성하의',
+    label: '여성하의',
+    value: '여성하의',
     middle: [
-      { label: '데님 팬츠', value: '데님 팬츠', key: 5601},
+      { label: '데님 팬츠', value: '데님 팬츠', key: 5601 },
       { label: '코튼 팬츠', value: '코튼 팬츠', key: 5602 },
       { label: '슬랙스', value: '슬랙스', key: 5603 },
       { label: '트레이닝 / 조거 팬츠', value: '트레이닝 / 조거 팬츠', key: 5604 },
@@ -95,10 +95,10 @@ export const category = [
   },
   {
     key: 6,
-    label:'남성하의',
-    value:'남성하의',
+    label: '남성하의',
+    value: '남성하의',
     middle: [
-      { label: '데님 팬츠', value: '데님 팬츠', key: 5601},
+      { label: '데님 팬츠', value: '데님 팬츠', key: 5601 },
       { label: '코튼 팬츠', value: '코튼 팬츠', key: 5602 },
       { label: '슬랙스', value: '슬랙스', key: 5603 },
       { label: '트레이닝 / 조거 팬츠', value: '트레이닝 / 조거 팬츠', key: 5604 },
@@ -109,26 +109,26 @@ export const category = [
   },
   {
     key: 7,
-    label:'원피스',
-    value:'원피스',
+    label: '원피스',
+    value: '원피스',
     middle: [
-      { label: '원피스', value: '원피스', key: 7701},
+      { label: '원피스', value: '원피스', key: 7701 },
     ],
   },
   {
     key: 8,
-    label:'스커트',
-    value:'스커트',
+    label: '스커트',
+    value: '스커트',
     middle: [
-      { label: '스커트', value: '스커트', key: 8801},
+      { label: '스커트', value: '스커트', key: 8801 },
     ],
   },
   {
     key: 9,
-    label:'여성가방',
-    value:'여성가방',
+    label: '여성가방',
+    value: '여성가방',
     middle: [
-      { label: '백팩', value: '백팩', key: 9101},
+      { label: '백팩', value: '백팩', key: 9101 },
       { label: '크로스백', value: '크로스백', key: 9102 },
       { label: '숄더 / 토트백', value: '숄더 / 토트백', key: 9103 },
       { label: '클러치백', value: '클러치백', key: 9104 },
@@ -140,10 +140,10 @@ export const category = [
   },
   {
     key: 10,
-    label:'남성가방',
-    value:'남성가방',
+    label: '남성가방',
+    value: '남성가방',
     middle: [
-      { label: '백팩', value: '백팩', key: 9101},
+      { label: '백팩', value: '백팩', key: 9101 },
       { label: '크로스백', value: '크로스백', key: 9102 },
       { label: '숄더 / 토트백', value: '숄더 / 토트백', key: 9103 },
       { label: '클러치백', value: '클러치백', key: 9104 },
@@ -155,10 +155,10 @@ export const category = [
   },
   {
     key: 11,
-    label:'여성신발',
-    value:'여성신발',
+    label: '여성신발',
+    value: '여성신발',
     middle: [
-      { label: '스니커즈', value: '스니커즈', key: 2101},
+      { label: '스니커즈', value: '스니커즈', key: 2101 },
       { label: '구두', value: '구두', key: 2102 },
       { label: '부츠 / 워커', value: '부츠 / 워커', key: 2103 },
       { label: '힐 / 펌프스', value: '힐 / 펌프스', key: 2104 },
@@ -171,10 +171,10 @@ export const category = [
   },
   {
     key: 12,
-    label:'남성신발',
-    value:'남성신발',
+    label: '남성신발',
+    value: '남성신발',
     middle: [
-      { label: '스니커즈', value: '스니커즈', key: 2101},
+      { label: '스니커즈', value: '스니커즈', key: 2101 },
       { label: '구두', value: '구두', key: 2102 },
       { label: '부츠 / 워커', value: '부츠 / 워커', key: 2103 },
       { label: '힐 / 펌프스', value: '힐 / 펌프스', key: 2104 },
@@ -187,10 +187,10 @@ export const category = [
   },
   {
     key: 12,
-    label:'여성 악세사리',
-    value:'여성 악세사리',
+    label: '여성 악세사리',
+    value: '여성 악세사리',
     middle: [
-      { label: '모자', value: '모자', key: 4301},
+      { label: '모자', value: '모자', key: 4301 },
       { label: '머플러', value: '머플러', key: 4302 },
       { label: '안경 / 선글라스', value: '안경 / 선글라스', key: 4303 },
       { label: '벨트', value: '벨트', key: 4304 },
@@ -202,10 +202,10 @@ export const category = [
   },
   {
     key: 13,
-    label:'남성 악세사리',
-    value:'남성 악세사리',
+    label: '남성 악세사리',
+    value: '남성 악세사리',
     middle: [
-      { label: '모자', value: '모자', key: 4301},
+      { label: '모자', value: '모자', key: 4301 },
       { label: '머플러', value: '머플러', key: 4302 },
       { label: '안경 / 선글라스', value: '안경 / 선글라스', key: 4303 },
       { label: '벨트', value: '벨트', key: 4304 },
@@ -215,4 +215,20 @@ export const category = [
       { label: '기타 악세사리', value: '기타 악세사리', key: 4308 },
     ],
   },
-]
+];
+
+export const clothesCategory = [
+  '여성상의',
+  '남성상의',
+  '여성 아우터',
+  '남성 아우터',
+  '여성하의',
+  '남성하의',
+  '원피스',
+  '스커트',
+];
+
+export const shoesCategory = [
+  '여성신발',
+  '남성신발'
+];

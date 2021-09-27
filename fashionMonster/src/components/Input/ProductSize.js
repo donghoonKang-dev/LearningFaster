@@ -1,49 +1,41 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import SizeButton from '../Button/SizeButton';
+import ManualSizeInput from './ManualSizeInput';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
+import { clothesSize, shoesSize } from '../../assets/data/sizes';
 
-function ProductSize() {
+function ProductSize({ sizes, setSizes, category, selectSizeKindOf }) {
+  const kindOf = selectSizeKindOf(category);
+
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 사이즈</Text>
-      <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableWithoutFeedback>
-            <View style={styles.sizeBox}>
-              <Text style={styles.sizeText}>XS</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.sizeBox}>
-              <Text style={styles.sizeText}>S</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.sizeBox}>
-              <Text style={styles.sizeText}>M</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.sizeBox}>
-              <Text style={styles.sizeText}>L</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.sizeBox}>
-              <Text style={styles.sizeText}>XL</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.sizeBox}>
-              <Text style={styles.sizeText}>XXL</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.sizeFreeBox}>
-              <Text style={styles.sizeText}>FREE</Text>
-            </View>
-          </TouchableWithoutFeedback>
-      </View>
+      {category === '' &&
+        <Text style={styles.itemDesc}>카테고리를 선택하면 사이즈 선택이 가능합니다.</Text>
+      }
+      {kindOf === 'clothes' &&
+        <>
+          <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
+          <View style={styles.buttonContainer}>
+            {clothesSize.map((size) => <SizeButton key={size.id} sizeText={size.value} />)}
+          </View>
+        </>
+      }
+      {kindOf === 'shoes' &&
+        <>
+          <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
+          <View style={styles.buttonContainer}>
+            {shoesSize.map((size) => <SizeButton key={size.id} sizeText={size.value} />)}
+          </View>
+        </>
+      }
+      {category !== '' && kindOf === 'others' &&
+        <>
+          <Text style={styles.itemDesc}>판매중인 상품 사이즈를 추가해주세요.</Text>
+          <ManualSizeInput sizes={sizes} setSizes={setSizes} />
+        </>
+      }
     </View>
   );
 };

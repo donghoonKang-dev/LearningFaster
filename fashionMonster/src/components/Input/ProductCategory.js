@@ -4,7 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import '@react-native-picker/picker';
 import EntIcon from 'react-native-vector-icons/Entypo';
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
-import { category } from '../../assets/data/productCategory';
+import { category } from '../../assets/data/category';
 
 function ProductCategory({ fullName, setFullName }) {
   const [main, setMain] = useState('');
@@ -12,13 +12,21 @@ function ProductCategory({ fullName, setFullName }) {
   const [middle, setMiddle] = useState('');
 
   function selectMainCategory(value) {
+    if (sub !== '') {
+      setSub('');
+      setMiddle('');
+      setFullName('');
+    }
     setMain(value);
     setMiddle(category.find(v => v.label === value).middle);
   };
 
-  async function selectSubCategory(value) {
-    setSub(value);
-    setFullName(fullName => fullName + main + ' / ' + sub);
+  function selectSubCategory(value) {
+    if (main === '') alert('메인카테고리를 먼저 선택하세요.');
+    else {
+      setSub(value);
+      setFullName(fullName => fullName + main + ' / ' + sub);
+    }
   };
 
   useEffect(() => {
