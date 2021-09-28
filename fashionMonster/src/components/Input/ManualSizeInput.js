@@ -53,6 +53,7 @@ function ManualSizeInput({ sizes, setSizes }) {
     <View>
       {sizes.map((size, index) =>
         <SizeRow
+          key={size.id}
           size={size}
           setSizes={setSizes}
           index={index}

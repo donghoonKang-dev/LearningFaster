@@ -177,4 +177,4 @@ export const shoesSize = [
     id: 21,
     value: 300,
   },
-]
+];

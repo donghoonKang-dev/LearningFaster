@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Header from '../components/Header/PRHeader';
@@ -37,13 +37,13 @@ function ProductRegistration() {
     setImages(images.filter(image => image.id !== id))
   };
 
-  function selectSizeKindOf(categoryName) {
+  const selectSizeKindOf = useCallback((categoryName) => {
     const tempName = categoryName.split('/')[0];
     const mainName = tempName.substring(0, tempName.length - 1);
     if (clothesCategory.includes(mainName)) return 'clothes';
     else if (shoesCategory.includes(mainName)) return 'shoes';
     else return 'others';
-  };
+  }, [clothesCategory, shoesCategory]);
 
   function onChangeColor(colorData) {
     const isExist = colors.findIndex(color => color.id === colorData.id) !== -1;
@@ -53,11 +53,13 @@ function ProductRegistration() {
   };
 
   function onChangeSize(sizeData) {
+    const isFreeSize = sizeData.value === 'FREE';
     const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
+    if (isFreeSize) return setSizes([sizeData]);
+    else setSizes(prev => prev.filter(sz => sz.value !== 'FREE'))
     isExist
-      ? setSizes(prev => prev.filter(v => v.id !== sizeData.id))
-      : setSizes([...sizes, sizeData]);
-    console.log(sizes);
+      ? setSizes(prev => prev.filter(sz => sz.id !== sizeData.id))
+      : setSizes(prev => [...prev, sizeData]);
   };
 
   return (
@@ -97,7 +99,10 @@ function ProductRegistration() {
               selectSizeKindOf={selectSizeKindOf}
             />
             {selectSizeKindOf(category) === 'clothes' &&
-              <ProductActualSize />
+              <ProductActualSize
+                category={category}
+                sizes={sizes}
+              />
             }
             <ProductMixRate />
             <ProductMadeIn />

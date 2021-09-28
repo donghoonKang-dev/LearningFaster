@@ -12,6 +12,7 @@ function ProductColor({ colors, onChangeColor }) {
           colorData.map(
             (color) => (
               <ColorButton
+                key={color.id}
                 colorData={color}
                 onChangeColor={onChangeColor}
                 selected={colors.findIndex(v => v.id === color.id) !== -1}

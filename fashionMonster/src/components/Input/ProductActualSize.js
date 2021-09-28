@@ -1,23 +1,43 @@
 import React from 'react';
-import { 
+import {
   StyleSheet,
   View,
   Text,
   TouchableWithoutFeedback,
-  TextInput } from 'react-native';
+  TextInput
+} from 'react-native';
 import { THEME_PURPLE, THEME_WHITE, THEME_LIGHTGRAY } from '../../styles/color';
 
-function ProductActualSize() {
+function ProductActualSize({ sizes, category }) {
+  function exactCategory(categoryName) {
+    const tempName = categoryName.split('/')[0];
+    const mainName = tempName.substring(0, tempName.length - 1);
+    return mainName;
+  };
+
+  const mainCategory = exactCategory(category);
+
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>실측 사이즈</Text>
       <Text style={styles.itemDesc}>상품 사이즈별 실측 사이즈를 입력해주세요.</Text>
       <View style={styles.realSizeButtonContainer}>
-        <TouchableWithoutFeedback>
-          <View style={styles.realSizeButtonBox}>
-            <Text style={styles.realSizeText}>XS</Text>
-          </View>
-        </TouchableWithoutFeedback>
+        {sizes.findIndex(i => i.value === 'FREE') !== -1
+          ? (
+            <TouchableWithoutFeedback>
+              <View style={styles.realSizeButtonBox}>
+                <Text style={styles.realSizeText}>FREE</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          ) :
+          sizes.map((size) => (
+            <TouchableWithoutFeedback key={size.id}>
+              <View style={styles.realSizeButtonBox}>
+                <Text style={styles.realSizeText}>{size.value}</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          ))
+        }
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -75,6 +95,7 @@ const styles = StyleSheet.create({
   realSizeButtonBox: {
     width: 46,
     height: 28,
+    marginRight: 14,
     backgroundColor: THEME_PURPLE,
     alignItems: 'center',
     justifyContent: 'center',

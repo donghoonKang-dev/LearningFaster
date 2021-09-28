@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import SizeButton from '../Button/SizeButton';
 import ManualSizeInput from './ManualSizeInput';
@@ -6,7 +6,11 @@ import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 import { clothesSize, shoesSize } from '../../assets/data/sizes';
 
 function ProductSize({ sizes, onChangeSize, manualSizes, setManualSizes, category, selectSizeKindOf }) {
-  const kindOf = selectSizeKindOf(category);
+  const [kindOf, setKindOf] = useState(selectSizeKindOf(category));
+
+  useEffect(() => {
+    setKindOf(selectSizeKindOf(category))
+  }, [category]);
 
   return (
     <View style={styles.itemContainer}>
@@ -23,7 +27,7 @@ function ProductSize({ sizes, onChangeSize, manualSizes, setManualSizes, categor
                 key={size.id}
                 sizeData={size}
                 onChangeSize={onChangeSize}
-                selected={sizes.findIndex(v => v.id === size.id) !== -1}
+                sizes={sizes}
               />
             )}
           </View>

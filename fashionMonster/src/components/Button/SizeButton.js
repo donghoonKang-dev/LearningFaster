@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
-function SizeButton({ sizeData, onChangeSize, selected }) {
+function SizeButton({ sizeData, onChangeSize, sizes }) {
+  const [isSelected, setIsSelected] = useState(false);
+
+  useEffect(() => {
+    setIsSelected(sizes.findIndex(size => size.id === sizeData.id) !== -1)
+  }, [sizes]);
+
   return (
     <TouchableWithoutFeedback onPress={() => onChangeSize(sizeData)}>
-      {sizeData.value === 'FREE'
-        ?
-        <View style={[styles.sizeBox, { width: '100%' }, selected && styles.selectedBox]}>
-          <Text style={[styles.sizeText, selected && styles.selectedText]}>{sizeData.value}</Text>
-        </View>
-        :
-        <View style={[styles.sizeBox, selected && styles.selectedBox]}>
-          <Text style={[styles.sizeText, selected && styles.selectedText]}>{sizeData.value}</Text>
-        </View>
-      }
+      <View
+        style={[
+          styles.sizeBox,
+          sizeData.value === 'FREE' && { width: '100%' },
+          isSelected && styles.selectedBox
+        ]}
+      >
+        <Text
+          style={[
+            styles.sizeText,
+            isSelected && styles.selectedText
+          ]}
+        >
+          {sizeData.value}
+        </Text>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
