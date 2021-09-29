@@ -1,11 +1,12 @@
 import React from 'react';
-import { 
+import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Image,
-  ScrollView } from 'react-native';
+  ScrollView
+} from 'react-native';
 import imagePicker from '../../utils/imagePicker';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -14,19 +15,19 @@ import { THEME_PURPLE, THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 function ProductImage({ images, setImages, deleteImage }) {
   const renderImage = (assets, index) => {
     return (
-      <View>
+      <View key={assets.uri}>
         <Image
           source={{ uri: assets.uri }}
           style={[styles.loadedImage, index === 0 ? styles.representImage : null]}
         />
         <TouchableOpacity
           style={{ position: 'absolute', top: 0, right: 0 }}
-          onPressIn={() => {deleteImage(assets.id)}}
+          onPressIn={() => { deleteImage(assets.id) }}
         >
           <View style={styles.deleteImageButton}>
             <FeatherIcon name="x" size={15} color={THEME_GRAY} />
           </View>
-        </TouchableOpacity> 
+        </TouchableOpacity>
       </View>
     );
   };
@@ -41,7 +42,7 @@ function ProductImage({ images, setImages, deleteImage }) {
         <View style={styles.imageRegBox}>
           <TouchableOpacity
             style={{ alignItems: 'center' }}
-            onPress={()=>{ imagePicker(images, setImages) }}
+            onPress={() => { imagePicker(images, setImages) }}
           >
             <MCIcon name="camera" size={26} color={THEME_GRAY} />
             <Text style={{ marginTop: 6, fontSize: 12, color: THEME_GRAY }}>

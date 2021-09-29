@@ -32,10 +32,7 @@ function ProductRegistration() {
   const [colors, setColors] = useState([]);
   const [manualSizes, setManualSizes] = useState(initialManualSizeState);
   const [sizes, setSizes] = useState([]);
-
-  function deleteImage(id) {
-    setImages(images.filter(image => image.id !== id))
-  };
+  const [selectedSize, setSelectedSize] = useState(null);
 
   const selectSizeKindOf = useCallback((categoryName) => {
     const tempName = categoryName.split('/')[0];
@@ -55,11 +52,13 @@ function ProductRegistration() {
   function onChangeSize(sizeData) {
     const isFreeSize = sizeData.value === 'FREE';
     const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
-    if (isFreeSize) return setSizes([sizeData]);
-    else setSizes(prev => prev.filter(sz => sz.value !== 'FREE'))
+    isFreeSize
+      ? setSizes([sizeData])
+      : setSizes(prev => prev.filter(size => size.value !== 'FREE'))
     isExist
-      ? setSizes(prev => prev.filter(sz => sz.id !== sizeData.id))
+      ? setSizes(prev => prev.filter(size => size.id !== sizeData.id))
       : setSizes(prev => [...prev, sizeData]);
+    isExist && setSelectedSize(null)
   };
 
   return (
@@ -72,7 +71,7 @@ function ProductRegistration() {
             <ProductImage
               images={images}
               setImages={setImages}
-              deleteImage={deleteImage}
+              deleteImage={id => setImages(images.filter(image => image.id !== id))}
             />
             <ProductName
               name={name}
@@ -97,11 +96,15 @@ function ProductRegistration() {
               setManualSizes={setManualSizes}
               category={category}
               selectSizeKindOf={selectSizeKindOf}
+
             />
             {selectSizeKindOf(category) === 'clothes' &&
               <ProductActualSize
+                selectedSize={selectedSize}
+                setSelectedSize={setSelectedSize}
                 category={category}
                 sizes={sizes}
+                setSizes={setSizes}
               />
             }
             <ProductMixRate />

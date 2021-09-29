@@ -37,7 +37,14 @@ function ProductSize({ sizes, onChangeSize, manualSizes, setManualSizes, categor
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
           <View style={styles.buttonContainer}>
-            {shoesSize.map((size) => <SizeButton key={size.id} sizeText={size.value} />)}
+            {shoesSize.map((size) =>
+              <SizeButton
+                key={size.id}
+                sizeData={size}
+                onChangeSize={onChangeSize}
+                sizes={sizes}
+              />
+            )}
           </View>
         </>
       }

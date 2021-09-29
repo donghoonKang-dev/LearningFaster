@@ -1,21 +1,20 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  TextInput
-} from 'react-native';
-import { THEME_PURPLE, THEME_WHITE, THEME_LIGHTGRAY } from '../../styles/color';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
+import DetailInputs from './DetailInputs';
+import cateNameExtractor from '../../utils/cateNameExtractor';
+import { THEME_PURPLE, THEME_WHITE, THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
-function ProductActualSize({ sizes, category }) {
-  function exactCategory(categoryName) {
-    const tempName = categoryName.split('/')[0];
-    const mainName = tempName.substring(0, tempName.length - 1);
-    return mainName;
-  };
+function ProductActualSize({
+  selectedSize,
+  setSelectedSize,
+  category,
+  sizes,
+  setSizes }) {
+  const [selectedCategory, setSelectedCategory] = useState(cateNameExtractor(category));
 
-  const mainCategory = exactCategory(category);
+  useEffect(() => {
+    setSelectedCategory(cateNameExtractor(category))
+  }, [category]);
 
   return (
     <View style={styles.itemContainer}>
@@ -24,53 +23,55 @@ function ProductActualSize({ sizes, category }) {
       <View style={styles.realSizeButtonContainer}>
         {sizes.findIndex(i => i.value === 'FREE') !== -1
           ? (
-            <TouchableWithoutFeedback>
-              <View style={styles.realSizeButtonBox}>
-                <Text style={styles.realSizeText}>FREE</Text>
+            <TouchableWithoutFeedback onPress={() => setSelectedSize('FREE')}>
+              <View
+                style={[
+                  styles.realSizeButtonBox,
+                  selectedSize === 'FREE' && { backgroundColor: THEME_PURPLE }
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.realSizeText,
+                    selectedSize === 'FREE' && { color: THEME_WHITE }
+                  ]}
+                >
+                  FREE
+                </Text>
               </View>
             </TouchableWithoutFeedback>
           ) :
-          sizes.map((size) => (
-            <TouchableWithoutFeedback key={size.id}>
-              <View style={styles.realSizeButtonBox}>
-                <Text style={styles.realSizeText}>{size.value}</Text>
-              </View>
-            </TouchableWithoutFeedback>
-          ))
+          sizes
+            .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+            .map((size) => (
+              <TouchableWithoutFeedback key={size.id} onPress={() => setSelectedSize(size.value)}>
+                <View
+                  style={[
+                    styles.realSizeButtonBox,
+                    size.value === selectedSize && { backgroundColor: THEME_PURPLE }
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.realSizeText,
+                      size.value === selectedSize && { color: THEME_WHITE }
+                    ]}
+                  >
+                    {size.value}
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback>
+            ))
         }
       </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="가슴 단면"
-          keyboardType="numeric"
-          style={{ height: '100%', width: '90%' }}
+      {selectedSize && sizes.length !== 0 &&
+        <DetailInputs
+          selectedCategory={selectedCategory}
+          selectedSize={selectedSize}
+          sizes={sizes}
+          setSizes={setSizes}
         />
-        <Text style={{ fontSize: 12, fontWeight: '600' }}>CM</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="어깨선"
-          keyboardType="numeric"
-          style={{ height: '100%', width: '90%' }}
-        />
-        <Text style={{ fontSize: 12, fontWeight: '600' }}>CM</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="소매"
-          keyboardType="numeric"
-          style={{ height: '100%', width: '90%' }}
-        />
-        <Text style={{ fontSize: 12, fontWeight: '600' }}>CM</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="총장"
-          keyboardType="numeric"
-          style={{ height: '100%', width: '90%' }}
-        />
-        <Text style={{ fontSize: 12, fontWeight: '600' }}>CM</Text>
-      </View>
+      }
     </View>
   );
 };
@@ -96,14 +97,14 @@ const styles = StyleSheet.create({
     width: 46,
     height: 28,
     marginRight: 14,
-    backgroundColor: THEME_PURPLE,
+    backgroundColor: THEME_LIGHTGRAY,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
   },
   realSizeText: {
     fontSize: 14,
-    color: THEME_WHITE,
+    color: THEME_GRAY,
     fontWeight: '600',
   },
   inputContainer: {
