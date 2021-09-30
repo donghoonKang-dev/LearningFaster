@@ -6,18 +6,19 @@ function ProductMinimumOrder({ canEach, setCanEach }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>최소 주문 단위</Text>
+      <Text style={styles.itemDesc}>'낱장 불가능' 옵션은 2장부터 주문 가능합니다.</Text>
       <View style={styles.minimunOrderContainer}>
         <TouchableWithoutFeedback onPress={() => setCanEach(true)}>
           <View style={[styles.minimumOrderBox, canEach && { backgroundColor: THEME_PURPLE }]}>
             <Text style={[styles.minimunOrderText, canEach && { color: THEME_WHITE }]}>
-              낮장 주문 가능
+              낮장 가능
             </Text>
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => setCanEach(false)}>
           <View style={[styles.minimumOrderBox, !canEach && { backgroundColor: THEME_PURPLE }]}>
             <Text style={[styles.minimunOrderText, !canEach && { color: THEME_WHITE }]}>
-              낮장 주문 불가
+              낮장 불가능
             </Text>
           </View>
         </TouchableWithoutFeedback>
@@ -34,6 +35,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 16,
     fontWeight: '600',
+  },
+  itemDesc: {
+    marginVertical: 6,
+    fontSize: 14,
   },
   minimunOrderContainer: {
     marginTop: 6,

@@ -37,12 +37,14 @@ function ProductRegistration() {
   const [selectedSize, setSelectedSize] = useState(null);
   const [mixRate, setMixRate] = useState('');
   const [madeIn, setMadeIn] = useState('');
+  const [madeInDetail, setMadeInDetail] = useState('');
   const [canEach, setCanEach] = useState(false);
   const [desc, setDesc] = useState('');
 
   const resetAllState = () => {
     setImages([]);
     setName('');
+    setPrice('');
     setCategory('');
     setMainCate(null);
     setSubCate(null);
@@ -51,6 +53,8 @@ function ProductRegistration() {
     setSizes([]);
     setSelectedSize(null);
     setMixRate('');
+    setMadeIn('');
+    setMadeInDetail('');
     setCanEach(false);
     setDesc('');
   }
@@ -110,6 +114,8 @@ function ProductRegistration() {
             <ProductMadeIn
               madeIn={madeIn}
               setMadeIn={setMadeIn}
+              madeInDetail={madeInDetail}
+              setMadeInDetail={setMadeInDetail}
             />
             <ProductMinimumOrder
               canEach={canEach}
