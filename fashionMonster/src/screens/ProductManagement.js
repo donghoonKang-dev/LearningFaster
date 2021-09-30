@@ -6,6 +6,7 @@ import SearchList from '../components/Search/SearchList';
 import FilterContainer from '../components/Filter/FilterContainer';
 import ProductList from '../components/List/ProductList';
 import BottomPopup from '../components/Popup/BottomPopup';
+import EmptyView from '../components/ImageView/EmptyView';
 import { THEME_WHITE } from '../styles/color';
 
 function ProductManagement() {
@@ -13,19 +14,12 @@ function ProductManagement() {
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('sortByDate');
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
+  const [products, setProducts] = useState([]);
 
-  const showLogOutPopup = () => {
-    setLogOutPopupOpen(true);
-  };
-  const closeLogOutPopup = () => {
-    setLogOutPopupOpen(false);
-  };
-  const showFilterPopup = () => {
-    setFilterPopupOpen(true);
-  };
-  const closeFilterPopup = () => {
-    setFilterPopupOpen(false);
-  };
+  const showLogOutPopup = () => setLogOutPopupOpen(true);
+  const closeLogOutPopup = () => setLogOutPopupOpen(false);
+  const showFilterPopup = () => setFilterPopupOpen(true);
+  const closeFilterPopup = () => setFilterPopupOpen(false);
   const logOut = () => {
     setLogOutPopupOpen(false);
     alert('로그아웃 되었습니다.');
@@ -45,52 +39,63 @@ function ProductManagement() {
     setFilterPopupOpen(false);
     alert('가격 높은순 정렬 되었습니다.');
   };
-  const searchBarOpen = () => {
-    setIsSearchBarClicked(true)
-  }
-  const searchBarClose = () => {
-    setIsSearchBarClicked(false)
-  }
-  
+  const searchBarOpen = () => setIsSearchBarClicked(true);
+  const searchBarClose = () => setIsSearchBarClicked(false);
+
   return (
     <>
       <Header iconClick={showLogOutPopup} />
-      <View 
-        style={{ flex: 1, backgroundColor: THEME_WHITE }}
-        contentInsetAdjustmentBehavior="automatic"
-      >
-        <SearchBar
-          pressed={isSearchBarClicked}
-          searchBarOpen={searchBarOpen}
-          searchBarClose={searchBarClose}
-        />
-        {isSearchBarClicked ?
-          <SearchList />:
-          <View style={{ flex: 1 }}>
-            <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup}/>
-            <ProductList selectedFilter={selectedFilter} />
-          </View>
-        }
-        {logOutPopupOpen &&
-          <BottomPopup
-            name="logOut"
-            isOpen={logOutPopupOpen}
-            onClose={logOut}
-            onTouchOutside={closeLogOutPopup} 
+      {products.length === 0
+        ?
+        <>
+          <EmptyView />
+          {logOutPopupOpen &&
+            <BottomPopup
+              name="logOut"
+              isOpen={logOutPopupOpen}
+              onClose={logOut}
+              onTouchOutside={closeLogOutPopup}
+            />
+          }
+        </>
+        :
+        <View
+          style={{ flex: 1, backgroundColor: THEME_WHITE }}
+          contentInsetAdjustmentBehavior="automatic"
+        >
+          <SearchBar
+            pressed={isSearchBarClicked}
+            searchBarOpen={searchBarOpen}
+            searchBarClose={searchBarClose}
           />
-        }
-        {filterPopupOpen &&
-          <BottomPopup
-            name="filter"
-            isOpen={filterPopupOpen}
-            sortBy={selectedFilter}
-            sortByDate={sortByDate}
-            sortByPriceAsc={sortByPriceAsc}
-            sortByPriceDsc={sortByPriceDsc}
-            onTouchOutside={closeFilterPopup} 
-          />
-        }
-      </View>
+          {isSearchBarClicked ?
+            <SearchList /> :
+            <View style={{ flex: 1 }}>
+              <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup} />
+              <ProductList selectedFilter={selectedFilter} />
+            </View>
+          }
+          {logOutPopupOpen &&
+            <BottomPopup
+              name="logOut"
+              isOpen={logOutPopupOpen}
+              onClose={logOut}
+              onTouchOutside={closeLogOutPopup}
+            />
+          }
+          {filterPopupOpen &&
+            <BottomPopup
+              name="filter"
+              isOpen={filterPopupOpen}
+              sortBy={selectedFilter}
+              sortByDate={sortByDate}
+              sortByPriceAsc={sortByPriceAsc}
+              sortByPriceDsc={sortByPriceDsc}
+              onTouchOutside={closeFilterPopup}
+            />
+          }
+        </View>
+      }
     </>
   );
 };
