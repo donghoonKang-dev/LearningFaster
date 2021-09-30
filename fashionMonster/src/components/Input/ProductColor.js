@@ -3,7 +3,14 @@ import { StyleSheet, View, Text } from 'react-native';
 import ColorButton from '../Button/ColorButton';
 import { colors as colorData } from '../../assets/data/colors';
 
-function ProductColor({ colors, onChangeColor }) {
+function ProductColor({ colors, setColors }) {
+  function onChangeColor(colorData) {
+    const isExist = colors.findIndex(color => color.id === colorData.id) !== -1;
+    isExist
+      ? setColors(prev => prev.filter(v => v.id !== colorData.id))
+      : setColors([...colors, colorData]);
+  };
+
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 색상</Text>

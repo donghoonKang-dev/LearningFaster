@@ -13,7 +13,7 @@ import ProductMixRate from '../components/Input/ProductMixRate';
 import ProductMadeIn from '../components/Input/ProductMadeIn';
 import ProductMinimumOrder from '../components/Input/ProductMinimumOrder';
 import ProductDetail from '../components/Input/ProductDetail';
-import { clothesCategory, shoesCategory } from '../assets/data/category';
+import cateClassifier from '../utils/cateClassifier';
 import { THEME_WHITE } from '../styles/color';
 
 function ProductRegistration() {
@@ -33,33 +33,6 @@ function ProductRegistration() {
   const [manualSizes, setManualSizes] = useState(initialManualSizeState);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
-
-  const selectSizeKindOf = useCallback((categoryName) => {
-    const tempName = categoryName.split('/')[0];
-    const mainName = tempName.substring(0, tempName.length - 1);
-    if (clothesCategory.includes(mainName)) return 'clothes';
-    else if (shoesCategory.includes(mainName)) return 'shoes';
-    else return 'others';
-  }, [clothesCategory, shoesCategory]);
-
-  function onChangeColor(colorData) {
-    const isExist = colors.findIndex(color => color.id === colorData.id) !== -1;
-    isExist
-      ? setColors(prev => prev.filter(v => v.id !== colorData.id))
-      : setColors([...colors, colorData]);
-  };
-
-  function onChangeSize(sizeData) {
-    const isFreeSize = sizeData.value === 'FREE';
-    const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
-    isFreeSize
-      ? setSizes([sizeData])
-      : setSizes(prev => prev.filter(size => size.value !== 'FREE'))
-    isExist
-      ? setSizes(prev => prev.filter(size => size.id !== sizeData.id))
-      : setSizes(prev => [...prev, sizeData]);
-    isExist && setSelectedSize(null)
-  };
 
   return (
     <>
@@ -87,18 +60,16 @@ function ProductRegistration() {
             />
             <ProductColor
               colors={colors}
-              onChangeColor={onChangeColor}
+              setColors={setColors}
             />
             <ProductSize
               sizes={sizes}
-              onChangeSize={onChangeSize}
+              setSizes={setSizes}
               manualSizes={manualSizes}
               setManualSizes={setManualSizes}
               category={category}
-              selectSizeKindOf={selectSizeKindOf}
-
             />
-            {selectSizeKindOf(category) === 'clothes' &&
+            {cateClassifier(category) === 'clothes' &&
               <ProductActualSize
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}

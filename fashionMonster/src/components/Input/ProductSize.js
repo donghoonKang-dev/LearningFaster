@@ -3,14 +3,26 @@ import { StyleSheet, View, Text } from 'react-native';
 import SizeButton from '../Button/SizeButton';
 import ManualSizeInput from './ManualSizeInput';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
+import cateClassifier from '../../utils/cateClassifier';
 import { clothesSize, shoesSize } from '../../assets/data/sizes';
 
-function ProductSize({ sizes, onChangeSize, manualSizes, setManualSizes, category, selectSizeKindOf }) {
-  const [kindOf, setKindOf] = useState(selectSizeKindOf(category));
+function ProductSize({ sizes, setSizes, manualSizes, setManualSizes, category }) {
+  const [kindOf, setKindOf] = useState(cateClassifier(category));
 
   useEffect(() => {
-    setKindOf(selectSizeKindOf(category))
+    setKindOf(cateClassifier(category))
   }, [category]);
+
+  function onChangeSize(sizeData) {
+    const isFreeSize = sizeData.value === 'FREE';
+    const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
+    isFreeSize
+      ? setSizes([sizeData])
+      : setSizes(prev => prev.filter(size => size.value !== 'FREE'))
+    isExist
+      ? setSizes(prev => prev.filter(size => size.id !== sizeData.id))
+      : setSizes(prev => [...prev, sizeData]);
+  };
 
   return (
     <View style={styles.itemContainer}>
