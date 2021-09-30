@@ -2,17 +2,17 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Header from '../components/Header/PRHeader';
-import ProductImage from '../components/Input/ProductImage';
-import ProductName from '../components/Input/ProductName';
-import ProductPrice from '../components/Input/ProductPrice';
-import ProductCategory from '../components/Input/ProductCategory';
-import ProductColor from '../components/Input/ProductColor';
-import ProductSize from '../components/Input/ProductSize';
-import ProductActualSize from '../components/Input/ProductActualSize';
-import ProductMixRate from '../components/Input/ProductMixRate';
-import ProductMadeIn from '../components/Input/ProductMadeIn';
-import ProductMinimumOrder from '../components/Input/ProductMinimumOrder';
-import ProductDetail from '../components/Input/ProductDetail';
+import ProductImage from '../components/ProductRegistration/ProductImage';
+import ProductName from '../components/ProductRegistration/ProductName';
+import ProductPrice from '../components/ProductRegistration/ProductPrice';
+import ProductCategory from '../components/ProductRegistration/ProductCategory';
+import ProductColor from '../components/ProductRegistration/ProductColor';
+import ProductSize from '../components/ProductRegistration/ProductSize';
+import ProductActualSize from '../components/ProductRegistration/ProductActualSize';
+import ProductMixRate from '../components/ProductRegistration/ProductMixRate';
+import ProductMadeIn from '../components/ProductRegistration/ProductMadeIn';
+import ProductMinimumOrder from '../components/ProductRegistration/ProductMinimumOrder';
+import ProductDetail from '../components/ProductRegistration/ProductDetail';
 import cateClassifier from '../utils/cateClassifier';
 import { THEME_WHITE } from '../styles/color';
 
@@ -36,7 +36,7 @@ function ProductRegistration() {
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [mixRate, setMixRate] = useState('');
-  const [madeIn, setMadeIn] = useState('');
+  const [madeIn, setMadeIn] = useState(null);
   const [madeInDetail, setMadeInDetail] = useState('');
   const [canEach, setCanEach] = useState(false);
   const [desc, setDesc] = useState('');
@@ -53,7 +53,7 @@ function ProductRegistration() {
     setSizes([]);
     setSelectedSize(null);
     setMixRate('');
-    setMadeIn('');
+    setMadeIn(null);
     setMadeInDetail('');
     setCanEach(false);
     setDesc('');

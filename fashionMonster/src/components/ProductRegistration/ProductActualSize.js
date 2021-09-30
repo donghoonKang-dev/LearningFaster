@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
-import DetailInputs from './DetailInputs';
+import DetailInputs from '../Input/DetailInputs';
 import cateNameExtractor from '../../utils/cateNameExtractor';
 import { THEME_PURPLE, THEME_WHITE, THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 

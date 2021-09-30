@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import SizeButton from '../Button/SizeButton';
-import ManualSizeInput from './ManualSizeInput';
+import ManualSizeInput from '../Input/ManualSizeInput';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 import cateClassifier from '../../utils/cateClassifier';
 import { clothesSize, shoesSize } from '../../assets/data/sizes';

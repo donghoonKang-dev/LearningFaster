@@ -12,29 +12,23 @@ const MADE_IN = [
 ];
 
 function ProductMadeIn({ madeIn, setMadeIn, madeInDetail, setMadeInDetail }) {
-  function selectMadeIn(value) {
-    if (value === 'none') alert('제조국을 선택하세요.');
-    else {
-      setMadeIn(value);
-    }
-  }
-
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>제조국 표기</Text>
       <View style={styles.inputContainer}>
         <RNPickerSelect
-          placeholder={{ label: '제조국을 선택해주세요.', value: 'none' }}
+          placeholder={{ label: '제조국을 선택해주세요.', value: null }}
           items={MADE_IN}
           style={pickerSelectStyles}
-          onValueChange={(value) => selectMadeIn(value)}
+          onValueChange={(value) => setMadeIn(value)}
+          value={madeIn}
           fixAndroidTouchableBug={true}
           textInputProps={{ underlineColorAndroid: 'transparent' }}
           useNativeAndroidPickerStyle={false}
         />
         <EntIcon name="select-arrows" size={20} color={THEME_GRAY} />
       </View>
-      {madeIn !== '' &&
+      {madeIn !== null &&
         <View style={styles.madeInContainer}>
           <Text style={styles.madeInText}>
             {madeIn === 'KOREA'
