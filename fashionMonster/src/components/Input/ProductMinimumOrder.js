@@ -1,23 +1,26 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
-import { THEME_PURPLE, THEME_LIGHTGRAY } from '../../styles/color';
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { THEME_PURPLE, THEME_LIGHTGRAY, THEME_WHITE } from '../../styles/color';
 
-function ProductMinimumOrder() {
+function ProductMinimumOrder({ canEach, setCanEach }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>최소 주문 단위</Text>
       <View style={styles.minimunOrderContainer}>
-        <View style={styles.minimumOrderBox}>
-          <Text style={styles.minimunOrderText}>낮장 주문 여부</Text>
-        </View>
-        <View style={styles.minimumOrderInputContainer}>
-          <TextInput
-            placeholder="최소 주문 수량을 입력해주세요."
-            keyboardType="numeric"
-            style={{ height: '100%', width: '90%' }}
-          />
-          <Text style={{ fontSize: 12, fontWeight: '600' }}>개</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={() => setCanEach(true)}>
+          <View style={[styles.minimumOrderBox, canEach && { backgroundColor: THEME_PURPLE }]}>
+            <Text style={[styles.minimunOrderText, canEach && { color: THEME_WHITE }]}>
+              낮장 주문 가능
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => setCanEach(false)}>
+          <View style={[styles.minimumOrderBox, !canEach && { backgroundColor: THEME_PURPLE }]}>
+            <Text style={[styles.minimunOrderText, !canEach && { color: THEME_WHITE }]}>
+              낮장 주문 불가
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   );
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   minimumOrderBox: {
-    width: '30%',
+    width: '48%',
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',

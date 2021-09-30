@@ -3,10 +3,10 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import PopupModal from '../Popup/PopupModal';
 import { THEME_PURPLE, THEME_WHITE, THEME_GRAY, THEME_BLACK } from '../../styles/color';
 
-function PRHeader() {
+function PRHeader({ resetAllState }) {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  
+
   const openResetModal = () => {
     setIsResetModalOpen(true);
   };
@@ -24,13 +24,13 @@ function PRHeader() {
     <View style={styles.headerContainer}>
       <Text style={styles.textTitle}>상품 등록</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.resetButtonContainer}
           onPress={openResetModal}
         >
           <Text style={styles.resetButtonText}>초기화</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.saveButtonContainer}
           onPress={openSaveModal}
         >
@@ -38,24 +38,27 @@ function PRHeader() {
         </TouchableOpacity>
       </View>
       {
-        isResetModalOpen && 
-          <PopupModal
-            isModalVisible={isResetModalOpen} 
-            onClose={closeResetModal} 
-            title="경고"
-            desc="입력된 모든 정보가 초기화 됩니다."
-            onTouchOutside={closeResetModal}
-          />
+        isResetModalOpen &&
+        <PopupModal
+          label="reset"
+          onOkClicked={resetAllState}
+          isModalVisible={isResetModalOpen}
+          onClose={closeResetModal}
+          title="경고"
+          desc="입력된 모든 정보가 초기화 됩니다."
+          onTouchOutside={closeResetModal}
+        />
       }
       {
         isSaveModalOpen &&
-          <PopupModal
-            isModalVisible={isSaveModalOpen} 
-            onClose={closeSaveModal}
-            title="상품 등록"
-            desc="등록하시겠습니까?"
-            onTouchOutside={closeSaveModal}
-          />
+        <PopupModal
+          label="save"
+          isModalVisible={isSaveModalOpen}
+          onClose={closeSaveModal}
+          title="상품 등록"
+          desc="등록하시겠습니까?"
+          onTouchOutside={closeSaveModal}
+        />
       }
     </View>
   )

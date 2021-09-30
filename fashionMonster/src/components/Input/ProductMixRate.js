@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { THEME_LIGHTGRAY } from '../../styles/color';
 
-function ProductMixRate() {
+function ProductMixRate({ mixRate, setMixRate }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>소재 혼용률</Text>
@@ -11,6 +11,8 @@ function ProductMixRate() {
         <TextInput
           placeholder="ex_ 면 50, 레이온 40, 린넨 10"
           style={{ height: '100%', width: '100%' }}
+          onChangeText={setMixRate}
+          value={mixRate}
         />
       </View>
     </View>

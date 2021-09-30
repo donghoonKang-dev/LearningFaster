@@ -1,23 +1,28 @@
 import React from 'react';
-import { 
-  StyleSheet, 
-  Modal, 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions
+} from 'react-native';
 import { THEME_PURPLE, THEME_WHITE, THEME_GRAY } from '../../styles/color';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT_MODAL = 150;
 
-function PopupModal({ title, desc, isModalVisible, onClose }) {
+function PopupModal({ label, onOkClicked, title, desc, isModalVisible, onClose }) {
 
   closeModal = (data) => {
     onClose();
     if (data === 'OK') {
-      // events
-      alert('요청 처리됨');
+      if (label === 'reset') {
+        onOkClicked();
+        alert('초기화 되었습니다.');
+      } else {
+        alert('요청 처리됨');
+      }
     }
   };
 
@@ -28,7 +33,7 @@ function PopupModal({ title, desc, isModalVisible, onClose }) {
       visible={isModalVisible}
       onRequestClose={onClose}
     >
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)'}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)' }}>
         <TouchableOpacity
           disabled={true}
           style={styles.container}
@@ -39,7 +44,7 @@ function PopupModal({ title, desc, isModalVisible, onClose }) {
               <Text style={styles.textDesc}>{desc}</Text>
             </View>
             <View style={styles.buttonsView}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.buttonFrame}
                 onPress={() => closeModal('Cancel')}
               >

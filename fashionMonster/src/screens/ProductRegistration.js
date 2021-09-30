@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Header from '../components/Header/PRHeader';
@@ -29,14 +29,35 @@ function ProductRegistration() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [mainCate, setMainCate] = useState(null);
+  const [subCate, setSubCate] = useState(null);
   const [colors, setColors] = useState([]);
   const [manualSizes, setManualSizes] = useState(initialManualSizeState);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [mixRate, setMixRate] = useState('');
+  const [madeIn, setMadeIn] = useState('');
+  const [canEach, setCanEach] = useState(false);
+  const [desc, setDesc] = useState('');
+
+  const resetAllState = () => {
+    setImages([]);
+    setName('');
+    setCategory('');
+    setMainCate(null);
+    setSubCate(null);
+    setColors([]);
+    setManualSizes(initialManualSizeState);
+    setSizes([]);
+    setSelectedSize(null);
+    setMixRate('');
+    setCanEach(false);
+    setDesc('');
+  }
 
   return (
     <>
-      <Header />
+      <Header resetAllState={resetAllState} />
       <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic">
@@ -55,6 +76,10 @@ function ProductRegistration() {
               setPrice={setPrice}
             />
             <ProductCategory
+              main={mainCate}
+              setMain={setMainCate}
+              sub={subCate}
+              setSub={setSubCate}
               fullName={category}
               setFullName={setCategory}
             />
@@ -78,10 +103,23 @@ function ProductRegistration() {
                 setSizes={setSizes}
               />
             }
-            <ProductMixRate />
-            <ProductMadeIn />
-            <ProductMinimumOrder />
-            <ProductDetail refScroll={refScroll} />
+            <ProductMixRate
+              mixRate={mixRate}
+              setMixRate={setMixRate}
+            />
+            <ProductMadeIn
+              madeIn={madeIn}
+              setMadeIn={setMadeIn}
+            />
+            <ProductMinimumOrder
+              canEach={canEach}
+              setCanEach={setCanEach}
+            />
+            <ProductDetail
+              refScroll={refScroll}
+              desc={desc}
+              setDesc={setDesc}
+            />
           </View>
         </ScrollView>
       </KeyboardAwareScrollView>

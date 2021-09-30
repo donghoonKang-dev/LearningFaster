@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { THEME_LIGHTGRAY } from '../../styles/color';
 
-function ProductDetail({ refScroll }) {
+function ProductDetail({ refScroll, desc, setDesc }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상세 설명</Text>
@@ -11,6 +11,8 @@ function ProductDetail({ refScroll }) {
           ref={refScroll}
           placeholder="상세설명은 선택사항입니다."
           style={{ height: '100%', width: '100%' }}
+          onChangeText={setDesc}
+          value={desc}
         />
       </View>
     </View>
