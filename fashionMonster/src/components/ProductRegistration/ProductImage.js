@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  TouchableWithoutFeedback,
 } from 'react-native';
+import HelpIconPopup from '../Popup/HelpIconPopup';
 import imagePicker from '../../utils/imagePicker';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { THEME_PURPLE, THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
 function ProductImage({ images, setImages, deleteImage }) {
+  const iconRef = useRef();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [iconPositionX, setIconPositionX] = useState(0);
+  const [iconPositionY, setIconPositionY] = useState(0);
+
+  const doMeasure = () => {
+    iconRef.current.measure((width, height, px, py, fx, fy) => {
+      setIconPositionX(x => x + 30 + fx);
+      setIconPositionY(fy);
+    })
+  }
+
   const renderImage = (assets, index) => {
     return (
       <View key={assets.uri}>
@@ -34,7 +49,22 @@ function ProductImage({ images, setImages, deleteImage }) {
 
   return (
     <View style={styles.itemContainer}>
-      <Text style={styles.itemTitle}>상품 이미지</Text>
+      <View style={styles.itemTitleContainer}>
+        <Text style={styles.itemTitle}>상품 이미지</Text>
+        <TouchableWithoutFeedback onPress={() => setIsModalOpen(!isModalOpen)}>
+          <Image
+            source={require('../../assets/images/questionIcon.png')}
+            ref={iconRef}
+            onLayout={() => doMeasure()}
+          />
+        </TouchableWithoutFeedback>
+        <HelpIconPopup
+          iconPositionX={iconPositionX}
+          iconPositionY={iconPositionY}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      </View>
       <Text style={styles.imageHeaderDesc}>
         첫 번째 사진이 대표 이미지로 사용됩니다.
       </Text>
@@ -59,6 +89,10 @@ function ProductImage({ images, setImages, deleteImage }) {
 const styles = StyleSheet.create({
   itemContainer: {
     marginBottom: 36,
+  },
+  itemTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   itemTitle: {
     marginRight: 10,

@@ -44,32 +44,17 @@ function DetailInputs({ selectedCategory, selectedSize, sizes, setSizes }) {
             :
             null
         ))
-        : (
-          selectedCategory === '여성하의' |
-            selectedCategory === '남성하의'
-            ?
-            bottomDetail.map(detail => (
-              <CommonSizeInput
-                key={detail.id}
-                placeholder={detail.placeholder}
-                label={detail.value}
-                selectedSize={selectedSize}
-                sizes={sizes}
-                onChangeInput={onChangeInput}
-              />
-            ))
-            :
-            skirtDetail.map(detail => (
-              <CommonSizeInput
-                key={detail.id}
-                placeholder={detail.placeholder}
-                label={detail.value}
-                selectedSize={selectedSize}
-                sizes={sizes}
-                onChangeInput={onChangeInput}
-              />
-            ))
-        )
+        : (selectedCategory === '여성하의' | selectedCategory === '남성하의'
+          ? bottomDetail : skirtDetail).map(detail => (
+            <CommonSizeInput
+              key={detail.id}
+              placeholder={detail.placeholder}
+              label={detail.value}
+              selectedSize={selectedSize}
+              sizes={sizes}
+              onChangeInput={onChangeInput}
+            />
+          ))
       }
     </View>
   );

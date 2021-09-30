@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { 
+import {
   Modal,
   TouchableWithoutFeedback,
   StyleSheet,
   View,
   Text,
-  TouchableOpacity } from 'react-native';
+  TouchableOpacity
+} from 'react-native';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { THEME_PURPLE, THEME_WHITE, THEME_GRAY, THEME_BLACK } from '../../styles/color';
 
-function BottomPopup({ 
-  name, 
-  sortBy, 
+function BottomPopup({
+  name,
+  sortBy,
   isOpen,
   onClose,
   sortByDate,
@@ -38,11 +39,11 @@ function BottomPopup({
     }
   }, [sortBy]);
 
-  const renderOutsideTouchable = onTouch => {
-    const view = <View style={{flex: 1, width: '100%'}} />;
-    if(!onTouch) return view;
+  const renderOutsideTouchable = (onTouch) => {
+    const view = <View style={{ flex: 1, width: '100%' }} />;
+    if (!onTouch) return view;
     return (
-      <TouchableWithoutFeedback onPress={onTouch} style={{flex: 1, width: '100%'}}>
+      <TouchableWithoutFeedback onPress={onTouch} style={{ flex: 1, width: '100%' }}>
         {view}
       </TouchableWithoutFeedback>
     );
