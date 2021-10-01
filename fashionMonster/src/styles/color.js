@@ -4,3 +4,4 @@ export const THEME_WHITE = '#FFFFFF';
 export const THEME_LIGHTGRAY = '#EFEFEF';
 export const THEME_GRAY = '#808080';
 export const THEME_BLACK = '#000000';
+export const THEME_PLACEHOLDER = '#5A5A5A';

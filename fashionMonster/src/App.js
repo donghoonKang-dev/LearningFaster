@@ -1,33 +1,30 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-} from 'react-native';
-import BottomNavigator from './navigations/BottomNavigator';
-import { THEME_PURPLE, THEME_WHITE } from './styles/color';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './screens/Login';
+import Main from './screens/Main';
+
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <>
-      <SafeAreaView style={styles.topSafeAreaContainer} />
-      <SafeAreaView style={styles.mainSafeAreaContainer}>
-        <StatusBar barStyle="light-content"/>
-        <BottomNavigator />
-      </SafeAreaView>
-    </>
+    <NavigationContainer independent={true}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        <Stack.Screen
+          name="Login"
+          component={Login}
+        />
+        <Stack.Screen
+          name="Main"
+          component={Main}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  topSafeAreaContainer: {
-    flex: 0,
-    backgroundColor: THEME_PURPLE,
-  },
-  mainSafeAreaContainer: {
-    flex: 1,
-    backgroundColor: THEME_WHITE,
-  },
-});
 
 export default App;

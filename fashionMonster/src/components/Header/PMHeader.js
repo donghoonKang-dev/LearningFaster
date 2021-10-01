@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
-function PMHeader({iconClick}) {
+function PMHeader({ iconClick }) {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerTextContainer}>
@@ -14,7 +14,7 @@ function PMHeader({iconClick}) {
       <View>
         <TouchableOpacity onPress={iconClick}>
           <FeatherIcon name="more-horizontal" size={30} color={THEME_WHITE} />
-      </TouchableOpacity>
+        </TouchableOpacity>
       </View>
     </View>
   );

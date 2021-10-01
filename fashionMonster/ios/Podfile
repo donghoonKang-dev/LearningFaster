@@ -13,8 +13,6 @@ target 'fashionMonster' do
   )
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-  
-  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
   target 'fashionMonsterTests' do
     inherit! :complete

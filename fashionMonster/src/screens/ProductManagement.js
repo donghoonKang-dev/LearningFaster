@@ -9,7 +9,7 @@ import BottomPopup from '../components/Popup/BottomPopup';
 import EmptyView from '../components/ImageView/EmptyView';
 import { THEME_WHITE } from '../styles/color';
 
-function ProductManagement() {
+function ProductManagement({ onPressLogOut }) {
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('sortByDate');
@@ -22,7 +22,7 @@ function ProductManagement() {
   const closeFilterPopup = () => setFilterPopupOpen(false);
   const logOut = () => {
     setLogOutPopupOpen(false);
-    alert('로그아웃 되었습니다.');
+    onPressLogOut();
   };
   const sortByDate = () => {
     setSelectedFilter('sortByDate');
