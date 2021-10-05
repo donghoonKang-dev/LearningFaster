@@ -1,17 +1,43 @@
-import React, { useState } from 'react';
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, View, StatusBar, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import {
+  StyleSheet,
+  Image,
+  ImageBackground,
+  SafeAreaView,
+  Text,
+  View,
+  StatusBar,
+  Dimensions,
+  TouchableOpacity,
+  Linking
+} from 'react-native';
 import LoginButton from '../components/Button/LoginButton';
 import LoginInput from '../components/Input/LoginInput';
 import { THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../styles/color';
 
 const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 function Login({ navigation }) {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
 
   const onPressLogin = () => navigation.navigate('Main', { name: 'Main' });
+  const onPressSignUp = () => navigation.navigate('SignUp1', { name: 'SignUp1' });
   const cannotLogin = () => alert('아이디, 비밀번호를 확인하세요.');
+
+  const findPassword = useCallback(async () => {
+    // https://github.com/shpongle2634/react-native-kakao-links
+    // https://medium.com/@zeroweb.tech/react-native-%EC%95%B1%EC%97%90-%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%A7%81%ED%81%AC-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-d170d31b780b
+    /*
+    const kakaoURL = "kakaoplus://plusfriend/home/_fZnrK";
+    const isSupported = await Linking.canOpenURL(kakaoURL);
+    isSupported
+      ? await Linking.openURL(kakaoURL)
+      : console.log(kakaoURL)
+    */
+    alert('준비중인 서비스입니다.');
+  });
 
   return (
     <ImageBackground
@@ -54,11 +80,11 @@ function Login({ navigation }) {
             }
           />
           <View style={styles.textButtonContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onPressSignUp}>
               <Text style={styles.textButtonText}>회원가입</Text>
             </TouchableOpacity>
             <View style={styles.borderBetween} />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={findPassword}>
               <Text style={styles.textButtonText}>비밀번호찾기</Text>
             </TouchableOpacity>
           </View>
@@ -92,7 +118,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 238,
     height: 53,
-    marginTop: 154,
+    marginTop: windowHeight * 0.15,
     marginBottom: 22,
   },
   purpleBar: {
