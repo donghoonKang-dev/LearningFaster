@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Header from '../components/Header/PRHeader';
 import ProductImage from '../components/ProductRegistration/ProductImage';
@@ -61,6 +61,7 @@ function ProductRegistration() {
 
   return (
     <>
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent={true} />
       <Header resetAllState={resetAllState} />
       <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
         <ScrollView

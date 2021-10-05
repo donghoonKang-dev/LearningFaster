@@ -44,7 +44,7 @@ function Login({ navigation }) {
       source={require('../assets/images/background.png')}
       style={styles.imgBg}
     >
-      <StatusBar barStyle="light-content" backgroundColor="transparent" />
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
       <SafeAreaView style={styles.blackBg}>
         <View style={styles.container}>
           <View style={styles.titleContainer}>
@@ -97,11 +97,12 @@ function Login({ navigation }) {
 const styles = StyleSheet.create({
   imgBg: {
     width: '100%',
-    height: '100%',
+    height: windowHeight,
+    flex: 1,
   },
   blackBg: {
     width: '100%',
-    height: '100%',
+    height: windowHeight,
     alignItems: 'center',
     backgroundColor: THEME_BLACK,
     opacity: 0.84,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 238,
-    height: 53,
+    height: 54,
     marginTop: windowHeight * 0.15,
     marginBottom: 22,
   },

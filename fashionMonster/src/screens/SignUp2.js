@@ -89,7 +89,7 @@ function SignUp2({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     width: '100%',
-    height: '100%',
+    height: windowHeight,
   },
   safeArea: {
     width: '100%',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 48,
     marginBottom: 24,
-    padding: 16,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -138,7 +138,7 @@ const pickerSelectStyles = StyleSheet.create({
     backgroundColor: THEME_LIGHTGRAY,
   },
   inputAndroid: {
-    fontSize: 16,
+    fontSize: 14,
     height: '100%',
     width: 250,
     color: THEME_BLACK,

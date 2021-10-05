@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import PopupModal from '../Popup/PopupModal';
 import { THEME_PURPLE, THEME_WHITE, THEME_GRAY, THEME_BLACK } from '../../styles/color';
+
+const STATUSBAR_HEIGHT = getStatusBarHeight();
 
 function PRHeader({ resetAllState }) {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
@@ -66,7 +69,8 @@ function PRHeader({ resetAllState }) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 50,
+    paddingTop: STATUSBAR_HEIGHT,
+    height: 50 + STATUSBAR_HEIGHT,
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',

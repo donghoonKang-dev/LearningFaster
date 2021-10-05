@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import Header from '../components/Header/PMHeader';
 import SearchBar from '../components/Search/SearchBar';
 import SearchList from '../components/Search/SearchList';
@@ -44,6 +44,7 @@ function ProductManagement({ onPressLogOut }) {
 
   return (
     <>
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
       <Header iconClick={showLogOutPopup} />
       {products.length === 0
         ?

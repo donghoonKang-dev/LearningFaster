@@ -1,10 +1,7 @@
 import React from 'react';
-import { StyleSheet, TextInput, View, Dimensions } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { THEME_PLACEHOLDER, THEME_WHITE } from '../../styles/color';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 function LoginInput({ iconName, placeholder, keyboardType, onChangeText, value }) {
   return (
@@ -25,8 +22,8 @@ function LoginInput({ iconName, placeholder, keyboardType, onChangeText, value }
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingBottom: 14,
     marginBottom: 24,
+    paddingBottom: 4,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,

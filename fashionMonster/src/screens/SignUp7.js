@@ -43,7 +43,7 @@ function SignUp7({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     width: '100%',
-    height: '100%',
+    height: windowHeight,
   },
   safeArea: {
     width: '100%',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   pageTitle: {
-    marginBottom: 8,
+    marginBottom: 6,
     fontSize: 24,
     fontWeight: '700',
   },

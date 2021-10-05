@@ -1,7 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { THEME_PURPLE, THEME_WHITE } from '../../styles/color';
+
+const STATUSBAR_HEIGHT = getStatusBarHeight();
 
 function PMHeader({ iconClick }) {
   return (
@@ -22,7 +25,8 @@ function PMHeader({ iconClick }) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 50,
+    paddingTop: STATUSBAR_HEIGHT,
+    height: 50 + STATUSBAR_HEIGHT,
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',

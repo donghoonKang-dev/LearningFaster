@@ -11,14 +11,14 @@ function ProductMinimumOrder({ canEach, setCanEach }) {
         <TouchableWithoutFeedback onPress={() => setCanEach(true)}>
           <View style={[styles.minimumOrderBox, canEach && { backgroundColor: THEME_PURPLE }]}>
             <Text style={[styles.minimunOrderText, canEach && { color: THEME_WHITE }]}>
-              낮장 가능
+              낱장 가능
             </Text>
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => setCanEach(false)}>
           <View style={[styles.minimumOrderBox, !canEach && { backgroundColor: THEME_PURPLE }]}>
             <Text style={[styles.minimunOrderText, !canEach && { color: THEME_WHITE }]}>
-              낮장 불가능
+              낱장 불가능
             </Text>
           </View>
         </TouchableWithoutFeedback>

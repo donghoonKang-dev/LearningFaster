@@ -18,7 +18,7 @@ function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false
+          headerShown: false,
         }}
       >
         <Stack.Screen

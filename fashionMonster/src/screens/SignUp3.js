@@ -61,7 +61,7 @@ function SignUp3({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     width: '100%',
-    height: '100%',
+    height: windowHeight,
   },
   safeArea: {
     width: '100%',

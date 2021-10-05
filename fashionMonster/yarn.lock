@@ -6105,6 +6105,11 @@
   "resolved" "https://registry.npmjs.org/react-native-splash-screen/-/react-native-splash-screen-3.2.0.tgz"
   "version" "3.2.0"
 
+"react-native-status-bar-height@^2.6.0":
+  "integrity" "sha512-z3SGLF0mHT+OlJDq7B7h/jXPjWcdBT3V14Le5L2PjntjjWM3+EJzq2BcXDwV+v67KFNJic5pgA26cCmseYek6w=="
+  "resolved" "https://registry.npmjs.org/react-native-status-bar-height/-/react-native-status-bar-height-2.6.0.tgz"
+  "version" "2.6.0"
+
 "react-native-swipeout@^2.3.6":
   "integrity" "sha512-t9suUCspzck4vp2pWggWe0frS/QOtX6yYCawHnEes75A7dZCEE74bxX2A1bQzGH9cUMjq6xsdfC94RbiDKIkJg=="
   "resolved" "https://registry.npmjs.org/react-native-swipeout/-/react-native-swipeout-2.3.6.tgz"

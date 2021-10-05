@@ -44,7 +44,7 @@ function SignUp6({ navigation }) {
                 <Text style={styles.whiteBtnText}>추천 없음</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => alert('준비중인 서비스입니다.')}>
+            <TouchableWithoutFeedback onPress={onClickNext}>
               <View style={styles.purpleBtnBox}>
                 <Text style={styles.purpleBtnText}>추천 있음</Text>
               </View>
@@ -59,7 +59,7 @@ function SignUp6({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     width: '100%',
-    height: '100%',
+    height: windowHeight,
   },
   safeArea: {
     width: '100%',
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     marginBottom: 36,
   },
   pageTitle: {
-    marginBottom: 8,
+    marginBottom: 6,
     fontSize: 24,
     fontWeight: '700',
   },
