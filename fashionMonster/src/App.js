@@ -8,6 +8,8 @@ import SignUp2 from './screens/SignUp2';
 import SignUp3 from './screens/SignUp3';
 import SignUp4 from './screens/SignUp4';
 import SignUp5 from './screens/SignUp5';
+import SignUp6 from './screens/SignUp6';
+import SignUp7 from './screens/SignUp7';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +48,14 @@ function App() {
         <Stack.Screen
           name="SignUp5"
           component={SignUp5}
+        />
+        <Stack.Screen
+          name="SignUp6"
+          component={SignUp6}
+        />
+        <Stack.Screen
+          name="SignUp7"
+          component={SignUp7}
         />
       </Stack.Navigator>
     </NavigationContainer>

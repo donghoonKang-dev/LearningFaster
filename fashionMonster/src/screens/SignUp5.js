@@ -5,9 +5,9 @@ import { THEME_WHITE } from '../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
-function SignUp5() {
+function SignUp5({ navigation }) {
   const onClickNext = () => {
-    return 0
+    navigation.navigate('SignUp6', { name: 'SignUp6' });
   }
 
   return (
