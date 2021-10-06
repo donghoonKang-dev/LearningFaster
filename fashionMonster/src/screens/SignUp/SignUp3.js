@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
-import SignupButton from '../components/Button/SignupButton';
-import SignupInput from '../components/Input/SignupInput';
-import { THEME_WHITE } from '../styles/color';
+import SignupButton from '../../components/Button/SignupButton';
+import SignupInput from '../../components/Input/SignupInput';
+import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -11,7 +11,7 @@ function SignUp3({ navigation }) {
   const [contact, setContact] = useState('');
 
   const onClickNext = (userName, contact) => {
-    navigation.navigate('SignUp4', { name: 'SignUp4' });
+    navigation.navigate('SignUp4');
   }
 
   return (

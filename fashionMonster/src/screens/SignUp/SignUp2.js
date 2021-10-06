@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import '@react-native-picker/picker';
-import SignupButton from '../components/Button/SignupButton';
-import SignupInput from '../components/Input/SignupInput';
+import SignupButton from '../../components/Button/SignupButton';
+import SignupInput from '../../components/Input/SignupInput';
 import MIcon from 'react-native-vector-icons/MaterialIcons'
-import { arcades } from '../assets/data/arcades';
-import { THEME_WHITE, THEME_GRAY, THEME_LIGHTGRAY, THEME_BLACK } from '../styles/color';
+import { arcades } from '../../assets/data/arcades';
+import { THEME_WHITE, THEME_GRAY, THEME_LIGHTGRAY, THEME_BLACK } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -23,7 +23,7 @@ function SignUp2({ navigation }) {
   };
 
   const onClickNext = (brandName, arcade, location) => {
-    navigation.navigate('SignUp3', { name: 'SignUp3' });
+    navigation.navigate('SignUp3');
   }
 
   return (

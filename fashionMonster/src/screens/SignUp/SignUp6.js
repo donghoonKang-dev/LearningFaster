@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native';
-import SignupInput from '../components/Input/SignupInput';
-import SignupButton from '../components/Button/SignupButton';
-import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
+import SignupInput from '../../components/Input/SignupInput';
+import { THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,7 +10,7 @@ function SignUp6({ navigation }) {
   const [recommender, setRecommender] = useState('');
 
   const onClickNext = () => {
-    navigation.navigate('SignUp7', { name: 'SignUp7' });
+    navigation.navigate('SignUp7');
   }
 
   return (

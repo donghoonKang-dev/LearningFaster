@@ -1,15 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native';
-import { THEME_WHITE, THEME_PURPLE } from '../styles/color';
+import { NavigationActions } from 'react-navigation';
+import { THEME_WHITE, THEME_PURPLE } from '../../styles/color';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function SignUp7({ navigation }) {
-  const onClickNext = () => {
-    navigation.popToTop();
-  }
-
+function SignUp7({ goToLogin }) {
   return (
     <View style={styles.background}>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -23,7 +20,7 @@ function SignUp7({ navigation }) {
           <Text style={styles.desc}>모든 이벤트와 안내사항은 카카오톡에서</Text>
           <Text style={styles.desc}>가장 빠르게 확인 가능합니다.</Text>
           <View style={styles.buttonContainer}>
-            <TouchableWithoutFeedback onPress={onClickNext}>
+            <TouchableWithoutFeedback onPress={goToLogin}>
               <View style={styles.whiteBtnBox}>
                 <Text style={styles.whiteBtnText}>나중에 등록하기</Text>
               </View>

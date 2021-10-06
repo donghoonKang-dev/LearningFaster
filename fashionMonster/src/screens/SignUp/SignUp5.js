@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text, Image } from 'react-native';
-import SignupButton from '../components/Button/SignupButton';
-import { THEME_WHITE } from '../styles/color';
+import SignupButton from '../../components/Button/SignupButton';
+import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp5({ navigation }) {
   const onClickNext = () => {
-    navigation.navigate('SignUp6', { name: 'SignUp6' });
+    navigation.navigate('SignUp6');
   }
 
   return (
@@ -23,7 +23,7 @@ function SignUp5({ navigation }) {
           <Text style={styles.desc}>매장 방문하여 확인 후 회원가입이 승인됩니다!</Text>
           <Image
             style={styles.image}
-            source={require('../assets/images/goodJob.png')}
+            source={require('../../assets/images/goodJob.png')}
           />
           <SignupButton
             text="회원가입 완료🎉"

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
-import SignupButton from '../components/Button/SignupButton';
-import SignupInput from '../components/Input/SignupInput';
-import { THEME_WHITE } from '../styles/color';
+import SignupButton from '../../components/Button/SignupButton';
+import SignupInput from '../../components/Input/SignupInput';
+import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -30,7 +30,7 @@ function SignUp1({ navigation }) {
       alert('비밀번호 확인이 일치하지 않습니다.');
       return -1;
     }
-    navigation.navigate('SignUp2', { name: 'SignUp2' });
+    navigation.navigate('SignUp2');
     return 0
   }
 

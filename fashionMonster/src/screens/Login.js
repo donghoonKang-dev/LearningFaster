@@ -23,7 +23,7 @@ function Login({ navigation }) {
   const [userPw, setUserPw] = useState('');
 
   const onPressLogin = () => navigation.navigate('Main', { name: 'Main' });
-  const onPressSignUp = () => navigation.navigate('SignUp1', { name: 'SignUp1' });
+  const onPressSignUp = () => navigation.navigate('SignUp', { name: 'SignUp' });
   const cannotLogin = () => alert('아이디, 비밀번호를 확인하세요.');
 
   const findPassword = useCallback(async () => {
