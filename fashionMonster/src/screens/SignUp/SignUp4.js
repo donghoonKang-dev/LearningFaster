@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
+import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
 import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp4({ navigation }) {
-  const [bank, setBank] = useState('');
-  const [accountNum, setAccountNum] = useState('');
-  const [accountName, setAccountName] = useState('');
+  const state = useSignupState();
+  const onChange = useChangeSignup();
 
-  const onClickNext = (bank, accountNum, accountName) => {
-    navigation.navigate('SignUp5');
-  }
+  const onClickNext = () => navigation.navigate('SignUp5');
 
   return (
     <View style={styles.background}>
@@ -25,31 +23,31 @@ function SignUp4({ navigation }) {
             desc="은행명을 적어주세요."
             keyboardType="default"
             placeholder="예시 : 신한은행"
-            text={bank}
-            setText={setBank}
+            text={state.bank}
+            setText={(text) => onChange('bank', text)}
             isSecure={false}
           />
           <SignupInput
             desc="계좌번호를 적어주세요."
             keyboardType="default"
             placeholder="예시 : 1234-1234-12-12"
-            text={accountNum}
-            setText={setAccountNum}
+            text={state.accountNumber}
+            setText={(text) => onChange('accountNumber', text)}
             isSecure={false}
           />
           <SignupInput
             desc="예금주명을 적어주세요."
             keyboardType="default"
             placeholder="예시 : 홍길동"
-            text={accountName}
-            setText={setAccountName}
+            text={state.accountName}
+            setText={(text) => onChange('accountName', text)}
             isSecure={false}
           />
-          {bank !== '' && accountNum !== '' && accountName !== ''
+          {state.bank !== '' && state.accountNumber !== '' && state.accountName !== ''
             ?
             <SignupButton
               text="다음"
-              onPress={() => onClickNext(bank, accountNum, accountName)}
+              onPress={onClickNext}
               active={true}
               number={4}
             />

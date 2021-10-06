@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { THEME_WHITE, THEME_PURPLE } from '../../styles/color';
 
 const windowWidth = Dimensions.get('window').width;

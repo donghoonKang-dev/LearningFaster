@@ -6,9 +6,7 @@ import { THEME_WHITE } from '../../styles/color';
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp5({ navigation }) {
-  const onClickNext = () => {
-    navigation.navigate('SignUp6');
-  }
+  const onClickNext = () => navigation.navigate('SignUp6');
 
   return (
     <View style={styles.background}>

@@ -9,9 +9,7 @@ const windowHeight = Dimensions.get('window').height;
 function SignUp6({ navigation }) {
   const [recommender, setRecommender] = useState('');
 
-  const onClickNext = () => {
-    navigation.navigate('SignUp7');
-  }
+  const onClickNext = () => navigation.navigate('SignUp7');
 
   return (
     <View style={styles.background}>

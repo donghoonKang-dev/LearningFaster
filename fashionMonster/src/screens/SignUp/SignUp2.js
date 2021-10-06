@@ -6,25 +6,20 @@ import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
 import MIcon from 'react-native-vector-icons/MaterialIcons'
 import { arcades } from '../../assets/data/arcades';
+import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
 import { THEME_WHITE, THEME_GRAY, THEME_LIGHTGRAY, THEME_BLACK } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp2({ navigation }) {
-  const [brandName, setBrandName] = useState('');
-  const [arcade, setArcade] = useState(null);
-  const [location, setLocation] = useState('');
+  const state = useSignupState();
+  const onChange = useChangeSignup();
 
   const selectArcade = (value) => {
-    if (value === null) setArcade(null);
-    else {
-      setArcade(value);
-    }
+    if (value !== null) onChange('StoreId', value)
   };
 
-  const onClickNext = (brandName, arcade, location) => {
-    navigation.navigate('SignUp3');
-  }
+  const onClickNext = () => navigation.navigate('SignUp3');
 
   return (
     <View style={styles.background}>
@@ -36,8 +31,8 @@ function SignUp2({ navigation }) {
             desc="브랜드명이 무엇인가요?"
             keyboardType="default"
             placeholder="예시 : 패스터 / FASTER"
-            text={brandName}
-            setText={setBrandName}
+            text={state.name}
+            setText={(text) => onChange('name', text)}
             isSecure={false}
           />
           <View style={styles.selectContainer}>
@@ -48,7 +43,7 @@ function SignUp2({ navigation }) {
                 items={arcades}
                 style={pickerSelectStyles}
                 onValueChange={(value) => selectArcade(value)}
-                value={arcade}
+                value={state.StoreId}
                 fixAndroidTouchableBug={true}
                 textInputProps={{ underlineColorAndroid: 'transparent' }}
                 useNativeAndroidPickerStyle={false}
@@ -60,15 +55,15 @@ function SignUp2({ navigation }) {
             desc="몇 층에 몇 호에 계신가요?"
             keyboardType="default"
             placeholder="예시 : 10층 / 101호"
-            text={location}
-            setText={setLocation}
+            text={state.location}
+            setText={(text) => onChange('location', text)}
             isSecure={false}
           />
-          {brandName !== '' && arcade !== '' && location !== ''
+          {state.name !== '' && state.StoreId !== null && state.location !== ''
             ?
             <SignupButton
               text="다음"
-              onPress={() => onClickNext(brandName, arcade, location)}
+              onPress={onClickNext}
               active={true}
               number={2}
             />

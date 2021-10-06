@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
+import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
 import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp3({ navigation }) {
-  const [userName, setUserName] = useState('');
-  const [contact, setContact] = useState('');
+  const state = useSignupState();
+  const onChange = useChangeSignup();
 
-  const onClickNext = (userName, contact) => {
-    navigation.navigate('SignUp4');
-  }
+  const onClickNext = () => navigation.navigate('SignUp4');
 
   return (
     <View style={styles.background}>
@@ -24,23 +23,23 @@ function SignUp3({ navigation }) {
             desc="성함을 알려주세요."
             keyboardType="default"
             placeholder="예시 : 홍길동"
-            text={userName}
-            setText={setUserName}
+            text={state.manager}
+            setText={(text) => onChange('manager', text)}
             isSecure={false}
           />
           <SignupInput
             desc="연락처를 알려주세요."
             keyboardType="default"
             placeholder="예시 : 010-1234-5678"
-            text={contact}
-            setText={setContact}
+            text={state.tel}
+            setText={(text) => onChange('tel', text)}
             isSecure={false}
           />
-          {userName !== '' && contact !== ''
+          {state.manager !== '' && state.tel !== ''
             ?
             <SignupButton
               text="다음"
-              onPress={() => onClickNext(userName, contact)}
+              onPress={onClickNext}
               active={true}
               number={3}
             />

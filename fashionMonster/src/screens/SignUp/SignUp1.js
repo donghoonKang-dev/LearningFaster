@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
+import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
 import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp1({ navigation }) {
-  const [userId, setUserId] = useState('');
-  const [userPw, setUserPw] = useState('');
+  const state = useSignupState();
+  const onChange = useChangeSignup();
+
   const [pwCheck, setPwCheck] = useState('');
 
   const onClickNext = (userId, userPw, pwCheck) => {
@@ -44,16 +46,16 @@ function SignUp1({ navigation }) {
             desc="아이디(이메일)"
             keyboardType="email-address"
             placeholder="예시: faster@naver.com"
-            text={userId}
-            setText={setUserId}
+            text={state.email}
+            setText={(text) => onChange('email', text)}
             isSecure={false}
           />
           <SignupInput
             desc="비밀번호"
             keyboardType="default"
             placeholder="영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요."
-            text={userPw}
-            setText={setUserPw}
+            text={state.password}
+            setText={(text) => onChange('password', text)}
             isSecure={true}
           />
           <SignupInput
@@ -64,11 +66,11 @@ function SignUp1({ navigation }) {
             setText={setPwCheck}
             isSecure={true}
           />
-          {userId !== '' && userPw !== '' && pwCheck !== ''
+          {state.email !== '' && state.password !== '' && pwCheck !== ''
             ?
             <SignupButton
               text="다음"
-              onPress={() => onClickNext(userId, userPw, pwCheck)}
+              onPress={() => onClickNext(state.email, state.password, pwCheck)}
               active={true}
               number={1}
             />
