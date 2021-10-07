@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
 import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
+import { useAuth } from '../../modules/auth/hook';
 import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
@@ -10,8 +11,12 @@ const windowHeight = Dimensions.get('window').height;
 function SignUp4({ navigation }) {
   const state = useSignupState();
   const onChange = useChangeSignup();
+  const { signupDispatch } = useAuth();
 
-  const onClickNext = () => navigation.navigate('SignUp5');
+  const onSignUp = useCallback(() => {
+    signupDispatch(state);
+    navigation.navigate('SignUp5');
+  }, []);
 
   return (
     <View style={styles.background}>
@@ -47,7 +52,7 @@ function SignUp4({ navigation }) {
             ?
             <SignupButton
               text="다음"
-              onPress={onClickNext}
+              onPress={onSignUp}
               active={true}
               number={4}
             />

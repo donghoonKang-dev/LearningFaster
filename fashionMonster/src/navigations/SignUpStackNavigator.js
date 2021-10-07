@@ -1,17 +1,17 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUp1 from './SignUp1';
-import SignUp2 from './SignUp2';
-import SignUp3 from './SignUp3';
-import SignUp4 from './SignUp4';
-import SignUp5 from './SignUp5';
-import SignUp6 from './SignUp6';
-import SignUp7 from './SignUp7';
+import SignUp1 from '../screens/SignUp/SignUp1';
+import SignUp2 from '../screens/SignUp/SignUp2';
+import SignUp3 from '../screens/SignUp/SignUp3';
+import SignUp4 from '../screens/SignUp/SignUp4';
+import SignUp5 from '../screens/SignUp/SignUp5';
+import SignUp6 from '../screens/SignUp/SignUp6';
+import SignUp7 from '../screens/SignUp/SignUp7';
 
 const SignUpStack = createNativeStackNavigator();
 
-function SignUp({ navigation }) {
+function SignUpStackNavigator({ navigation }) {
   const goToLogin = () => navigation.navigate('Login', { name: 'Login' });
 
   return (
@@ -54,4 +54,4 @@ function SignUp({ navigation }) {
   );
 };
 
-export default SignUp;
+export default SignUpStackNavigator;

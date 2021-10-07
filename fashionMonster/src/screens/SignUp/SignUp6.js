@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native';
 import SignupInput from '../../components/Input/SignupInput';
+import { useAuth } from '../../modules/auth/hook';
 import { THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp6({ navigation }) {
+  const {
+    addRecommDispatch,
+    signup: { data: signUpData },
+  } = useAuth();
   const [recommender, setRecommender] = useState('');
 
   const onClickNext = () => navigation.navigate('SignUp7');
+
+  const onAddRecomm = () => {
+    if (!signUpData) {
+      console.log(signUpData + '데이터 받지 못함!');
+      return;
+    }
+    if (recommender === '') {
+      alert('추천한 브랜드를 입력해주세요.');
+      return;
+    }
+    addRecommDispatch({ userId: signUpData?.id, brand: recommender });
+    navigation.navigate('SignUp7');
+  };
 
   return (
     <View style={styles.background}>
@@ -41,7 +59,7 @@ function SignUp6({ navigation }) {
                 <Text style={styles.whiteBtnText}>추천 없음</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={onClickNext}>
+            <TouchableWithoutFeedback onPress={onAddRecomm}>
               <View style={styles.purpleBtnBox}>
                 <Text style={styles.purpleBtnText}>추천 있음</Text>
               </View>
