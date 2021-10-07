@@ -1,49 +1,68 @@
 import React, { useState } from 'react';
-import { 
+import {
   StyleSheet,
   View,
   TouchableOpacity,
   Image,
   Text,
-  Switch } from 'react-native';
+  Switch
+} from 'react-native';
 import Swipeout from 'react-native-swipeout';
-import { 
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import { useProduct } from '../../modules/product';
+import {
   THEME_PURPLE,
   THEME_LIGHTPURPLE,
   THEME_WHITE,
   THEME_LIGHTGRAY,
-  THEME_GRAY } from '../../styles/color';
+  THEME_GRAY
+} from '../../styles/color';
+dayjs.locale('ko');
 
-function ProductListItem({ imgSrc, name, uploadDate, price }) {
+function ProdListItem({ productData }) {
   const [switchEnabled, setSwitchEnabled] = useState(false);
+  const { toggleActiveDispatch } = useProduct();
 
-  const toggleSwitch = () => setSwitchEnabled(previousState => !previousState);
+  const toggleValue = () => {
+    toggleActiveDispatch({
+      productId: productData.id,
+      isActive: productData.isActive === 1 ? 0 : 1,
+    });
+  };
+
+  //const toggleSwitch = () => setSwitchEnabled(previousState => !previousState);
 
   const swipeoutButtons = [{
-      text: '삭제',
-      backgroundColor: 'red',
-      underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-      onPress: () => { alert('삭제되었습니다.'); }
-    }];
+    text: '삭제',
+    backgroundColor: 'red',
+    underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+    onPress: () => { alert('삭제되었습니다.'); }
+  }];
 
   return (
     <Swipeout right={swipeoutButtons} buttonWidth={100}>
       <View style={styles.listItemContainer}>
         <TouchableOpacity style={styles.productInfoContainer}>
-          <Image style={styles.productImage} source={imgSrc}/>
+          {/*
+            <Image
+              style={styles.productImage}
+              source={require(`${process.env.REACT_APP_S3_SRC}/${productData.thumbnail}`)}
+            />
+          */}
           <View style={styles.textContainer}>
-            <Text style={styles.productName}>{name}</Text>
-            <Text style={styles.productInfo}>{uploadDate}</Text>
-            <Text style={styles.productInfo}>{price+'원'}</Text>
+            <Text style={styles.productName}>{productData.name}</Text>
+            <Text style={styles.productInfo}>{dayjs(productData.createdAt).format('YY년 MM월 DD일 HH시')}</Text>
+            <Text style={styles.productInfo}>{productData.price.toLocaleString() + '원'}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.switchContainer}>
           <Switch
             trackColor={{ false: THEME_LIGHTGRAY, true: THEME_LIGHTPURPLE }}
-            thumbColor={switchEnabled ? THEME_PURPLE : THEME_WHITE}
+            thumbColor={productData.isActive ? THEME_PURPLE : THEME_WHITE}
             ios_backgroundColor={THEME_LIGHTGRAY}
-            onValueChange={toggleSwitch}
-            value={switchEnabled}
+            onValueChange={toggleValue}
+            value={productData.isActive}
           />
         </View>
       </View>
@@ -87,4 +106,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default React.memo(ProductListItem);
+export default React.memo(ProdListItem);

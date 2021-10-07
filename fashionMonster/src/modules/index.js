@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import auth from './auth/slice';
+import product from './product/slice';
+
 const prod = process.env.NODE_ENV === 'production';
 
-const rootReducer = combineReducers({ auth });
+const rootReducer = combineReducers({ auth, product });
 
 const store = configureStore({
   reducer: rootReducer,

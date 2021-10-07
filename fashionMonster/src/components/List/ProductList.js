@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
-import ProductListItem from './ProductListItem';
-import { THEME_GRAY } from '../../styles/color';
+import ProdListItem from './ProdListItem';
+import { ProductListItem, useProduct } from '../../modules/product';
 import dateParser from '../../utils/dateParser';
 import DATA from '../../assets/data/data';
+import { THEME_GRAY } from '../../styles/color';
 
 function ProductList({ selectedFilter }) {
   const renderItem = ({ item }) => (
-    <ProductListItem
+    <ProdListItem
       imgSrc={item.imgSrc}
       name={item.name}
       uploadDate={item.uploadDate}
@@ -25,25 +26,25 @@ function ProductList({ selectedFilter }) {
 
   return (
     <View style={styles.listContainer}>
-      { selectedFilter === 'sortByDate' && 
+      {selectedFilter === 'sortByDate' &&
         <FlatList
-          data={DATA.sort((x,y) => dateParser(y.uploadDate) - dateParser(x.uploadDate))}
+          data={DATA.sort((x, y) => dateParser(y.uploadDate) - dateParser(x.uploadDate))}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListEmptyComponent={renderEmptyContainer}
         />
       }
-      { selectedFilter === 'sortByPriceAsc' && 
+      {selectedFilter === 'sortByPriceAsc' &&
         <FlatList
-          data={DATA.sort((x,y) => parseInt(x.price) - parseInt(y.price))}
+          data={DATA.sort((x, y) => parseInt(x.price) - parseInt(y.price))}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListEmptyComponent={renderEmptyContainer}
         />
       }
-      { selectedFilter === 'sortByPriceDsc' && 
+      {selectedFilter === 'sortByPriceDsc' &&
         <FlatList
-          data={DATA.sort((x,y) => parseInt(y.price) - parseInt(x.price))}
+          data={DATA.sort((x, y) => parseInt(y.price) - parseInt(x.price))}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListEmptyComponent={renderEmptyContainer}

@@ -15,6 +15,7 @@ import ProductMinimumOrder from '../components/ProductRegistration/ProductMinimu
 import ProductDetail from '../components/ProductRegistration/ProductDetail';
 import cateClassifier from '../utils/cateClassifier';
 import { THEME_WHITE } from '../styles/color';
+import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 
 function ProductRegistration() {
   const refScroll = useRef(null);
@@ -61,7 +62,7 @@ function ProductRegistration() {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent={true} />
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={THEME_WHITE} translucent={true} />
       <Header resetAllState={resetAllState} />
       <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
         <ScrollView

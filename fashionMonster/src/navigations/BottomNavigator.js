@@ -40,7 +40,7 @@ function BottomNavigator({ goToLogin }) {
       />
       <Tab.Screen
         name="ProductRegistration"
-        component={ProductRegistration}
+        children={() => <ProductRegistration />}
         options={{
           tabBarLabel: 'ProductRegistration',
           tabBarIcon: ({ focused }) => {

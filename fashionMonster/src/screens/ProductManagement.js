@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View } from 'react-native';
 import Header from '../components/Header/PMHeader';
 import SearchBar from '../components/Search/SearchBar';
 import SearchList from '../components/Search/SearchList';
@@ -8,7 +8,8 @@ import ProductList from '../components/List/ProductList';
 import BottomPopup from '../components/Popup/BottomPopup';
 import EmptyView from '../components/ImageView/EmptyView';
 import { useAuth } from '../modules/auth/hook';
-import { THEME_WHITE } from '../styles/color';
+import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
+import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 
 function ProductManagement({ goToLogin }) {
   const {
@@ -52,7 +53,7 @@ function ProductManagement({ goToLogin }) {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header iconClick={showLogOutPopup} />
       {products.length === 0
         ?

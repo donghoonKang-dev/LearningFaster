@@ -112,13 +112,12 @@ function Login({ navigation }) {
 
 const styles = StyleSheet.create({
   imgBg: {
-    width: '100%',
+    width: windowWidth,
     height: windowHeight,
-    flex: 1,
   },
   blackBg: {
     width: '100%',
-    height: windowHeight,
+    height: '100%',
     alignItems: 'center',
     backgroundColor: THEME_BLACK,
     opacity: 0.84,
