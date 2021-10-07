@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { THEME_PLACEHOLDER, THEME_WHITE } from '../../styles/color';
 
-function LoginInput({ iconName, placeholder, keyboardType, onChangeText, value }) {
+function LoginInput({ iconName, placeholder, keyboardType, onChangeText, value, isSecure }) {
   return (
     <View style={styles.container}>
       <MCIcon style={{ marginRight: 22 }} name={iconName} size={30} color={THEME_WHITE} />
@@ -14,6 +14,8 @@ function LoginInput({ iconName, placeholder, keyboardType, onChangeText, value }
         keyboardType={keyboardType}
         onChangeText={onChangeText}
         value={value}
+        autoCapitalize='none'
+        secureTextEntry={isSecure}
       />
     </View>
   );

@@ -28,11 +28,6 @@ const authSlice = createSlice({
         state.login.data = null;
         state.login.error = payload;
       })
-      .addCase(logoutAction.pending, state => {
-        state.login.loading = true;
-        state.login.data = null;
-        state.login.error = null;
-      })
       .addCase(logoutAction.fulfilled, state => {
         state.login.loading = false;
         state.login.data = null;

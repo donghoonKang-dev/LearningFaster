@@ -7,9 +7,14 @@ import FilterContainer from '../components/Filter/FilterContainer';
 import ProductList from '../components/List/ProductList';
 import BottomPopup from '../components/Popup/BottomPopup';
 import EmptyView from '../components/ImageView/EmptyView';
+import { useAuth } from '../modules/auth/hook';
 import { THEME_WHITE } from '../styles/color';
 
-function ProductManagement({ onPressLogOut }) {
+function ProductManagement({ goToLogin }) {
+  const {
+    logoutDispatch,
+    login: { data: userData },
+  } = useAuth();
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('sortByDate');
@@ -20,9 +25,12 @@ function ProductManagement({ onPressLogOut }) {
   const closeLogOutPopup = () => setLogOutPopupOpen(false);
   const showFilterPopup = () => setFilterPopupOpen(true);
   const closeFilterPopup = () => setFilterPopupOpen(false);
+
   const logOut = () => {
+    if (!userData) return;
     setLogOutPopupOpen(false);
-    onPressLogOut();
+    logoutDispatch({ email: userData.email, name: userData.name });
+    goToLogin();
   };
   const sortByDate = () => {
     setSelectedFilter('sortByDate');

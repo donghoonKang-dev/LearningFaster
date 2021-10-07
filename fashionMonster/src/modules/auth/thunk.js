@@ -11,7 +11,6 @@ export const loginAction = createAsyncThunk(
       const { data } = await axios.post('seller/auth/login', loginData);
       return data;
     } catch (e) {
-      console.error(e);
       return rejectWithValue({ message: e.response.data });
     }
   }
@@ -19,12 +18,11 @@ export const loginAction = createAsyncThunk(
 
 export const logoutAction = createAsyncThunk(
   'auth/logout',
-  async (logoutData, { rejectWithValue }) => {
+  async ({ email }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`seller/auth/logout?email=${logoutData.email}`);
+      const { data } = await axios.get(`seller/auth/logout?email=${email}`);
       return data;
     } catch (e) {
-      console.error(e);
       return rejectWithValue({ message: e.response.data });
     }
   });
@@ -36,7 +34,6 @@ export const signupAction = createAsyncThunk(
       const { data } = await axios.post(`seller/auth/regist`, signupData);
       return data;
     } catch (e) {
-      console.error(e);
       return rejectWithValue({ message: e.response.data });
     }
   });
@@ -48,7 +45,6 @@ export const addRecommAction = createAsyncThunk(
       const { data } = await axios.post(`seller/auth/recommender`, recommenderData);
       return data;
     } catch (e) {
-      console.error(e);
       return rejectWithValue({ message: e.response.data });
     }
   });

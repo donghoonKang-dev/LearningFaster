@@ -18,7 +18,7 @@ function SignUp6({ navigation }) {
 
   const onAddRecomm = () => {
     if (!signUpData) {
-      console.log(signUpData + '데이터 받지 못함!');
+      console.log('회원가입 데이터 받지 못함!');
       return;
     }
     if (recommender === '') {

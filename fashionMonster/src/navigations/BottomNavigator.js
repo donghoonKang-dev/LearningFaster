@@ -7,7 +7,7 @@ import { THEME_PURPLE, THEME_GRAY } from '../styles/color';
 
 const Tab = createBottomTabNavigator();
 
-function BottomNavigator({ logOut }) {
+function BottomNavigator({ goToLogin }) {
   return (
     <Tab.Navigator screenOptions={() => ({
       header: () => { return null; },
@@ -22,7 +22,7 @@ function BottomNavigator({ logOut }) {
     })}>
       <Tab.Screen
         name="ProductManagement"
-        children={() => <ProductManagement onPressLogOut={logOut} />}
+        children={() => <ProductManagement goToLogin={goToLogin} />}
         options={{
           tabBarLabel: 'ProductManagement',
           tabBarIcon: ({ focused }) => {

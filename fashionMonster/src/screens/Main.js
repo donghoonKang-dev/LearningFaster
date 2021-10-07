@@ -4,14 +4,14 @@ import BottomNavigator from '../navigations/BottomNavigator';
 import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
 
 function Main({ navigation }) {
-  const logOut = () => navigation.navigate('Login', { name: 'Login' });
+  const goToLogin = () => navigation.navigate('Login', { name: 'Login' });
 
   return (
     <>
       <SafeAreaView style={styles.topSafeAreaContainer} />
       <SafeAreaView style={styles.mainSafeAreaContainer}>
         <StatusBar barStyle="light-content" />
-        <BottomNavigator logOut={logOut} />
+        <BottomNavigator goToLogin={goToLogin} />
       </SafeAreaView>
     </>
   );

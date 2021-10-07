@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Image,
@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import LoginButton from '../components/Button/LoginButton';
 import LoginInput from '../components/Input/LoginInput';
+import { useAuth } from '../modules/auth/hook';
 import { THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../styles/color';
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,10 +22,27 @@ const windowHeight = Dimensions.get('window').height;
 function Login({ navigation }) {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
+  const {
+    loginDispatch,
+    login
+  } = useAuth();
 
-  const onPressLogin = () => navigation.navigate('Main', { name: 'Main' });
+  const onLogin = () => {
+    if (!userId.trim()) return alert('이메일을 입력해주세요');
+    if (!userPw.trim()) return alert('비밀번호를 입력해주세요');
+    loginDispatch({ email: userId, password: userPw });
+  };
   const onPressSignUp = () => navigation.navigate('SignUp', { name: 'SignUp' });
-  const cannotLogin = () => alert('아이디, 비밀번호를 확인하세요.');
+
+  useEffect(() => {
+    if (login.data) {
+      return navigation.navigate('Main', { name: 'Main' })
+    }
+    if (login.error) {
+      setUserPw('');
+      alert(login.error.message);
+    }
+  }, [login]);
 
   const findPassword = useCallback(async () => {
     // https://github.com/shpongle2634/react-native-kakao-links
@@ -62,6 +80,7 @@ function Login({ navigation }) {
               keyboardType="default"
               onChangeText={setUserId}
               value={userId}
+              isSecure={false}
             />
             <LoginInput
               iconName="lock-outline"
@@ -69,15 +88,12 @@ function Login({ navigation }) {
               keyboardType="default"
               onChangeText={setUserPw}
               value={userPw}
+              isSecure={true}
             />
           </View>
           <LoginButton
             text="로그인"
-            onPress={
-              userId !== '' && userPw !== ''
-                ? onPressLogin
-                : cannotLogin
-            }
+            onPress={onLogin}
           />
           <View style={styles.textButtonContainer}>
             <TouchableOpacity onPress={onPressSignUp}>
