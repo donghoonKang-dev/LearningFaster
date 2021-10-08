@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '..';
+import { useAppDispatch, useAppSelector } from '../index';
 import { loginAction, logoutAction, signupAction, addRecommAction } from './thunk';
 
 export function useAuth() {

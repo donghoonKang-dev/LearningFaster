@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
+import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 import Header from '../components/Header/PMHeader';
 import SearchBar from '../components/Search/SearchBar';
 import SearchList from '../components/Search/SearchList';
@@ -8,24 +9,28 @@ import ProductList from '../components/List/ProductList';
 import BottomPopup from '../components/Popup/BottomPopup';
 import EmptyView from '../components/ImageView/EmptyView';
 import { useAuth } from '../modules/auth/hook';
+import { useProduct } from '../modules/product/index';
+import useFetchMore from '../hooks/useFetchMore';
 import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
-import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 
 function ProductManagement({ goToLogin }) {
   const {
     logoutDispatch,
     login: { data: userData },
   } = useAuth();
+  const { loadProductListDispatch, loadProductList, hasMore } = useProduct();
+  const [FetchMoreTrigger, page, setPage] = useFetchMore(hasMore);
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState('sortByDate');
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('created');
 
   const showLogOutPopup = () => setLogOutPopupOpen(true);
   const closeLogOutPopup = () => setLogOutPopupOpen(false);
   const showFilterPopup = () => setFilterPopupOpen(true);
   const closeFilterPopup = () => setFilterPopupOpen(false);
+  const openSearchBar = () => setIsSearchBarClicked(true);
+  const closeSearchBar = () => setIsSearchBarClicked(false);
 
   const logOut = () => {
     if (!userData) return;
@@ -33,29 +38,25 @@ function ProductManagement({ goToLogin }) {
     logoutDispatch({ email: userData.email, name: userData.name });
     goToLogin();
   };
-  const sortByDate = () => {
-    setSelectedFilter('sortByDate');
+
+  const sortBy = (type) => {
+    setSelectedFilter(type);
     setFilterPopupOpen(false);
-    alert('최근 등록일순 정렬 되었습니다.');
   };
-  const sortByPriceAsc = () => {
-    setSelectedFilter('sortByPriceAsc');
-    setFilterPopupOpen(false);
-    alert('가격 낮은순 정렬 되었습니다.');
-  };
-  const sortByPriceDsc = () => {
-    setSelectedFilter('sortByPriceDsc');
-    setFilterPopupOpen(false);
-    alert('가격 높은순 정렬 되었습니다.');
-  };
-  const searchBarOpen = () => setIsSearchBarClicked(true);
-  const searchBarClose = () => setIsSearchBarClicked(false);
+
+  useEffect(() => {
+    loadProductListDispatch({ page, sort: selectedFilter });
+  }, [page, selectedFilter]);
+
+  useEffect(() => {
+    setPage(1)
+  }, [selectedFilter]);
 
   return (
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header iconClick={showLogOutPopup} />
-      {products.length === 0
+      {loadProductList.data?.length === 0
         ?
         <>
           <EmptyView />
@@ -75,14 +76,16 @@ function ProductManagement({ goToLogin }) {
         >
           <SearchBar
             pressed={isSearchBarClicked}
-            searchBarOpen={searchBarOpen}
-            searchBarClose={searchBarClose}
+            openSearchBar={openSearchBar}
+            closeSearchBar={closeSearchBar}
           />
-          {isSearchBarClicked ?
-            <SearchList /> :
+          {isSearchBarClicked
+            ?
+            <SearchList />
+            :
             <View style={{ flex: 1 }}>
               <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup} />
-              <ProductList selectedFilter={selectedFilter} />
+              <ProductList />
             </View>
           }
           {logOutPopupOpen &&
@@ -97,10 +100,8 @@ function ProductManagement({ goToLogin }) {
             <BottomPopup
               name="filter"
               isOpen={filterPopupOpen}
-              sortBy={selectedFilter}
-              sortByDate={sortByDate}
-              sortByPriceAsc={sortByPriceAsc}
-              sortByPriceDsc={sortByPriceDsc}
+              selectedFilter={selectedFilter}
+              sortBy={sortBy}
               onTouchOutside={closeFilterPopup}
             />
           }

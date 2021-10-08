@@ -9,9 +9,9 @@ function FilterContainer({ selectedFilter, onClick }) {
       <TouchableOpacity style={styles.filterBox} onPress={onClick}>
         <FeatherIcon name="chevron-down" size={15} color={THEME_PURPLE} />
         <Text style={styles.filterText}>
-          {selectedFilter === 'sortByDate' && '최근 등록일순'}
-          {selectedFilter === 'sortByPriceAsc' && '가격 낮은순'}
-          {selectedFilter === 'sortByPriceDsc' && '가격 높은순'}
+          {selectedFilter === 'created' && '최근 등록일순'}
+          {selectedFilter === 'name' && '이름순'}
+          {selectedFilter === 'price' && '가격순'}
         </Text>
       </TouchableOpacity>
     </View>

@@ -1,14 +1,18 @@
 import { useCallback } from 'react';
 import {
+  addProductAction,
   loadDetailAction,
   loadProductListAction,
-  ProductPayload,
+  removeProductAction,
   toggleActiveAction,
+  updateProductAction,
 } from './thunk';
-import { useAppDispatch, useAppSelector } from '..';
+import { useAppDispatch, useAppSelector } from '../index';
 
 export function useProduct() {
-  const { loadProductList, loadDetail } = useAppSelector(state => state.product);
+  const { addProduct, loadProductList, loadDetail, hasMore, loadMore } = useAppSelector(
+    state => state.product
+  );
 
   const dispatch = useAppDispatch();
 
@@ -24,11 +28,29 @@ export function useProduct() {
     dispatch(loadDetailAction(data));
   }, []);
 
+  const addProductDispatch = useCallback((data) => {
+    dispatch(addProductAction(data));
+  }, []);
+
+  const updateProductDispatch = useCallback((data) => {
+    dispatch(updateProductAction(data));
+  }, []);
+
+  const removeProductDispatch = useCallback((data) => {
+    dispatch(removeProductAction(data));
+  }, []);
+
   return {
+    addProduct,
+    loadMore,
+    hasMore,
     loadDetail,
     loadProductList,
     loadProductListDispatch,
     loadDetailDispatch,
     toggleActiveDispatch,
+    addProductDispatch,
+    updateProductDispatch,
+    removeProductDispatch,
   };
 };

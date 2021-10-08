@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -21,8 +21,7 @@ import {
 dayjs.locale('ko');
 
 function ProdListItem({ productData }) {
-  const [switchEnabled, setSwitchEnabled] = useState(false);
-  const { toggleActiveDispatch } = useProduct();
+  const { toggleActiveDispatch, removeProductDispatch } = useProduct();
 
   const toggleValue = () => {
     toggleActiveDispatch({
@@ -33,27 +32,31 @@ function ProdListItem({ productData }) {
 
   //const toggleSwitch = () => setSwitchEnabled(previousState => !previousState);
 
+  const onClickRemove = () => {
+    if (confirm(`${productData.name}을 삭제하시겠습니까?`)) {
+      removeProductDispatch({ ProductId: productData.id, name: productData.name });
+    }
+  };
+
   const swipeoutButtons = [{
     text: '삭제',
     backgroundColor: 'red',
     underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-    onPress: () => { alert('삭제되었습니다.'); }
+    onPress: onClickRemove
   }];
 
   return (
     <Swipeout right={swipeoutButtons} buttonWidth={100}>
       <View style={styles.listItemContainer}>
         <TouchableOpacity style={styles.productInfoContainer}>
-          {/*
-            <Image
-              style={styles.productImage}
-              source={require(`${process.env.REACT_APP_S3_SRC}/${productData.thumbnail}`)}
-            />
-          */}
+          <Image
+            style={styles.productImage}
+            source={{ uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/original/product/${productData.thumbnail}` }}
+          />
           <View style={styles.textContainer}>
             <Text style={styles.productName}>{productData.name}</Text>
             <Text style={styles.productInfo}>{dayjs(productData.createdAt).format('YY년 MM월 DD일 HH시')}</Text>
-            <Text style={styles.productInfo}>{productData.price.toLocaleString() + '원'}</Text>
+            <Text style={styles.productInfo}>{productData.price.toLocaleString() + ' 원'}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.switchContainer}>
