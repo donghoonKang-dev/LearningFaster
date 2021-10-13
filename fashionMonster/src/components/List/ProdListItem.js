@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  Switch
+  Switch,
+  Alert
 } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import dayjs from 'dayjs';
@@ -33,9 +34,19 @@ function ProdListItem({ productData }) {
   //const toggleSwitch = () => setSwitchEnabled(previousState => !previousState);
 
   const onClickRemove = () => {
-    if (confirm(`${productData.name}을 삭제하시겠습니까?`)) {
-      removeProductDispatch({ ProductId: productData.id, name: productData.name });
-    }
+    Alert.alert("경고", "정말 삭제하시겠습니까?",
+      [
+        {
+          text: "취소",
+          onPress: () => { },
+          style: "cancel"
+        },
+        {
+          text: "확인",
+          onPress: () => removeProductDispatch({ ProductId: productData.id, name: productData.name }),
+        }
+      ]
+    )
   };
 
   const swipeoutButtons = [{

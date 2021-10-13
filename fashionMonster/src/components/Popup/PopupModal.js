@@ -13,9 +13,7 @@ const WIDTH = Dimensions.get('window').width;
 const HEIGHT_MODAL = 150;
 
 function PopupModal({ label, onOkClicked, title, desc, isModalVisible, onClose }) {
-
   closeModal = (data) => {
-    onClose();
     if (data === 'OK') {
       if (label === 'reset') {
         onOkClicked();
@@ -24,6 +22,7 @@ function PopupModal({ label, onOkClicked, title, desc, isModalVisible, onClose }
         onOkClicked();
       }
     }
+    onClose();
   };
 
   return (

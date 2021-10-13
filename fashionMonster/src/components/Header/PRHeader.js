@@ -10,18 +10,10 @@ function PRHeader({ resetAllState, onSubmit }) {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
-  const openResetModal = () => {
-    setIsResetModalOpen(true);
-  };
-  const closeResetModal = () => {
-    setIsResetModalOpen(false);
-  };
-  const openSaveModal = () => {
-    setIsSaveModalOpen(true);
-  };
-  const closeSaveModal = () => {
-    setIsSaveModalOpen(false);
-  };
+  const openResetModal = () => setIsResetModalOpen(true);
+  const closeResetModal = () => setIsResetModalOpen(false);
+  const openSaveModal = () => setIsSaveModalOpen(true);
+  const closeSaveModal = () => setIsSaveModalOpen(false);
 
   return (
     <View style={styles.headerContainer}>
