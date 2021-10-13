@@ -31,8 +31,6 @@ function ProdListItem({ productData }) {
     });
   };
 
-  //const toggleSwitch = () => setSwitchEnabled(previousState => !previousState);
-
   const onClickRemove = () => {
     Alert.alert("경고", "정말 삭제하시겠습니까?",
       [
@@ -73,10 +71,10 @@ function ProdListItem({ productData }) {
         <View style={styles.switchContainer}>
           <Switch
             trackColor={{ false: THEME_LIGHTGRAY, true: THEME_LIGHTPURPLE }}
-            thumbColor={productData.isActive ? THEME_PURPLE : THEME_WHITE}
+            thumbColor={THEME_WHITE}
             ios_backgroundColor={THEME_LIGHTGRAY}
             onValueChange={toggleValue}
-            value={productData.isActive}
+            value={productData.isActive ? true : false}
           />
         </View>
       </View>
