@@ -28,16 +28,16 @@ function ProductImage({ images, setImages, deleteImage }) {
     })
   }
 
-  const renderImage = (assets, index) => {
+  const renderImage = (image, index) => {
     return (
-      <View key={assets.uri}>
+      <View key={image.filename}>
         <Image
-          source={{ uri: assets.uri }}
+          source={{ uri: `http://faster-seller.s3.ap-northeast-2.amazonaws.com/original/product/${image.filename}` }}
           style={[styles.loadedImage, index === 0 ? styles.representImage : null]}
         />
         <TouchableOpacity
           style={{ position: 'absolute', top: 0, right: 0 }}
-          onPressIn={() => { deleteImage(assets.id) }}
+          onPressIn={() => { deleteImage(image.filename) }}
         >
           <View style={styles.deleteImageButton}>
             <FeatherIcon name="x" size={15} color={THEME_GRAY} />
@@ -80,7 +80,7 @@ function ProductImage({ images, setImages, deleteImage }) {
             </Text>
           </TouchableOpacity>
         </View>
-        {images.map((assets, index) => renderImage(assets, index))}
+        {images.map((image, index) => renderImage(image, index))}
       </ScrollView>
     </View>
   );

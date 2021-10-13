@@ -23,7 +23,7 @@ function ProductSize({ sizes, setSizes, manualSizes, setManualSizes, category })
       ? setSizes(prev => prev.filter(size => size.id !== sizeData.id))
       : setSizes(prev => [...prev, sizeData]);
   };
-  console.log(sizes)
+
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 사이즈</Text>

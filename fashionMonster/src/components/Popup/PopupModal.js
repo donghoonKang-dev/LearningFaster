@@ -20,8 +20,8 @@ function PopupModal({ label, onOkClicked, title, desc, isModalVisible, onClose }
       if (label === 'reset') {
         onOkClicked();
         alert('초기화 되었습니다.');
-      } else {
-        alert('요청 처리됨');
+      } else if (label === 'save') {
+        onOkClicked();
       }
     }
   };

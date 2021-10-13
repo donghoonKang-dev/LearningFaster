@@ -6,7 +6,7 @@ import { THEME_PURPLE, THEME_WHITE, THEME_GRAY, THEME_BLACK } from '../../styles
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
 
-function PRHeader({ resetAllState }) {
+function PRHeader({ resetAllState, onSubmit }) {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
@@ -56,6 +56,7 @@ function PRHeader({ resetAllState }) {
         isSaveModalOpen &&
         <PopupModal
           label="save"
+          onOkClicked={onSubmit}
           isModalVisible={isSaveModalOpen}
           onClose={closeSaveModal}
           title="상품 등록"

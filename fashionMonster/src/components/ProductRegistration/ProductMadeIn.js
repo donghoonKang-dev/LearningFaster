@@ -6,9 +6,9 @@ import EntIcon from 'react-native-vector-icons/Entypo';
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
 const MADE_IN = [
-  { label: '대한민국', value: 'KOREA', key: 1 },
-  { label: '중국', value: 'CHINA', key: 2 },
-  { label: '그외', value: 'OTHER', key: 3 },
+  { id: 1, label: '대한민국', value: 1 },
+  { id: 2, label: '중국', value: 2 },
+  { id: 3, label: '그외', value: 3 },
 ];
 
 function ProductMadeIn({ madeIn, setMadeIn, madeInDetail, setMadeInDetail }) {
@@ -17,7 +17,7 @@ function ProductMadeIn({ madeIn, setMadeIn, madeInDetail, setMadeInDetail }) {
       <Text style={styles.itemTitle}>제조국 표기</Text>
       <View style={styles.inputContainer}>
         <RNPickerSelect
-          placeholder={{ label: '제조국을 선택해주세요.', value: null }}
+          placeholder={{ id: 0, label: '제조국을 선택해주세요.', value: 0 }}
           items={MADE_IN}
           style={pickerSelectStyles}
           onValueChange={(value) => setMadeIn(value)}
@@ -28,13 +28,13 @@ function ProductMadeIn({ madeIn, setMadeIn, madeInDetail, setMadeInDetail }) {
         />
         <EntIcon name="select-arrows" size={20} color={THEME_GRAY} />
       </View>
-      {madeIn !== null &&
+      {madeIn !== 0 &&
         <View style={styles.madeInContainer}>
           <Text style={styles.madeInText}>
-            {madeIn === 'KOREA'
+            {madeIn === 1
               ? '대한민국'
               : (
-                madeIn === 'CHINA'
+                madeIn === 2
                   ? '중국'
                   : '그 외'
               )
@@ -42,7 +42,7 @@ function ProductMadeIn({ madeIn, setMadeIn, madeInDetail, setMadeInDetail }) {
           </Text>
         </View>
       }
-      {madeIn === 'OTHER' &&
+      {madeIn === 3 &&
         <View style={[styles.inputContainer, { borderWidth: 1, borderColor: THEME_PURPLE }]}>
           <TextInput
             style={{ height: '100%', width: '100%' }}
