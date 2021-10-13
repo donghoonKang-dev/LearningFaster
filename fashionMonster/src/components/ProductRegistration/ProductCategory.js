@@ -6,10 +6,9 @@ import EntIcon from 'react-native-vector-icons/Entypo';
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 import { category } from '../../assets/data/category';
 
-function ProductCategory({ main, setMain, sub, setSub, fullName, setFullName }) {
+function ProductCategory({ main, setMain, sub, setSub, fullName, setFullName, middle, setMiddle }) {
   const [mainName, setMainName] = useState('');
   const [subName, setSubName] = useState('');
-  const [middle, setMiddle] = useState([]);
 
   function selectMainCategory(value) {
     if (sub !== 0) {
@@ -26,8 +25,8 @@ function ProductCategory({ main, setMain, sub, setSub, fullName, setFullName }) 
       setSubName('');
     } else {
       setMain(value);
-      setMiddle(category.find(v => v.id === value).middle);
-      setMainName(category.find(v => v.id === value).label);
+      if (value !== 0) setMiddle(category.find(v => v.id === value).middle);
+      if (value !== 0) setMainName(category.find(v => v.id === value).label);
     }
   };
 

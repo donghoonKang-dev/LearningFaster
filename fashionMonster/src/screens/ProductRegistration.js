@@ -39,6 +39,7 @@ function ProductRegistration() {
   const [category, setCategory] = useState('');
   const [mainCate, setMainCate] = useState(0);
   const [subCate, setSubCate] = useState(0);
+  const [middle, setMiddle] = useState([]);
   const [colors, setColors] = useState([]);
   const [manualSizes, setManualSizes] = useState(initialManualSizeState);
   const [sizes, setSizes] = useState([]);
@@ -56,6 +57,7 @@ function ProductRegistration() {
     setCategory('');
     setMainCate(0);
     setSubCate(0);
+    setMiddle([]);
     setColors([]);
     setManualSizes(initialManualSizeState);
     setSizes([]);
@@ -121,6 +123,8 @@ function ProductRegistration() {
               setSub={setSubCate}
               fullName={category}
               setFullName={setCategory}
+              middle={middle}
+              setMiddle={setMiddle}
             />
             <ProductColor
               colors={colors}
