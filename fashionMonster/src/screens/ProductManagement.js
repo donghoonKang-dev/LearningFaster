@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 import Header from '../components/Header/PMHeader';
 import SearchBar from '../components/Search/SearchBar';
-import SearchList from '../components/Search/SearchList';
 import FilterContainer from '../components/Filter/FilterContainer';
 import ProductList from '../components/List/ProductList';
 import BottomPopup from '../components/Popup/BottomPopup';
@@ -18,8 +17,9 @@ function ProductManagement({ route, navigation }) {
     logoutDispatch,
     login: { data: userData },
   } = useAuth();
-  const { loadProductListDispatch, loadProductList, hasMore } = useProduct();
+  const { loadProductListDispatch, loadProductList, hasMore, totalCnt } = useProduct();
   const [FetchMoreTrigger, page, setPage] = useFetchMore(hasMore);
+  const [keyword, setKeyword] = useState(null);
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
@@ -45,8 +45,8 @@ function ProductManagement({ route, navigation }) {
   };
 
   useEffect(() => {
-    loadProductListDispatch({ page, sort: selectedFilter });
-  }, [page, selectedFilter]);
+    loadProductListDispatch({ page, keyword: keyword ? keyword : '', sort: selectedFilter });
+  }, [page, keyword, selectedFilter]);
 
   useEffect(() => {
     setPage(1)
@@ -56,7 +56,7 @@ function ProductManagement({ route, navigation }) {
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header name={userData.name} iconClick={showLogOutPopup} />
-      {loadProductList.data?.length === 0
+      {totalCnt === 0 && keyword === null
         ?
         <>
           <EmptyView />
@@ -76,20 +76,15 @@ function ProductManagement({ route, navigation }) {
         >
           <SearchBar
             pressed={isSearchBarClicked}
+            keyword={keyword}
+            setKeyword={setKeyword}
             openSearchBar={openSearchBar}
             closeSearchBar={closeSearchBar}
           />
-          {isSearchBarClicked
-            ?
-            <SearchList />
-            :
-            <View style={{ flex: 1 }}>
-              <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup} />
-              <ProductList
-                navigation={navigation}
-              />
-            </View>
-          }
+          <View style={{ flex: 1 }}>
+            <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup} keyword={keyword} />
+            <ProductList navigation={navigation} keyword={keyword} />
+          </View>
           {logOutPopupOpen &&
             <BottomPopup
               name="logOut"

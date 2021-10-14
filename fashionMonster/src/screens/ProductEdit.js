@@ -122,7 +122,6 @@ function ProductEdit({ route, navigation }) {
         detail: arr,
       };
     });
-    console.log(mappedSize[0])
     setName(data.name);
     setPrice(data.price + '');
     setImages(data.pImages);

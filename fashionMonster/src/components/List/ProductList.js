@@ -3,11 +3,23 @@ import { StyleSheet, View, FlatList, Text } from 'react-native';
 import ProdListItem from './ProdListItem';
 import { useProduct } from '../../modules/product/index';
 import useFetchMore from '../../hooks/useFetchMore';
-import { THEME_GRAY } from '../../styles/color';
 
-function ProductList({ navigation }) {
-  const { loadProductListDispatch, loadProductList, hasMore } = useProduct();
-  const [FetchMoreTrigger, page] = useFetchMore(hasMore);
+function ProductList({ navigation, keyword }) {
+  const {
+    loadProductListDispatch,
+    loadProductList,
+    hasMore,
+    page,
+    setPageDispatch,
+    reloadBlock,
+  } = useProduct();
+  const [FetchMoreTrigger] = useFetchMore(hasMore);
+
+  useEffect(() => {
+    loadProductListDispatch({
+      keyword: keyword ? keyword : '',
+    });
+  }, [keyword]);
 
   const renderItem = ({ item }) =>
     <ProdListItem
@@ -17,11 +29,20 @@ function ProductList({ navigation }) {
 
   return (
     <View style={styles.listContainer}>
-      <FlatList
-        data={loadProductList.data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      {keyword === ''
+        ?
+        <FlatList
+          data={loadProductList.data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+        :
+        <FlatList
+          data={loadProductList.data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      }
     </View>
   );
 };

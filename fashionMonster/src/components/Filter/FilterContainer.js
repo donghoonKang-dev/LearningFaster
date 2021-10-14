@@ -4,16 +4,21 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useProduct } from '../../modules/product';
 import { THEME_GRAY, THEME_PURPLE } from '../../styles/color';
 
-function FilterContainer({ selectedFilter, onClick }) {
+function FilterContainer({ selectedFilter, onClick, keyword }) {
   const { totalCnt, loadProductCntDispatch } = useProduct();
 
   useEffect(() => {
-    loadProductCntDispatch({ keyword: '' });
-  }, []);
+    loadProductCntDispatch({ keyword: keyword ? keyword : '' });
+  }, [keyword]);
 
   return (
     <View style={styles.filterBar}>
-      <Text style={styles.cntText}>총 {totalCnt}개의 등록된 상품</Text>
+      {keyword === ''
+        ?
+        <Text style={styles.cntText}>총 {totalCnt}개의 등록된 상품</Text>
+        :
+        <Text style={styles.cntText}>총 {totalCnt}개의 {keyword} 검색결과</Text>
+      }
       <TouchableOpacity style={styles.filterBox} onPress={onClick}>
         <FeatherIcon name="chevron-down" size={15} color={THEME_PURPLE} />
         <Text style={styles.filterText}>
