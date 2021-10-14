@@ -6,7 +6,7 @@ import { THEME_PURPLE, THEME_WHITE, THEME_GRAY, THEME_BLACK } from '../../styles
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
 
-function PRHeader({ resetAllState, onSubmit }) {
+function PRHeader({ resetAllState, onSubmit, headerName }) {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
@@ -17,7 +17,7 @@ function PRHeader({ resetAllState, onSubmit }) {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.textTitle}>상품 등록</Text>
+      <Text style={styles.textTitle}>{headerName}</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.resetButtonContainer}

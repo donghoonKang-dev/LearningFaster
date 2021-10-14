@@ -13,7 +13,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useProduct } from '../../modules/product';
 import {
-  THEME_PURPLE,
   THEME_LIGHTPURPLE,
   THEME_WHITE,
   THEME_LIGHTGRAY,
@@ -21,8 +20,15 @@ import {
 } from '../../styles/color';
 dayjs.locale('ko');
 
-function ProdListItem({ productData }) {
+function ProdListItem({ productData, navigation }) {
   const { toggleActiveDispatch, removeProductDispatch } = useProduct();
+
+  const goToDetail = () => {
+    navigation.navigate('ProductEdit', {
+      selectedId: productData.id,
+      selectedIsUpdated: productData.state === 2 ? true : false,
+    })
+  }
 
   const toggleValue = () => {
     toggleActiveDispatch({
@@ -57,7 +63,7 @@ function ProdListItem({ productData }) {
   return (
     <Swipeout right={swipeoutButtons} buttonWidth={100}>
       <View style={styles.listItemContainer}>
-        <TouchableOpacity style={styles.productInfoContainer}>
+        <TouchableOpacity style={styles.productInfoContainer} onPress={goToDetail}>
           <Image
             style={styles.productImage}
             source={{ uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/original/product/${productData.thumbnail}` }}

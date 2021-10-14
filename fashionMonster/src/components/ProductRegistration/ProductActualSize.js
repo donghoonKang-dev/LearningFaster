@@ -15,7 +15,6 @@ function ProductActualSize({
   useEffect(() => {
     setSelectedCategory(cateNameExtractor(category))
   }, [category]);
-
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>실측 사이즈</Text>

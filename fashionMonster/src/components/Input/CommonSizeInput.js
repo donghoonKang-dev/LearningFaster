@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { THEME_LIGHTGRAY } from '../../styles/color';
 
 function CommonSizeInput({ placeholder, label, selectedSize, sizes, onChangeInput }) {
-
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -11,7 +10,7 @@ function CommonSizeInput({ placeholder, label, selectedSize, sizes, onChangeInpu
         placeholder={placeholder}
         keyboardType="numeric"
         onChangeText={(text) => onChangeInput(selectedSize, label, text)}
-        value={sizes.find(v => v.value === selectedSize).detail?.find(v => v.label === label)?.value || ''}
+        value={sizes.find(v => v.value === selectedSize).detail?.find(v => v.name === label)?.value || ''}
       />
       <Text style={{ fontSize: 12, fontWeight: '600' }}>CM</Text>
     </View>

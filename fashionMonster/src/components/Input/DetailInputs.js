@@ -9,19 +9,18 @@ function DetailInputs({ selectedCategory, selectedSize, sizes, setSizes }) {
     const currentSizeIdx = copiedSizes.findIndex(sz => sz.value === selectedSize);
 
     if (!copiedSizes[currentSizeIdx].detail) {
-      copiedSizes[currentSizeIdx].detail = [{ label, value: text }];
+      copiedSizes[currentSizeIdx].detail = [{ name: label, value: text }];
     } else {
-      const detailIdx = copiedSizes[currentSizeIdx].detail.findIndex(sz => sz.label === label);
+      const detailIdx = copiedSizes[currentSizeIdx].detail.findIndex(sz => sz.name === label);
       if (detailIdx !== -1) {
-        const labelIdx = copiedSizes[currentSizeIdx].detail.findIndex(v => v.label === label);
-        copiedSizes[currentSizeIdx].detail[labelIdx] = { label, value: text };
+        const labelIdx = copiedSizes[currentSizeIdx].detail.findIndex(v => v.name === label);
+        copiedSizes[currentSizeIdx].detail[labelIdx] = { name: label, value: text };
       } else {
-        copiedSizes[currentSizeIdx].detail = [...copiedSizes[currentSizeIdx].detail, { label, value: text }];
+        copiedSizes[currentSizeIdx].detail = [...copiedSizes[currentSizeIdx].detail, { name: label, value: text }];
       }
     }
     setSizes(copiedSizes);
   }
-
   return (
     <View>
       {selectedCategory === '여성상의' |

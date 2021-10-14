@@ -5,11 +5,15 @@ import { useProduct } from '../../modules/product/index';
 import useFetchMore from '../../hooks/useFetchMore';
 import { THEME_GRAY } from '../../styles/color';
 
-function ProductList() {
+function ProductList({ navigation }) {
   const { loadProductListDispatch, loadProductList, hasMore } = useProduct();
   const [FetchMoreTrigger, page] = useFetchMore(hasMore);
 
-  const renderItem = ({ item }) => <ProdListItem productData={item} />
+  const renderItem = ({ item }) =>
+    <ProdListItem
+      productData={item}
+      navigation={navigation}
+    />
 
   return (
     <View style={styles.listContainer}>

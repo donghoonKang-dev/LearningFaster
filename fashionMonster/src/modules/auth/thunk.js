@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://192.168.0.38:8080';
+axios.defaults.baseURL = 'http://192.168.0.38:8081';
 //axios.defaults.baseURL = 'http://3.38.18.80:8080';
 axios.defaults.withCredentials = true;
 

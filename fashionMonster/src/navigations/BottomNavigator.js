@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ProductNavigator from './ProductNavigator';
 import ProductManagement from '../screens/ProductManagement';
 import ProductRegistration from '../screens/ProductRegistration';
 import { THEME_PURPLE, THEME_GRAY } from '../styles/color';
@@ -22,7 +23,7 @@ function BottomNavigator({ goToLogin }) {
     })}>
       <Tab.Screen
         name="ProductManagement"
-        children={() => <ProductManagement goToLogin={goToLogin} />}
+        children={() => <ProductNavigator goToLogin={goToLogin} />}
         options={{
           tabBarLabel: 'ProductManagement',
           tabBarIcon: ({ focused }) => {

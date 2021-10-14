@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
@@ -75,7 +75,7 @@ function ProductRegistration() {
     if (!name.trim()) return alert('상품명을 기입해주세요');
     if (!price.trim()) return alert('상품가격을 기입해주세요');
     if (!mixRate.trim()) return alert('소재 혼용률을 입력해주세요');
-    if (madeIn == null || madeInDetail == '') return alert('제조국가를 입력해주세요');
+    if (madeIn == null && madeInDetail == '') return alert('제조국가를 입력해주세요');
     if (colors.length === 0) return alert('색상을 선택해주세요');
     if (sizes.length === 0) return alert('사이즈를 입력해주세요');
     addProductDispatch({
@@ -98,7 +98,7 @@ function ProductRegistration() {
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor={THEME_WHITE} translucent={true} />
-      <Header resetAllState={resetAllState} onSubmit={onSubmit} />
+      <Header resetAllState={resetAllState} onSubmit={onSubmit} headerName="상품 등록" />
       <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic">

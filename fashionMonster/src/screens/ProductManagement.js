@@ -13,7 +13,7 @@ import { useProduct } from '../modules/product/index';
 import useFetchMore from '../hooks/useFetchMore';
 import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
 
-function ProductManagement({ goToLogin }) {
+function ProductManagement({ route, navigation }) {
   const {
     logoutDispatch,
     login: { data: userData },
@@ -36,7 +36,7 @@ function ProductManagement({ goToLogin }) {
     if (!userData) return;
     setLogOutPopupOpen(false);
     logoutDispatch({ email: userData.email, name: userData.name });
-    goToLogin();
+    route.params.goToLogin();
   };
 
   const sortBy = (type) => {
@@ -85,7 +85,9 @@ function ProductManagement({ goToLogin }) {
             :
             <View style={{ flex: 1 }}>
               <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup} />
-              <ProductList />
+              <ProductList
+                navigation={navigation}
+              />
             </View>
           }
           {logOutPopupOpen &&

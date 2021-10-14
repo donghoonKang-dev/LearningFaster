@@ -6,12 +6,20 @@ import EntIcon from 'react-native-vector-icons/Entypo';
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 import { category } from '../../assets/data/category';
 
-function ProductCategory({ main, setMain, sub, setSub, fullName, setFullName, middle, setMiddle }) {
+function ProductCategory({
+  main,
+  setMain,
+  sub,
+  setSub,
+  fullName,
+  setFullName,
+  middle,
+  setMiddle }) {
   const [mainName, setMainName] = useState('');
   const [subName, setSubName] = useState('');
 
   function selectMainCategory(value) {
-    if (sub !== 0) {
+    if (sub !== 0 && value !== main) {
       setSub(0);
       setSubName('');
       setMiddle([]);
