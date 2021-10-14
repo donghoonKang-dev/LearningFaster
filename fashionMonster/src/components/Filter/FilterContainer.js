@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { THEME_PURPLE } from '../../styles/color';
+import { useProduct } from '../../modules/product';
+import { THEME_GRAY, THEME_PURPLE } from '../../styles/color';
 
 function FilterContainer({ selectedFilter, onClick }) {
+  const { totalCnt, loadProductCntDispatch } = useProduct();
+
+  useEffect(() => {
+    loadProductCntDispatch({ keyword: '' });
+  }, []);
+
   return (
     <View style={styles.filterBar}>
+      <Text style={styles.cntText}>총 {totalCnt}개의 등록된 상품</Text>
       <TouchableOpacity style={styles.filterBox} onPress={onClick}>
         <FeatherIcon name="chevron-down" size={15} color={THEME_PURPLE} />
         <Text style={styles.filterText}>
@@ -16,7 +24,7 @@ function FilterContainer({ selectedFilter, onClick }) {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   filterBar: {
@@ -25,7 +33,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+  },
+  cntText: {
+    marginLeft: 10,
+    fontSize: 14,
+    color: THEME_GRAY,
   },
   filterBox: {
     flexDirection: 'row',

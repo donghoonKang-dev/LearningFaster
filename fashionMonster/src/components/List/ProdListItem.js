@@ -18,6 +18,7 @@ import {
   THEME_LIGHTGRAY,
   THEME_GRAY
 } from '../../styles/color';
+import StateBadge from '../Badge/StateBadge';
 dayjs.locale('ko');
 
 function ProdListItem({ productData, navigation }) {
@@ -71,7 +72,10 @@ function ProdListItem({ productData, navigation }) {
           <View style={styles.textContainer}>
             <Text style={styles.productName}>{productData.name}</Text>
             <Text style={styles.productInfo}>{dayjs(productData.createdAt).format('YY년 MM월 DD일 HH시')}</Text>
-            <Text style={styles.productInfo}>{productData.price.toLocaleString() + ' 원'}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={styles.productInfo}>{productData.price.toLocaleString() + ' 원'}</Text>
+              <StateBadge state={productData.state} />
+            </View>
           </View>
         </TouchableOpacity>
         <View style={styles.switchContainer}>

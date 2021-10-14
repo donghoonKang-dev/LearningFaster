@@ -55,7 +55,7 @@ function ProductManagement({ route, navigation }) {
   return (
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
-      <Header iconClick={showLogOutPopup} />
+      <Header name={userData.name} iconClick={showLogOutPopup} />
       {loadProductList.data?.length === 0
         ?
         <>

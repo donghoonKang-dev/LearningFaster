@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addProductAction,
   loadDetailAction,
+  loadProductCntAction,
   loadProductListAction,
   removeProductAction,
   toggleActiveAction,
@@ -13,8 +14,11 @@ const initialState = {
   loadDetail: { loading: false, data: null, error: null },
   addProduct: { loading: false, data: null, error: null },
   updateProduct: { loading: false, data: null, error: null },
+  totalCnt: 0,
   loadMore: false,
   hasMore: true,
+  page: 1,
+  reloadBlock: false,
 };
 
 const productSlice = createSlice({
@@ -24,11 +28,20 @@ const productSlice = createSlice({
     resetDetail(state) {
       state.loadDetail = initialState.loadDetail;
     },
+    resetRegist(state) {
+      state.addProduct = initialState.addProduct;
+    },
     isMoreLoading(state, { payload }) {
       state.loadMore = payload;
     },
     hasMoreData(state, { payload }) {
       state.hasMore = payload;
+    },
+    setPage(state, { payload }) {
+      payload === 'next' ? (state.page = state.page + 1) : (state.page = payload);
+    },
+    setReloadBlock(state, { payload }) {
+      state.reloadBlock = payload;
     },
   },
   extraReducers: builder => {
@@ -126,6 +139,7 @@ const productSlice = createSlice({
         state.updateProduct.error = payload;
       })
       .addCase(removeProductAction.fulfilled, (state, { payload }) => {
+        state.totalCnt = state.totalCnt - 1;
         const idx = state.loadProductList.data?.findIndex(
           v => v.id === +payload
         );
@@ -133,11 +147,21 @@ const productSlice = createSlice({
         state.loadProductList.data = (
           state.loadProductList.data
         ).filter(prod => prod.id !== +payload);
-      });
+      })
+      .addCase(loadProductCntAction.fulfilled, (state, { payload }) => {
+        state.totalCnt = payload;
+      })
   },
 });
 
 const product = productSlice.reducer;
-export const { resetDetail, hasMoreData, isMoreLoading } = productSlice.actions;
+export const {
+  resetDetail,
+  hasMoreData,
+  setReloadBlock,
+  isMoreLoading,
+  resetRegist,
+  setPage,
+} = productSlice.actions;
 
 export default product;

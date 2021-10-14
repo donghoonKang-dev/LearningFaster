@@ -10,7 +10,7 @@ const delay = async () => {
   await new Promise(res => {
     setTimeout(() => {
       res(1);
-    }, 500);
+    }, 350);
   });
 };
 
@@ -95,6 +95,18 @@ export const removeProductAction = createAsyncThunk(
   async ({ ProductId }, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(`seller/product/${ProductId}`);
+      return data;
+    } catch (e) {
+      return rejectWithValue({ message: e.response.data });
+    }
+  }
+);
+
+export const loadProductCntAction = createAsyncThunk(
+  'product/loadCnt',
+  async ({ keyword }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`seller/product/count${keyword ? `?keyword=${keyword}` : ''}`);
       return data;
     } catch (e) {
       return rejectWithValue({ message: e.response.data });

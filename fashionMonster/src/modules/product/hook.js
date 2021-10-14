@@ -2,17 +2,27 @@ import { useCallback } from 'react';
 import {
   addProductAction,
   loadDetailAction,
+  loadProductCntAction,
   loadProductListAction,
+  ProductPayload,
   removeProductAction,
   toggleActiveAction,
   updateProductAction,
 } from './thunk';
 import { useAppDispatch, useAppSelector } from '../index';
+import { setPage, setReloadBlock } from './slice';
 
 export function useProduct() {
-  const { addProduct, loadProductList, loadDetail, hasMore, loadMore } = useAppSelector(
-    state => state.product
-  );
+  const {
+    reloadBlock,
+    page,
+    addProduct,
+    loadProductList,
+    loadDetail,
+    hasMore,
+    loadMore,
+    totalCnt
+  } = useAppSelector(state => state.product);
 
   const dispatch = useAppDispatch();
 
@@ -40,7 +50,22 @@ export function useProduct() {
     dispatch(removeProductAction(data));
   }, []);
 
+  const loadProductCntDispatch = useCallback((data) => {
+    dispatch(loadProductCntAction(data));
+  }, []);
+
+  const setPageDispatch = useCallback((data) => {
+    dispatch(setPage(data));
+  }, []);
+
+  const setReloadBlockDispatch = useCallback((data) => {
+    dispatch(setReloadBlock(data));
+  }, []);
+
   return {
+    page,
+    reloadBlock,
+    totalCnt,
     addProduct,
     loadMore,
     hasMore,
@@ -52,5 +77,8 @@ export function useProduct() {
     addProductDispatch,
     updateProductDispatch,
     removeProductDispatch,
+    loadProductCntDispatch,
+    setPageDispatch,
+    setReloadBlockDispatch,
   };
 };

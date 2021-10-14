@@ -6,13 +6,11 @@ import { THEME_PURPLE, THEME_WHITE } from '../../styles/color';
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
 
-function PMHeader({ iconClick }) {
+function PMHeader({ name, iconClick }) {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerTextContainer}>
-        <Text style={styles.brandName}>테스트</Text>
-        <Text style={styles.brandName}>/</Text>
-        <Text style={styles.brandName}>test</Text>
+        <Text style={styles.brandName}>{name}</Text>
       </View>
       <View>
         <TouchableOpacity onPress={iconClick}>
@@ -39,7 +37,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   brandName: {
-    marginRight: 10,
     color: THEME_WHITE,
     fontSize: 20,
     fontWeight: "600",
