@@ -59,7 +59,7 @@ function Login({ navigation }) {
 
   return (
     <ImageBackground
-      source={require('../assets/images/background.png')}
+      source={require('../assets/images/loginBg.png')}
       style={styles.imgBg}
     >
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
@@ -119,8 +119,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    backgroundColor: THEME_BLACK,
-    opacity: 0.84,
   },
   container: {
     width: windowWidth * 0.75,

@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../index';
-import { loginAction, logoutAction, signupAction, addRecommAction } from './thunk';
+import { loginAction, logoutAction, signupAction, addRecommAction, emailCheckAction } from './thunk';
 
 export function useAuth() {
-  const { signup, login } = useAppSelector(state => state.auth);
+  const { signup, login, emailCheck } = useAppSelector(state => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -19,13 +19,18 @@ export function useAuth() {
   const addRecommDispatch = useCallback((data) => {
     dispatch(addRecommAction(data));
   }, []);
+  const emailCheckDispatch = useCallback((data) => {
+    dispatch(emailCheckAction(data));
+  }, []);
 
   return {
     signup,
+    emailCheck,
     login,
     loginDispatch,
     logoutDispatch,
     signupDispatch,
     addRecommDispatch,
+    emailCheckDispatch,
   };
 }

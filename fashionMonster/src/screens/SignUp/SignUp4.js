@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
@@ -13,10 +13,10 @@ function SignUp4({ navigation }) {
   const onChange = useChangeSignup();
   const { signupDispatch } = useAuth();
 
-  const onSignUp = useCallback(() => {
+  const onSignUp = () => {
     signupDispatch(state);
     navigation.navigate('SignUp5');
-  }, []);
+  }
 
   return (
     <View style={styles.background}>

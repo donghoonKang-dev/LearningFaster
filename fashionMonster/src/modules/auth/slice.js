@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAction, logoutAction, signupAction, addRecommAction } from './thunk';
+import { loginAction, logoutAction, signupAction, addRecommAction, emailCheckAction } from './thunk';
 
 const initialState = {
   login: { loading: false, data: null, error: null },
   signup: { loading: false, data: null, error: null },
   addRecomm: { loading: false, data: null, error: null },
+  emailCheck: 'ok',
 };
 
 const authSlice = createSlice({
@@ -67,6 +68,9 @@ const authSlice = createSlice({
         state.addRecomm.loading = false;
         state.addRecomm.data = null;
         state.addRecomm.error = payload;
+      })
+      .addCase(emailCheckAction.fulfilled, (state, { payload }) => {
+        state.emailCheck = payload;
       });
   },
 });

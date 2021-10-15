@@ -49,3 +49,14 @@ export const addRecommAction = createAsyncThunk(
       return rejectWithValue({ message: e.response.data });
     }
   });
+
+export const emailCheckAction = createAsyncThunk(
+  'auth/emailCheck',
+  async (email, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`seller/auth/email?email=${email}`);
+      return data;
+    } catch (e) {
+      return rejectWithValue({ message: e.response.data });
+    }
+  });

@@ -1,17 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
+import _debounce from 'lodash/debounce';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
 import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
+import { useAuth } from '../../modules/auth/hook';
 import { THEME_WHITE } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp1({ navigation }) {
+  const { emailCheck, emailCheckDispatch } = useAuth();
   const state = useSignupState();
   const onChange = useChangeSignup();
 
+  const [emailError, setEmailError] = useState('');
   const [pwCheck, setPwCheck] = useState('');
+
+  const debounce = useCallback(
+    _debounce((emailV) => {
+      emailCheckDispatch(emailV);
+    }, 400),
+    []
+  );
+
+  const onChangeEmail = useCallback((text) => {
+    onChange('email', text);
+    const result = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(text);
+    debounce(text);
+    if (result) setEmailError('');
+    else setEmailError('이메일 형식을 확인해주세요');
+  }, [state.email]);
+
+  useEffect(() => {
+    if (emailCheck === 'exist') return setEmailError('이미 사용중인 이메일입니다.');
+    return () => {
+      emailCheckDispatch('');
+    };
+  }, [emailCheck]);
 
   const onClickNext = (userId, userPw, pwCheck) => {
     if (userId.indexOf('@') === -1) {
@@ -47,8 +73,9 @@ function SignUp1({ navigation }) {
             keyboardType="email-address"
             placeholder="예시: faster@naver.com"
             text={state.email}
-            setText={(text) => onChange('email', text)}
+            setText={(text) => onChangeEmail(text)}
             isSecure={false}
+            emailError={emailError}
           />
           <SignupInput
             desc="비밀번호"
@@ -66,7 +93,7 @@ function SignUp1({ navigation }) {
             setText={setPwCheck}
             isSecure={true}
           />
-          {state.email !== '' && state.password !== '' && pwCheck !== ''
+          {state.email !== '' && state.password !== '' && pwCheck !== '' && emailError === ''
             ?
             <SignupButton
               text="다음"
@@ -110,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     fontSize: 24,
     fontWeight: '700',
-  }
+  },
 });
 
 export default SignUp1;

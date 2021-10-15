@@ -6,19 +6,20 @@ import {
   Image,
   Text,
   Switch,
-  Alert
+  Alert,
 } from 'react-native';
-import Swipeout from 'react-native-swipeout';
+import { Swipeable } from 'react-native-gesture-handler';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import StateBadge from '../Badge/StateBadge';
 import { useProduct } from '../../modules/product';
 import {
   THEME_LIGHTPURPLE,
   THEME_WHITE,
   THEME_LIGHTGRAY,
-  THEME_GRAY
+  THEME_GRAY,
+  THEME_WARNING
 } from '../../styles/color';
-import StateBadge from '../Badge/StateBadge';
 dayjs.locale('ko');
 
 function ProdListItem({ productData, navigation }) {
@@ -54,15 +55,20 @@ function ProdListItem({ productData, navigation }) {
     )
   };
 
-  const swipeoutButtons = [{
-    text: '삭제',
-    backgroundColor: 'red',
-    underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-    onPress: onClickRemove
-  }];
+  const renderRightActions = () => {
+    return (
+      <View style={styles.swipedRow}>
+        <TouchableOpacity style={{ width: '100%' }} onPress={onClickRemove} >
+          <View style={styles.deleteButton}>
+            <Text style={styles.deleteButtonText}>삭제</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
-    <Swipeout right={swipeoutButtons} buttonWidth={100}>
+    <Swipeable renderRightActions={renderRightActions}>
       <View style={styles.listItemContainer}>
         <TouchableOpacity style={styles.productInfoContainer} onPress={goToDetail}>
           <Image
@@ -88,7 +94,7 @@ function ProdListItem({ productData, navigation }) {
           />
         </View>
       </View>
-    </Swipeout>
+    </Swipeable>
   );
 };
 
@@ -125,7 +131,23 @@ const styles = StyleSheet.create({
   },
   switchContainer: {
     alignItems: 'center',
-  }
+  },
+  swipedRow: {
+    width: 100,
+  },
+  deleteButton: {
+    height: '100%',
+    width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: THEME_WARNING,
+  },
+  deleteButtonText: {
+    fontSize: 14,
+    color: THEME_WHITE,
+    fontWeight: 'bold',
+  },
 });
 
 export default React.memo(ProdListItem);

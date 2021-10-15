@@ -10,6 +10,11 @@ import EmptyView from '../components/ImageView/EmptyView';
 import { useAuth } from '../modules/auth/hook';
 import { useProduct } from '../modules/product/index';
 import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 function ProductManagement({ route, navigation }) {
   const {
@@ -25,6 +30,7 @@ function ProductManagement({ route, navigation }) {
     reloadBlock,
     setReloadBlockDispatch,
     totalCnt,
+    loadProductCntDispatch,
   } = useProduct();
   const [keyword, setKeyword] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('created');
@@ -57,6 +63,12 @@ function ProductManagement({ route, navigation }) {
   }
 
   useEffect(() => {
+    loadProductCntDispatch({
+      keyword: keyword ? keyword : '',
+    });
+  }, [keyword]);
+
+  useEffect(() => {
     if (!reloadBlock) {
       setPage(1);
     }
@@ -78,7 +90,7 @@ function ProductManagement({ route, navigation }) {
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header name={userData.name} iconClick={showLogOutPopup} />
-      {totalCnt === 0 && keyword !== ''
+      {totalCnt === 0 && !keyword
         ?
         <>
           <EmptyView />
