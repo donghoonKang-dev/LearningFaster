@@ -9,7 +9,6 @@ import BottomPopup from '../components/Popup/BottomPopup';
 import EmptyView from '../components/ImageView/EmptyView';
 import { useAuth } from '../modules/auth/hook';
 import { useProduct } from '../modules/product/index';
-import useFetchMore from '../hooks/useFetchMore';
 import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
 
 function ProductManagement({ route, navigation }) {
@@ -17,13 +16,21 @@ function ProductManagement({ route, navigation }) {
     logoutDispatch,
     login: { data: userData },
   } = useAuth();
-  const { loadProductListDispatch, loadProductList, hasMore, totalCnt } = useProduct();
-  const [FetchMoreTrigger, page, setPage] = useFetchMore(hasMore);
-  const [keyword, setKeyword] = useState(null);
+  const {
+    loadProductListDispatch,
+    loadProductList,
+    hasMore,
+    page,
+    setPageDispatch: setPage,
+    reloadBlock,
+    setReloadBlockDispatch,
+    totalCnt,
+  } = useProduct();
+  const [keyword, setKeyword] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('created');
   const [logOutPopupOpen, setLogOutPopupOpen] = useState(false);
   const [filterPopupOpen, setFilterPopupOpen] = useState(false);
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState('created');
 
   const showLogOutPopup = () => setLogOutPopupOpen(true);
   const closeLogOutPopup = () => setLogOutPopupOpen(false);
@@ -44,19 +51,34 @@ function ProductManagement({ route, navigation }) {
     setFilterPopupOpen(false);
   };
 
-  useEffect(() => {
-    loadProductListDispatch({ page, keyword: keyword ? keyword : '', sort: selectedFilter });
-  }, [page, keyword, selectedFilter]);
+  const loadMoreData = () => {
+    setReloadBlockDispatch(false);
+    setPage('next');
+  }
 
   useEffect(() => {
-    setPage(1)
+    if (!reloadBlock) {
+      setPage(1);
+    }
+  }, [keyword]);
+
+  useEffect(() => {
+    if (!reloadBlock) {
+      setPage(1);
+    }
   }, [selectedFilter]);
+
+  useEffect(() => {
+    if (!hasMore && page > 1) return;
+    if (reloadBlock) return;
+    loadProductListDispatch({ page, keyword: keyword ? keyword : '', sort: selectedFilter });
+  }, [page, hasMore, keyword, selectedFilter]);
 
   return (
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header name={userData.name} iconClick={showLogOutPopup} />
-      {totalCnt === 0 && keyword === null
+      {totalCnt === 0 && keyword !== ''
         ?
         <>
           <EmptyView />
@@ -83,7 +105,13 @@ function ProductManagement({ route, navigation }) {
           />
           <View style={{ flex: 1 }}>
             <FilterContainer selectedFilter={selectedFilter} onClick={showFilterPopup} keyword={keyword} />
-            <ProductList navigation={navigation} keyword={keyword} />
+            <ProductList
+              navigation={navigation}
+              loadProductList={loadProductList}
+              hasMore={hasMore}
+              loadMoreData={loadMoreData}
+              page={page}
+            />
           </View>
           {logOutPopupOpen &&
             <BottomPopup

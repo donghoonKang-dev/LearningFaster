@@ -1,48 +1,39 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native';
+import { THEME_GRAY } from '../../styles/color';
 import ProdListItem from './ProdListItem';
-import { useProduct } from '../../modules/product/index';
-import useFetchMore from '../../hooks/useFetchMore';
 
-function ProductList({ navigation, keyword }) {
-  const {
-    loadProductListDispatch,
-    loadProductList,
-    hasMore,
-    page,
-    setPageDispatch,
-    reloadBlock,
-  } = useProduct();
-  const [FetchMoreTrigger] = useFetchMore(hasMore);
-
-  useEffect(() => {
-    loadProductListDispatch({
-      keyword: keyword ? keyword : '',
-    });
-  }, [keyword]);
-
+function ProductList({ navigation, loadProductList, hasMore, loadMoreData, page }) {
   const renderItem = ({ item }) =>
     <ProdListItem
       productData={item}
       navigation={navigation}
     />
 
+  const renderFooter = () => {
+    return (
+      hasMore ?
+        <View style={styles.footerContainer}>
+          <ActivityIndicator size="large" />
+        </View> :
+        <View style={styles.footerContainer}>
+          <Text style={{ fontSize: 14, color: THEME_GRAY }}>
+            모든 데이터를 불러왔습니다.
+          </Text>
+        </View>
+    )
+  }
+
   return (
     <View style={styles.listContainer}>
-      {keyword === ''
-        ?
-        <FlatList
-          data={loadProductList.data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
-        :
-        <FlatList
-          data={loadProductList.data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
-      }
+      <FlatList
+        data={loadProductList.data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => `${item.id}${index}+${page}`}
+        ListFooterComponent={renderFooter}
+        onEndReached={loadMoreData}
+        onEndReachedThreshold={0}
+      />
     </View>
   );
 };
@@ -50,6 +41,10 @@ function ProductList({ navigation, keyword }) {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
+  },
+  footerContainer: {
+    marginVertical: 10,
+    alignItems: 'center',
   }
 });
 

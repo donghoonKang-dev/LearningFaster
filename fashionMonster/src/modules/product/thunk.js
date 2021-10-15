@@ -22,7 +22,7 @@ export const loadProductListAction = createAsyncThunk(
         `seller/product${loadListData.page ? `?page=${loadListData.page}&` : '?'}${loadListData.sort ? `sort=${loadListData.sort}&` : ''
         }${loadListData.keyword ? `keyword=${loadListData.keyword}` : ''}`
       );
-      dispatch(hasMoreData(data.length === 10));
+      dispatch(hasMoreData(data.length === 14));
       dispatch(isMoreLoading(loadListData.page ? loadListData.page !== 1 : false));
       return data;
     } catch (e) {

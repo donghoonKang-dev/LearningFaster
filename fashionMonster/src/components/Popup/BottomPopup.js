@@ -23,7 +23,7 @@ function BottomPopup({
 
   useEffect(() => {
     setSortByCreatedColor(selectedFilter === 'created' ? THEME_PURPLE : THEME_GRAY);
-    setSortByNameColor(selectedFilter === 'date' ? THEME_PURPLE : THEME_GRAY);
+    setSortByNameColor(selectedFilter === 'name' ? THEME_PURPLE : THEME_GRAY);
     setSortByPriceColor(selectedFilter === 'price' ? THEME_PURPLE : THEME_GRAY);
   }, [sortBy]);
 

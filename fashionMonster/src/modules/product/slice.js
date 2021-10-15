@@ -49,17 +49,13 @@ const productSlice = createSlice({
     builder
       .addCase(loadProductListAction.pending, state => {
         state.loadProductList.loading = true;
-        state.loadProductList.data = null;
         state.loadProductList.error = null;
       })
       .addCase(loadProductListAction.fulfilled, (state, { payload }) => {
         state.loadProductList.loading = false;
-        /*
         state.loadProductList.data = state.loadMore
           ? state.loadProductList.data.concat(payload)
           : payload;
-        */
-        state.loadProductList.data = payload
         state.loadProductList.error = null;
       })
       .addCase(loadProductListAction.rejected, (state, { payload }) => {

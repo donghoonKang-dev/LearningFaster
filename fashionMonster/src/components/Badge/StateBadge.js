@@ -9,10 +9,10 @@ function StateBadge({ state }) {
         <View style={[styles.container, { backgroundColor: '#7855af' }]}>
           <Text style={styles.text}>등록요청중</Text>
         </View>
-        :
-        <View style={[styles.container, { backgroundColor: '#ad1457' }]}>
-          <Text style={styles.text}>수정요청중</Text>
-        </View>
+        : state === 2 ?
+          <View style={[styles.container, { backgroundColor: '#ad1457' }]}>
+            <Text style={styles.text}>수정요청중</Text>
+          </View> : null
       }
     </>
   );

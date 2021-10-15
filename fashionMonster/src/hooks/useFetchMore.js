@@ -5,14 +5,12 @@ import React, {
   useCallback,
 } from 'react';
 import { Image, StyleSheet, View, Text } from 'react-native';
-
+import { useProduct } from '../modules/product';
 
 export function useFetchMore(loading = false) {
-  const [page, setPage] = useState(1);
+  const { setPageDispatch: setPage, setReloadBlockDispatch } = useProduct();
 
   const FetchMore = useCallback(() => {
-    const fetchMoreTrigger = useRef(null);
-
     useEffect(() => {
       const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
         if (isIntersecting) setPage(prev => prev + 1);
@@ -45,7 +43,7 @@ export function useFetchMore(loading = false) {
     );
   }, [loading]);
 
-  return [FetchMore, page, setPage];
+  return [FetchMore];
 }
 
 const styles = StyleSheet.create({
