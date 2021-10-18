@@ -3,7 +3,14 @@ import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-nativ
 import { THEME_GRAY } from '../../styles/color';
 import ProdListItem from './ProdListItem';
 
-function ProductList({ navigation, loadProductList, hasMore, loadMoreData, page }) {
+function ProductList({
+  navigation,
+  loadProductList,
+  hasMore,
+  loadMoreData,
+  page,
+  isLoading,
+  onPullRefresh }) {
   const renderItem = ({ item }) =>
     <ProdListItem
       productData={item}
@@ -33,6 +40,8 @@ function ProductList({ navigation, loadProductList, hasMore, loadMoreData, page 
         ListFooterComponent={renderFooter}
         onEndReached={loadMoreData}
         onEndReachedThreshold={0}
+        refreshing={isLoading}
+        onRefresh={onPullRefresh}
       />
     </View>
   );

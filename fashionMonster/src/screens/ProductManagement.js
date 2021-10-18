@@ -62,6 +62,10 @@ function ProductManagement({ route, navigation }) {
     setPage('next');
   }
 
+  const onPullRefresh = () => {
+    loadProductListDispatch({ page, keyword: keyword ? keyword : '', sort: selectedFilter });
+  }
+
   useEffect(() => {
     loadProductCntDispatch({
       keyword: keyword ? keyword : '',
@@ -123,6 +127,8 @@ function ProductManagement({ route, navigation }) {
               hasMore={hasMore}
               loadMoreData={loadMoreData}
               page={page}
+              isLoading={loadProductList.loading}
+              onPullRefresh={onPullRefresh}
             />
           </View>
           {logOutPopupOpen &&

@@ -11,7 +11,12 @@ function ColorButton({ colorData, onChangeColor, selected }) {
   return (
     <TouchableWithoutFeedback onPress={() => onChangeColor(colorData)}>
       <View
-        style={[styles.colorBox, selected ? { backgroundColor: colorData.background } : null]}
+        style={[
+          styles.colorBox,
+          colorData.id % 3 === 2 && { marginHorizontal: '5%' },
+          selected && colorData.id === 2 && { borderWidth: 1 },
+          selected && { backgroundColor: colorData.background }
+        ]}
       >
         <Text
           style={[styles.colorText, selected ? { color: colorData.color } : null]}

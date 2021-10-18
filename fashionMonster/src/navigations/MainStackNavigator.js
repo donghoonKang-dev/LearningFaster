@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Intro from '../screens/Intro';
 import Login from '../screens/Login';
 import Main from '../screens/Main';
 import SignUpStackNavigator from './SignUpStackNavigator';
@@ -19,8 +20,12 @@ export default function MainStackNavigator() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={isLogin ? "Main" : "Login"}
+        initialRouteName={isLogin ? "Main" : "Intro"}
       >
+        <MainStack.Screen
+          name="Intro"
+          component={Intro}
+        />
         <MainStack.Screen
           name="Login"
           component={Login}

@@ -13,7 +13,7 @@ function ProductSize({ sizes, setSizes, manualSizes, setManualSizes, category })
     setKindOf(cateClassifier(category))
   }, [category]);
 
-  function onChangeSize(sizeData) {
+  const onChangeSize = (sizeData) => {
     const isFreeSize = sizeData.value === 'FREE';
     const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
     isFreeSize
@@ -63,7 +63,7 @@ function ProductSize({ sizes, setSizes, manualSizes, setManualSizes, category })
       {category !== '' && kindOf === 'others' &&
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 추가해주세요.</Text>
-          <ManualSizeInput sizes={manualSizes} setSizes={setManualSizes} />
+          <ManualSizeInput size={manualSizes} setSizes={setManualSizes} />
         </>
       }
     </View>

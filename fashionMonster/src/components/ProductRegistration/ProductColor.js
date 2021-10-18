@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignContent: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
 });
 

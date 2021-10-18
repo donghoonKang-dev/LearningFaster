@@ -18,7 +18,7 @@ function SignUp6({ navigation }) {
 
   const onAddRecomm = () => {
     if (!signUpData) {
-      console.log('회원가입 데이터 받지 못함!');
+      alert('회원가입이 완료되지 않았습니다. 개발팀에 문의해주세요.');
       return;
     }
     if (recommender === '') {
