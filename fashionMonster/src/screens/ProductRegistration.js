@@ -26,12 +26,6 @@ function ProductRegistration() {
   } = useAuth();
 
   const refScroll = useRef(null);
-  const nextManualSizeId = useRef(1);
-
-  const initialManualSizeState = [{
-    id: nextManualSizeId.current++,
-    size: '',
-  }];
 
   const [images, setImages] = useState([]);
   const [name, setName] = useState('');
@@ -41,7 +35,6 @@ function ProductRegistration() {
   const [subCate, setSubCate] = useState(0);
   const [middle, setMiddle] = useState([]);
   const [colors, setColors] = useState([]);
-  const [manualSizes, setManualSizes] = useState(initialManualSizeState);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [mixRate, setMixRate] = useState('');
@@ -59,7 +52,6 @@ function ProductRegistration() {
     setSubCate(0);
     setMiddle([]);
     setColors([]);
-    setManualSizes(initialManualSizeState);
     setSizes([]);
     setSelectedSize(null);
     setMixRate('');
@@ -133,8 +125,6 @@ function ProductRegistration() {
             <ProductSize
               sizes={sizes}
               setSizes={setSizes}
-              manualSizes={manualSizes}
-              setManualSizes={setManualSizes}
               category={category}
             />
             {cateClassifier(category) === 'clothes' &&

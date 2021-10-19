@@ -29,12 +29,6 @@ function ProductEdit({ route, navigation }) {
   } = useAuth();
   const dispatch = useDispatch();
   const refScroll = useRef(null);
-  const nextManualSizeId = useRef(1);
-
-  const initialManualSizeState = [{
-    id: nextManualSizeId.current++,
-    size: '',
-  }];
 
   const [images, setImages] = useState([]);
   const [name, setName] = useState('');
@@ -44,7 +38,6 @@ function ProductEdit({ route, navigation }) {
   const [subCate, setSubCate] = useState(0);
   const [middle, setMiddle] = useState([]);
   const [colors, setColors] = useState([]);
-  const [manualSizes, setManualSizes] = useState(initialManualSizeState);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [mixRate, setMixRate] = useState('');
@@ -62,7 +55,6 @@ function ProductEdit({ route, navigation }) {
     setSubCate(0);
     setMiddle([]);
     setColors([]);
-    setManualSizes(initialManualSizeState);
     setSizes([]);
     setSelectedSize(null);
     setMixRate('');
@@ -189,8 +181,6 @@ function ProductEdit({ route, navigation }) {
                 <ProductSize
                   sizes={sizes}
                   setSizes={setSizes}
-                  manualSizes={manualSizes}
-                  setManualSizes={setManualSizes}
                   category={category}
                 />
                 {cateClassifier(category) === 'clothes' &&

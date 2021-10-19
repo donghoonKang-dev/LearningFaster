@@ -6,7 +6,7 @@ import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 import cateClassifier from '../../utils/cateClassifier';
 import { clothesSize, shoesSize } from '../../assets/data/sizes';
 
-function ProductSize({ sizes, setSizes, manualSizes, setManualSizes, category }) {
+function ProductSize({ sizes, setSizes, category }) {
   const [kindOf, setKindOf] = useState(cateClassifier(category));
 
   useEffect(() => {
@@ -63,7 +63,7 @@ function ProductSize({ sizes, setSizes, manualSizes, setManualSizes, category })
       {category !== '' && kindOf === 'others' &&
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 추가해주세요.</Text>
-          <ManualSizeInput size={manualSizes} setSizes={setManualSizes} />
+          <ManualSizeInput sizes={sizes} setSizes={setSizes} />
         </>
       }
     </View>

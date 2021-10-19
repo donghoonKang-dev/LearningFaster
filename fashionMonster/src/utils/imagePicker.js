@@ -16,7 +16,7 @@ export default function imagePicker(images, setImages) {
         uri:
           Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
       }));
-      axios.post('http://192.168.0.38:8081/seller/upload/image/product', formData).then((res) => setImages(prev => [...prev, ...res.data]));
+      axios.post('https://api.fstr.shop/seller/upload/image/product', formData).then((res) => setImages(prev => [...prev, ...res.data]));
     }
   });
 };

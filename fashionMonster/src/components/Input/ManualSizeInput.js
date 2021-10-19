@@ -1,27 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import FIcon from 'react-native-vector-icons/Feather';
 import { THEME_PURPLE, THEME_WHITE, THEME_LIGHTGRAY } from '../../styles/color';
 
-function SizeRow({ size, setSizes, index, last }) {
+function SizeRow({ sizes, setSizes, onChangeText, index, last }) {
   const onPressButton = () => {
     if (last - 1 === index) {
-      setSizes(prev => [...prev, { id: last + 1, size: '' },])
+      setSizes(prev => [...prev, { id: 1, value: 'CUSTOM', detail: [{ name: 'custom', value: '' }] },])
     } else {
       setSizes(prev => prev.filter((v, i) => i !== index))
     }
   };
 
-  const onChangeText = (value) => {
-    setSizes(prev => {
-      const arr = [...prev];
-      arr[index].size = value;
-      return arr;
-    });
-  };
-
   return (
-    <View key={size.id} style={styles.rowContainer}>
+    <View style={styles.rowContainer}>
       <TouchableWithoutFeedback onPress={onPressButton}>
         <View
           style={[
@@ -40,8 +32,8 @@ function SizeRow({ size, setSizes, index, last }) {
         <TextInput
           placeholder="mm / cm / 호 등 사이즈 옵션을 추가해주세요."
           style={styles.input}
-          onChangeText={onChangeText}
-          value={size.size}
+          onChangeText={text => onChangeText(text)}
+          value={sizes[index].detail[0].value}
         />
       </View>
     </View>
@@ -49,13 +41,39 @@ function SizeRow({ size, setSizes, index, last }) {
 };
 
 function ManualSizeInput({ sizes, setSizes }) {
+  const onChangeText = (text) => {
+    if (sizes.length === 0) {
+      setSizes([
+        { id: 1, value: 'CUSTOM', detail: [{ name: 'custom', value: text }] },
+      ]);
+    } else {
+      setSizes(prev => {
+        const arr = [...prev];
+        arr[arr.length - 1] = {
+          ...arr[arr.length - 1],
+          detail: [{ name: 'custom', value: text }],
+        };
+        return arr;
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (sizes.length === 0) {
+      setSizes([
+        { id: 1, value: 'CUSTOM', detail: [{ name: 'custom', value: '' }] },
+      ]);
+    }
+  }, [])
+
   return (
     <View>
       {sizes.map((size, index) =>
         <SizeRow
-          key={size.id}
-          size={size}
+          key={index}
+          sizes={sizes}
           setSizes={setSizes}
+          onChangeText={onChangeText}
           index={index}
           last={sizes.length}
         />

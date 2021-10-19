@@ -94,7 +94,7 @@ function ProductManagement({ route, navigation }) {
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header name={userData.name} iconClick={showLogOutPopup} />
-      {totalCnt === 0 && !keyword
+      {totalCnt === 0 && !keyword && !loadProductList.loading
         ?
         <>
           <EmptyView />
