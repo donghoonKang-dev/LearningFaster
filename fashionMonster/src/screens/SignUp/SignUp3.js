@@ -11,7 +11,13 @@ function SignUp3({ navigation }) {
   const state = useSignupState();
   const onChange = useChangeSignup();
 
-  const onClickNext = () => navigation.navigate('SignUp4');
+  const onClickNext = () => {
+    if (state.tel.indexOf('-') === -1) {
+      alert('- 기호를 포함한 연락처를 입력해주세요.');
+      return -1;
+    }
+    navigation.navigate('SignUp4');
+  }
 
   return (
     <View style={styles.background}>

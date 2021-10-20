@@ -85,7 +85,12 @@ function ProductRegistration() {
       detail: desc,
       colors: colors,
     });
-    alert('저장되었습니다.');
+    if (addProduct.error !== null) {
+      alert('상품 등록 서버 오류 - 개발팀에 문의해주세요.');
+    } else {
+      alert('저장되었습니다.');
+      resetAllState();
+    }
   };
   return (
     <>
@@ -93,7 +98,8 @@ function ProductRegistration() {
       <Header resetAllState={resetAllState} onSubmit={onSubmit} headerName="상품 등록" />
       <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
         <ScrollView
-          contentInsetAdjustmentBehavior="automatic">
+          contentInsetAdjustmentBehavior="automatic"
+        >
           <View style={styles.pageContainer}>
             <ProductImage
               images={images}

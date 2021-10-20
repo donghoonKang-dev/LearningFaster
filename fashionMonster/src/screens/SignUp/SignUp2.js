@@ -39,7 +39,7 @@ function SignUp2({ navigation }) {
             <Text style={styles.desc}>어떤 상가에 계신가요?</Text>
             <View style={styles.selectBox}>
               <RNPickerSelect
-                placeholder={{ label: '선택해주세요', value: null }}
+                placeholder={{ id: 0, label: '선택해주세요', value: 0 }}
                 items={arcades}
                 style={pickerSelectStyles}
                 onValueChange={(value) => selectArcade(value)}
@@ -59,7 +59,7 @@ function SignUp2({ navigation }) {
             setText={(text) => onChange('location', text)}
             isSecure={false}
           />
-          {state.name !== '' && state.StoreId !== null && state.location !== ''
+          {state.name !== '' && state.StoreId !== 0 && state.location !== ''
             ?
             <SignupButton
               text="다음"

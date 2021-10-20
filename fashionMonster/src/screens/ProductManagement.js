@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 import Header from '../components/Header/PMHeader';
@@ -45,10 +45,12 @@ function ProductManagement({ route, navigation }) {
   const openSearchBar = () => setIsSearchBarClicked(true);
   const closeSearchBar = () => setIsSearchBarClicked(false);
 
+  const isNoData = useRef(-1);
+
   const logOut = () => {
     if (!userData) return;
     setLogOutPopupOpen(false);
-    logoutDispatch({ email: userData.email, name: userData.name });
+    logoutDispatch({ email: userData.email, name: userData?.name });
     route.params.goToLogin();
   };
 
@@ -67,12 +69,6 @@ function ProductManagement({ route, navigation }) {
   }
 
   useEffect(() => {
-    loadProductCntDispatch({
-      keyword: keyword ? keyword : '',
-    });
-  }, [keyword]);
-
-  useEffect(() => {
     if (!reloadBlock) {
       setPage(1);
     }
@@ -88,15 +84,15 @@ function ProductManagement({ route, navigation }) {
     if (!hasMore && page > 1) return;
     if (reloadBlock) return;
     loadProductListDispatch({ page, keyword: keyword ? keyword : '', sort: selectedFilter });
+    if (loadProductList.data?.length === 0) isNoData.current = 0;
   }, [page, hasMore, keyword, selectedFilter]);
 
   return (
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
-      <Header name={userData.name} iconClick={showLogOutPopup} />
-      {totalCnt === 0 && !keyword && !loadProductList.loading
-        ?
-        <>
+      <Header name={userData?.name} iconClick={showLogOutPopup} />
+      {totalCnt === 0 && keyword === '' && isNoData.current === -1
+        ? <>
           <EmptyView />
           {logOutPopupOpen &&
             <BottomPopup
@@ -114,7 +110,6 @@ function ProductManagement({ route, navigation }) {
         >
           <SearchBar
             pressed={isSearchBarClicked}
-            keyword={keyword}
             setKeyword={setKeyword}
             openSearchBar={openSearchBar}
             closeSearchBar={closeSearchBar}

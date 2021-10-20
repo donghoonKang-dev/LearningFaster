@@ -11,11 +11,11 @@ const windowHeight = Dimensions.get('window').height;
 function SignUp4({ navigation }) {
   const state = useSignupState();
   const onChange = useChangeSignup();
-  const { signupDispatch } = useAuth();
+  const { signup, signupDispatch } = useAuth();
 
   const onSignUp = () => {
     signupDispatch(state);
-    navigation.navigate('SignUp5');
+    if (signup.error === null) navigation.navigate('SignUp5');
   }
 
   return (

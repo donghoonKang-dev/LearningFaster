@@ -24,7 +24,7 @@ function SignUp7({ goToLogin }) {
                 <Text style={styles.whiteBtnText}>나중에 등록하기</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => alert('준비중인 서비스입니다.')}>
+            <TouchableWithoutFeedback onPress={() => alert('준비중인 서비스입니다. 개발팀에 문의해주세요.')}>
               <View style={styles.purpleBtnBox}>
                 <Text style={styles.purpleBtnText}>지금 등록하기</Text>
               </View>

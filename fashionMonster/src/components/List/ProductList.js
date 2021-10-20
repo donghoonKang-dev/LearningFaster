@@ -39,7 +39,7 @@ function ProductList({
         keyExtractor={(item, index) => `${item.id}${index}+${page}`}
         ListFooterComponent={renderFooter}
         onEndReached={loadMoreData}
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.1}
         refreshing={isLoading}
         onRefresh={onPullRefresh}
       />

@@ -9,7 +9,6 @@ import {
   Image,
   TouchableWithoutFeedback
 } from 'react-native';
-import Loading from '../components/Loading/Loading';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 import { THEME_PURPLE, THEME_WHITE } from '../styles/color';
 

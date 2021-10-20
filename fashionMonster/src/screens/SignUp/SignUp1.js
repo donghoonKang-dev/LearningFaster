@@ -40,8 +40,12 @@ function SignUp1({ navigation }) {
   }, [emailCheck]);
 
   const onClickNext = (userId, userPw, pwCheck) => {
-    if (userId.indexOf('@') === -1) {
-      alert('이메일 형식이 올바르지 않습니다.');
+    if (userId === '') {
+      alert('이메일을 입력해주세요.');
+      return -1;
+    }
+    if (emailError !== '') {
+      alert('이메일을 확인해주세요.');
       return -1;
     }
     if (userPw.length < 8) {

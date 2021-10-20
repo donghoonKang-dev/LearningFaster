@@ -6,7 +6,7 @@ import { THEME_PURPLE, THEME_WHITE, THEME_GRAY, THEME_BLACK } from '../../styles
 
 const STATUSBAR_HEIGHT = getStatusBarHeight();
 
-function PRHeader({ resetAllState, onSubmit, headerName }) {
+function PRHeader({ resetAllState, goToBack, onSubmit, headerName }) {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
@@ -19,12 +19,22 @@ function PRHeader({ resetAllState, onSubmit, headerName }) {
     <View style={styles.headerContainer}>
       <Text style={styles.textTitle}>{headerName}</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.resetButtonContainer}
-          onPress={openResetModal}
-        >
-          <Text style={styles.resetButtonText}>초기화</Text>
-        </TouchableOpacity>
+        {headerName === '상품 수정'
+          ?
+          <TouchableOpacity
+            style={styles.resetButtonContainer}
+            onPress={goToBack}
+          >
+            <Text style={styles.resetButtonText}>뒤로 가기</Text>
+          </TouchableOpacity>
+          :
+          <TouchableOpacity
+            style={styles.resetButtonContainer}
+            onPress={openResetModal}
+          >
+            <Text style={styles.resetButtonText}>초기화</Text>
+          </TouchableOpacity>
+        }
         <TouchableOpacity
           style={styles.saveButtonContainer}
           onPress={openSaveModal}

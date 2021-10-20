@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,15 +7,26 @@ import {
   Text,
   Keyboard
 } from 'react-native';
+import _debounce from "lodash/debounce";
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
-function SearchBar({ pressed, keyword, setKeyword, openSearchBar, closeSearchBar }) {
+function SearchBar({ pressed, setKeyword, openSearchBar, closeSearchBar }) {
+  const [text, setText] = useState('');
+
+  const debounce = useCallback(_debounce((text) => {
+    setKeyword(text);
+  }, 400), []);
+
   const onClickCancel = () => {
-    setKeyword('');
+    setText('');
     closeSearchBar();
     Keyboard.dismiss();
   }
+
+  useEffect(() => {
+    debounce(text);
+  }, [text]);
 
   return (
     <View style={styles.searchBarContainer}>
@@ -23,8 +34,8 @@ function SearchBar({ pressed, keyword, setKeyword, openSearchBar, closeSearchBar
         <FeatherIcon name="search" size={20} color={THEME_GRAY} />
         <TextInput
           style={styles.textInput}
-          onChangeText={setKeyword}
-          value={keyword}
+          onChangeText={setText}
+          value={text}
           onPressIn={openSearchBar}
           placeholder="상품명을 입력해주세요."
           keyboardType="default"

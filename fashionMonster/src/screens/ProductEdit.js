@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, View, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 import Header from '../components/Header/PRHeader';
@@ -14,7 +14,6 @@ import ProductMixRate from '../components/ProductRegistration/ProductMixRate';
 import ProductMadeIn from '../components/ProductRegistration/ProductMadeIn';
 import ProductMinimumOrder from '../components/ProductRegistration/ProductMinimumOrder';
 import ProductDetail from '../components/ProductRegistration/ProductDetail';
-import Loading from '../components/Loading/Loading';
 import cateClassifier from '../utils/cateClassifier';
 import { useProduct } from '../modules/product/hook';
 import { useAuth } from '../modules/auth/hook';
@@ -45,6 +44,8 @@ function ProductEdit({ route, navigation }) {
   const [madeInDetail, setMadeInDetail] = useState('');
   const [canEach, setCanEach] = useState(false);
   const [desc, setDesc] = useState('');
+
+  const goToBack = () => navigation.navigate('ProductManagement', { name: 'ProductManagement' });
 
   const resetAllState = () => {
     setImages([]);
@@ -139,14 +140,14 @@ function ProductEdit({ route, navigation }) {
       {!loadDetail.data ? (
         <>
           <FocusAwareStatusBar barStyle="dark-content" backgroundColor={THEME_WHITE} translucent={true} />
-          <SafeAreaView>
-            <Loading />
+          <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <ActivityIndicator size="large" />
           </SafeAreaView>
         </>
       ) : (
         <>
           <FocusAwareStatusBar barStyle="dark-content" backgroundColor={THEME_WHITE} translucent={true} />
-          <Header resetAllState={resetAllState} onSubmit={onSubmit} headerName="상품 수정" />
+          <Header resetAllState={resetAllState} goToBack={goToBack} onSubmit={onSubmit} headerName="상품 수정" />
           <KeyboardAwareScrollView innerRef={value => { refScroll.current = value }}>
             <ScrollView
               contentInsetAdjustmentBehavior="automatic">

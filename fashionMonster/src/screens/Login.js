@@ -54,7 +54,7 @@ function Login({ navigation }) {
       ? await Linking.openURL(kakaoURL)
       : console.log(kakaoURL)
     */
-    alert('준비중인 서비스입니다.');
+    alert('준비중인 서비스입니다. 개발팀에 문의해주세요.');
   });
 
   return (
