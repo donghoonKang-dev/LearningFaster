@@ -5,10 +5,10 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  Switch,
   Alert,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
+import { Switch } from 'react-native-switch';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import StateBadge from '../Badge/StateBadge';
@@ -84,15 +84,21 @@ function ProdListItem({ productData, navigation }) {
             </View>
           </View>
         </TouchableOpacity>
-        <View style={styles.switchContainer}>
-          <Switch
-            trackColor={{ false: THEME_LIGHTGRAY, true: THEME_LIGHTPURPLE }}
-            thumbColor={THEME_WHITE}
-            ios_backgroundColor={THEME_LIGHTGRAY}
-            onValueChange={toggleValue}
-            value={productData.isActive ? true : false}
-          />
-        </View>
+        <Switch
+          value={productData.isActive ? true : false}
+          onValueChange={toggleValue}
+          activeText={'판매중'}
+          activeTextStyle={{ fontSize: 12 }}
+          inActiveText={'품절'}
+          inactiveTextStyle={{ fontSize: 12 }}
+          backgroundActive={THEME_LIGHTPURPLE}
+          backgroundInactive={THEME_GRAY}
+          containerStyle={{ marginRight: 12 }}
+          changeValueImmediately={true}
+          circleSize={27}
+          barHeight={17}
+          circleBorderWidth={1}
+        />
       </View>
     </Swipeable>
   );

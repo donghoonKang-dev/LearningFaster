@@ -38,12 +38,12 @@ export const bottomDetail = [
     placeholder: '밑위',
   },
   {
-    id: 5,
+    id: 4,
     value: 'thigh',
     placeholder: '허벅지단면',
   },
   {
-    id: 6,
+    id: 5,
     value: 'hem',
     placeholder: '밑단',
   },
@@ -66,3 +66,8 @@ export const skirtDetail = [
     placeholder: '밑단',
   },
 ];
+
+export const shoesDetail = [
+  { id: 1, value: 'heel', placeholder: '굽높이' },
+  { id: 2, value: 'feet', placeholder: '발볼 넓이 ' },
+]

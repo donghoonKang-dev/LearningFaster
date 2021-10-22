@@ -91,7 +91,7 @@ function ProductManagement({ route, navigation }) {
     <>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME_PURPLE} translucent={true} />
       <Header name={userData?.name} iconClick={showLogOutPopup} />
-      {totalCnt === 0 && keyword === '' && isNoData.current === -1
+      {totalCnt === 0 && keyword !== '' //&& isNoData.current === -1
         ? <>
           <EmptyView />
           {logOutPopupOpen &&

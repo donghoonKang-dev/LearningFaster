@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, StatusBar, SafeAreaView, Dimensions, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import '@react-native-picker/picker';
 import SignupButton from '../../components/Button/SignupButton';
 import SignupInput from '../../components/Input/SignupInput';
 import MIcon from 'react-native-vector-icons/MaterialIcons'
-import { arcades } from '../../assets/data/arcades';
+import { useUI } from '../../modules/ui';
 import { useChangeSignup, useSignupState } from '../../hooks/SignUpProvider';
 import { THEME_WHITE, THEME_GRAY, THEME_LIGHTGRAY, THEME_BLACK } from '../../styles/color';
 
 const windowHeight = Dimensions.get('window').height;
 
 function SignUp2({ navigation }) {
+  const [stores, setStores] = useState([]);
+
+  const { storeList, loadStoreDispatch } = useUI();
   const state = useSignupState();
   const onChange = useChangeSignup();
 
@@ -20,6 +23,19 @@ function SignUp2({ navigation }) {
   };
 
   const onClickNext = () => navigation.navigate('SignUp3');
+
+  useEffect(() => {
+    loadStoreDispatch();
+  }, []);
+
+  useEffect(() => {
+    storeList?.map(v => {
+      const id = v.id;
+      const label = v.name;
+      const value = v.id;
+      setStores(prev => prev.concat({ id, label, value }));
+    })
+  }, [storeList]);
 
   return (
     <View style={styles.background}>
@@ -40,7 +56,7 @@ function SignUp2({ navigation }) {
             <View style={styles.selectBox}>
               <RNPickerSelect
                 placeholder={{ id: 0, label: '선택해주세요', value: 0 }}
-                items={arcades}
+                items={stores}
                 style={pickerSelectStyles}
                 onValueChange={(value) => selectArcade(value)}
                 value={state.StoreId}

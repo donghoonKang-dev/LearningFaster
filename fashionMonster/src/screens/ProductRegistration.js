@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
@@ -17,6 +17,8 @@ import ProductDetail from '../components/ProductRegistration/ProductDetail';
 import cateClassifier from '../utils/cateClassifier';
 import { useProduct } from '../modules/product/hook';
 import { useAuth } from '../modules/auth/hook';
+import { useDispatch } from 'react-redux';
+import { resetRegist } from '../modules/product/slice';
 import { THEME_WHITE } from '../styles/color';
 
 function ProductRegistration() {
@@ -24,6 +26,7 @@ function ProductRegistration() {
   const {
     login: { data: userData },
   } = useAuth();
+  const dispatch = useDispatch();
 
   const refScroll = useRef(null);
 
@@ -31,6 +34,7 @@ function ProductRegistration() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [cateName, setCateName] = useState('');
   const [mainCate, setMainCate] = useState(0);
   const [subCate, setSubCate] = useState(0);
   const [middle, setMiddle] = useState([]);
@@ -48,6 +52,7 @@ function ProductRegistration() {
     setName('');
     setPrice('');
     setCategory('');
+    setCateName('');
     setMainCate(0);
     setSubCate(0);
     setMiddle([]);
@@ -66,10 +71,12 @@ function ProductRegistration() {
     if (images.length === 0) return alert('이미지를 1개이상 입력해주세요');
     if (!name.trim()) return alert('상품명을 기입해주세요');
     if (!price.trim()) return alert('상품가격을 기입해주세요');
-    if (!mixRate.trim()) return alert('소재 혼용률을 입력해주세요');
-    if (madeIn == null && madeInDetail == '') return alert('제조국가를 입력해주세요');
+    if (!mainCate && !subCate) return alert('카테고리를 선택해주세요');
     if (colors.length === 0) return alert('색상을 선택해주세요');
     if (sizes.length === 0) return alert('사이즈를 입력해주세요');
+    if (!mixRate.trim()) return alert('소재 혼용률을 입력해주세요');
+    if (madeIn === 0) return alert('제조국가를 입력해주세요');
+    if (madeIn === 3 && madeInDetail === '') return alert('제조국가명을 입력해주세요');
     addProductDispatch({
       BrandId: userData.id,
       CategoryMainId: mainCate,
@@ -92,6 +99,18 @@ function ProductRegistration() {
       resetAllState();
     }
   };
+
+  useEffect(() => {
+    setCateName(cateClassifier(category));
+    setSizes([]);
+  }, [category]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetRegist());
+    };
+  }, [dispatch]);
+
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor={THEME_WHITE} translucent={true} />
@@ -131,9 +150,9 @@ function ProductRegistration() {
             <ProductSize
               sizes={sizes}
               setSizes={setSizes}
-              category={category}
+              cateName={cateName}
             />
-            {cateClassifier(category) === 'clothes' &&
+            {cateName !== '' && cateName !== 'others' &&
               <ProductActualSize
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}

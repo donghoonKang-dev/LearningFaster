@@ -15,7 +15,7 @@ const initialState = {
   accountNumber: "",
   accountName: "",
   StoreId: null,
-}
+};
 
 export default function SignUpProvider({ children }) {
   const [signupForm, setSignupForm] = useState(initialState);
@@ -25,7 +25,7 @@ export default function SignUpProvider({ children }) {
       ...prev,
       [key]: value
     }));
-  }
+  };
 
   return (
     <FormStateContext.Provider value={signupForm}>
@@ -35,21 +35,21 @@ export default function SignUpProvider({ children }) {
         </FormChangeContext.Provider>
       </FormDispatchContext.Provider>
     </FormStateContext.Provider>
-  )
-}
+  );
+};
 
 export const useSignupState = () => {
   const context = useContext(FormStateContext)
   if (!context) throw new Error('cannot find state');
   return context;
-}
+};
 export const useSetSignup = () => {
   const context = useContext(FormDispatchContext);
-  if (!context) throw new Error('connot find setStateAction')
-  return context
-}
+  if (!context) throw new Error('connot find setStateAction');
+  return context;
+};
 export const useChangeSignup = () => {
   const context = useContext(FormChangeContext);
-  if (!context) throw new Error('connot find onChangeHandler')
-  return context
-}
+  if (!context) throw new Error('connot find onChangeHandler');
+  return context;
+};

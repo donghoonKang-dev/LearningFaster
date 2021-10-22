@@ -33,6 +33,8 @@ function ProductCategory({
       setSubName('');
     } else {
       setMain(value);
+      if (value === 7) setSub(67); //원피스
+      if (value === 8) setSub(68); //치마
       if (value !== 0) setMiddle(category.find(v => v.id === value).middle);
       if (value !== 0) setMainName(category.find(v => v.id === value).label);
     }

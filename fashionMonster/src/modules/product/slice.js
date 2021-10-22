@@ -64,11 +64,8 @@ const productSlice = createSlice({
         state.loadProductList.error = payload;
       })
       .addCase(toggleActiveAction.fulfilled, (state, { payload }) => {
-        const idx = state.loadProductList.data?.findIndex(
-          v => v.id === +payload
-        );
+        const idx = state.loadProductList.data?.findIndex(v => v.id === +payload);
         if (idx === -1) return;
-
         const isActive = (state.loadProductList.data)[idx].isActive;
         state.loadProductList.data[idx] = {
           ...state.loadProductList.data[idx],
@@ -116,11 +113,8 @@ const productSlice = createSlice({
         state.updateProduct.data = payload;
         state.updateProduct.error = null;
 
-        const idx = state.loadProductList.data?.findIndex(
-          v => v.id === +payload.id
-        );
+        const idx = state.loadProductList.data?.findIndex(v => v.id === +payload.id);
         if (idx === -1) return;
-
         state.loadProductList.data[idx] = {
           ...state.loadProductList.data[idx],
           state: 2,
@@ -136,9 +130,7 @@ const productSlice = createSlice({
       })
       .addCase(removeProductAction.fulfilled, (state, { payload }) => {
         state.totalCnt = state.totalCnt - 1;
-        const idx = state.loadProductList.data?.findIndex(
-          v => v.id === +payload
-        );
+        const idx = state.loadProductList.data?.findIndex(v => v.id === +payload);
         if (idx === -1) return;
         state.loadProductList.data = (
           state.loadProductList.data

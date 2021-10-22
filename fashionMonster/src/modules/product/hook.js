@@ -4,7 +4,6 @@ import {
   loadDetailAction,
   loadProductCntAction,
   loadProductListAction,
-  ProductPayload,
   removeProductAction,
   toggleActiveAction,
   updateProductAction,

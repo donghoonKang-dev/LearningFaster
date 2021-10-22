@@ -3,9 +3,9 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.fstr.shop';
 //axios.defaults.baseURL = 'http://192.168.0.38:8081';
-//axios.defaults.baseURL = 'http://3.38.18.80:8080';
 axios.defaults.withCredentials = true;
 
+//NOTE: 로그인
 export const loginAction = createAsyncThunk(
   'auth/login',
   async (loginData, { rejectWithValue }) => {
@@ -18,6 +18,7 @@ export const loginAction = createAsyncThunk(
   }
 );
 
+//NOTE: 로그아웃
 export const logoutAction = createAsyncThunk(
   'auth/logout',
   async ({ email }, { rejectWithValue }) => {
@@ -29,6 +30,7 @@ export const logoutAction = createAsyncThunk(
     }
   });
 
+//NOTE: 회원가입
 export const signupAction = createAsyncThunk(
   'auth/signup',
   async (signupData, { rejectWithValue }) => {
@@ -40,6 +42,7 @@ export const signupAction = createAsyncThunk(
     }
   });
 
+//NOTE: 추천인 등록
 export const addRecommAction = createAsyncThunk(
   'auth/addRecomm',
   async (recommenderData, { rejectWithValue }) => {
@@ -51,6 +54,7 @@ export const addRecommAction = createAsyncThunk(
     }
   });
 
+//NOTE: 이메일 중복 확인
 export const emailCheckAction = createAsyncThunk(
   'auth/emailCheck',
   async (email, { rejectWithValue }) => {

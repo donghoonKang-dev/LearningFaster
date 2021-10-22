@@ -1,7 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
 import CommonSizeInput from './CommonSizeInput';
-import { topDetail, bottomDetail, skirtDetail } from '../../assets/data/cateSize';
+import { topDetail, bottomDetail, skirtDetail, shoesDetail } from '../../assets/data/cateSize';
 
 function DetailInputs({ selectedCategory, selectedSize, sizes, setSizes }) {
   const onChangeInput = (selectedSize, label, text) => {
@@ -22,40 +21,85 @@ function DetailInputs({ selectedCategory, selectedSize, sizes, setSizes }) {
     setSizes(copiedSizes);
   }
   return (
-    <View>
-      {selectedCategory === '여성상의' |
-        selectedCategory === '남성상의' |
-        selectedCategory === '여성 아우터' |
-        selectedCategory === '남성 아우터' |
-        selectedCategory === '원피스'
-        ?
-        topDetail.map(detail => (
-          sizes.findIndex(v => v.value === selectedSize) !== -1
-            ?
-            <CommonSizeInput
-              key={detail.id}
-              placeholder={detail.placeholder}
-              label={detail.value}
-              selectedSize={selectedSize}
-              sizes={sizes}
-              onChangeInput={onChangeInput}
-            />
-            :
-            null
-        ))
-        : (selectedCategory === '여성하의' | selectedCategory === '남성하의'
-          ? bottomDetail : skirtDetail).map(detail => (
-            <CommonSizeInput
-              key={detail.id}
-              placeholder={detail.placeholder}
-              label={detail.value}
-              selectedSize={selectedSize}
-              sizes={sizes}
-              onChangeInput={onChangeInput}
-            />
-          ))
-      }
-    </View>
+    <>
+      {(function () {
+        switch (selectedCategory) {
+          case '여성상의':
+          case '남성상의':
+          case '여성 아우터':
+          case '남성 아우터':
+          case '원피스':
+            return (
+              topDetail.map(detail => (
+                sizes.findIndex(v => v.value === selectedSize) !== -1
+                  ?
+                  <CommonSizeInput
+                    key={detail.id}
+                    placeholder={detail.placeholder}
+                    label={detail.value}
+                    selectedSize={selectedSize}
+                    sizes={sizes}
+                    onChangeInput={onChangeInput}
+                  />
+                  :
+                  null
+              ))
+            );
+          case '여성하의':
+          case '남성하의':
+            return (
+              bottomDetail.map(detail => (
+                sizes.findIndex(v => v.value === selectedSize) !== -1
+                  ?
+                  <CommonSizeInput
+                    key={detail.id}
+                    placeholder={detail.placeholder}
+                    label={detail.value}
+                    selectedSize={selectedSize}
+                    sizes={sizes}
+                    onChangeInput={onChangeInput}
+                  />
+                  :
+                  null
+              ))
+            );
+          case '스커트':
+            return (
+              skirtDetail.map(detail => (
+                sizes.findIndex(v => v.value === selectedSize) !== -1
+                  ?
+                  <CommonSizeInput
+                    key={detail.id}
+                    placeholder={detail.placeholder}
+                    label={detail.value}
+                    selectedSize={selectedSize}
+                    sizes={sizes}
+                    onChangeInput={onChangeInput}
+                  />
+                  :
+                  null
+              ))
+            )
+          default:
+            return (
+              shoesDetail.map(detail => (
+                sizes.findIndex(v => v.value === selectedSize) !== -1
+                  ?
+                  <CommonSizeInput
+                    key={detail.id}
+                    placeholder={detail.placeholder}
+                    label={detail.value}
+                    selectedSize={selectedSize}
+                    sizes={sizes}
+                    onChangeInput={onChangeInput}
+                  />
+                  :
+                  null
+              ))
+            )
+        }
+      })()}
+    </>
   );
 };
 

@@ -2,13 +2,13 @@ import axios from 'axios';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function imagePicker(images, setImages) {
+  if (images.length === 20) return alert('사진은 최대 20장까지 등록 가능합니다.');
   launchImageLibrary({ mediaType: 'photo' }, (response) => {
     if (response.didCancel) {
       console.log('User cancelled image picker');
     } else if (response.error) {
       console.log('ImagePicker Error: ', response.error);
     } else {
-      // https://www.python2.net/questions-1239008.htm
       const formData = new FormData();
       response.assets.forEach(file => formData.append('image', {
         name: file.fileName,

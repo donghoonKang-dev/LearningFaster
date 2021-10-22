@@ -4,7 +4,6 @@ import { hasMoreData, isMoreLoading } from './slice';
 
 axios.defaults.baseURL = 'https://api.fstr.shop';
 //axios.defaults.baseURL = 'http://192.168.0.38:8081';
-//axios.defaults.baseURL = 'http://3.38.18.80:8080';
 axios.defaults.withCredentials = true;
 
 const delay = async () => {
@@ -15,6 +14,7 @@ const delay = async () => {
   });
 };
 
+//NOTE: 상품 리스트
 export const loadProductListAction = createAsyncThunk(
   'product/loadProductList',
   async (loadListData, { rejectWithValue, dispatch }) => {
@@ -32,6 +32,7 @@ export const loadProductListAction = createAsyncThunk(
   }
 );
 
+//NOTE: 진열상태 수정
 export const toggleActiveAction = createAsyncThunk(
   'product/toggleActive',
   async ({ productId, isActive }, { rejectWithValue }) => {
@@ -46,6 +47,7 @@ export const toggleActiveAction = createAsyncThunk(
   }
 );
 
+//NOTE: 상품 디테일 조회
 export const loadDetailAction = createAsyncThunk(
   'product/loadDetail',
   async ({ type, productId }, { rejectWithValue }) => {
@@ -61,6 +63,7 @@ export const loadDetailAction = createAsyncThunk(
   }
 );
 
+//NOTE: 상품 등록
 export const addProductAction = createAsyncThunk(
   'product/addProduct',
   async (addProductData, { rejectWithValue }) => {
@@ -76,6 +79,7 @@ export const addProductAction = createAsyncThunk(
   }
 );
 
+//NOTE: 상품 수정
 export const updateProductAction = createAsyncThunk(
   'product/updateProduct',
   async (updateProductData, { rejectWithValue }) => {
@@ -91,6 +95,7 @@ export const updateProductAction = createAsyncThunk(
   }
 );
 
+//NOTE: 상품 삭제
 export const removeProductAction = createAsyncThunk(
   'product/removeProduct',
   async ({ ProductId }, { rejectWithValue }) => {
@@ -103,6 +108,7 @@ export const removeProductAction = createAsyncThunk(
   }
 );
 
+//NOTE: 총 상품 수량
 export const loadProductCntAction = createAsyncThunk(
   'product/loadCnt',
   async ({ keyword }, { rejectWithValue }) => {

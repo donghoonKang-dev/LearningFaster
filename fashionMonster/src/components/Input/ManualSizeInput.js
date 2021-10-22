@@ -40,7 +40,7 @@ function SizeRow({ sizes, setSizes, onChangeText, index, last }) {
   );
 };
 
-function ManualSizeInput({ sizes, setSizes }) {
+function ManualSizeInput({ sizes, setSizes, cateName }) {
   const onChangeText = (text) => {
     if (sizes.length === 0) {
       setSizes([
@@ -59,12 +59,12 @@ function ManualSizeInput({ sizes, setSizes }) {
   };
 
   useEffect(() => {
-    if (sizes.length === 0) {
+    if (cateName === 'others' && sizes.length === 0) {
       setSizes([
         { id: 1, value: 'CUSTOM', detail: [{ name: 'custom', value: '' }] },
       ]);
     }
-  }, [])
+  }, [cateName, sizes])
 
   return (
     <View>

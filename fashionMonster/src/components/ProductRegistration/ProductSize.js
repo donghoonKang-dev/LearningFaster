@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import SizeButton from '../Button/SizeButton';
 import ManualSizeInput from '../Input/ManualSizeInput';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
-import cateClassifier from '../../utils/cateClassifier';
 import { clothesSize, shoesSize } from '../../assets/data/sizes';
 
-function ProductSize({ sizes, setSizes, category }) {
-  const [kindOf, setKindOf] = useState(cateClassifier(category));
-
-  useEffect(() => {
-    setKindOf(cateClassifier(category))
-  }, [category]);
-
+function ProductSize({ sizes, setSizes, cateName }) {
   const onChangeSize = (sizeData) => {
     const isFreeSize = sizeData.value === 'FREE';
     const isExist = sizes.findIndex(size => size.id === sizeData.id) !== -1;
-    isFreeSize
-      ? setSizes([sizeData])
-      : setSizes(prev => prev.filter(size => size.value !== 'FREE'))
-    isExist
-      ? setSizes(prev => prev.filter(size => size.id !== sizeData.id))
-      : setSizes(prev => [...prev, sizeData]);
+    if (isFreeSize) {
+      isExist
+        ? setSizes([])
+        : setSizes([sizeData])
+    } else {
+      setSizes(prev => prev.filter(size => size.value !== 'FREE'))
+      isExist
+        ? setSizes(prev => prev.filter(size => size.id !== sizeData.id))
+        : setSizes(prev => [...prev, sizeData]);
+    }
   };
 
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 사이즈</Text>
-      {category === '' &&
+      {cateName === '' &&
         <Text style={styles.itemDesc}>카테고리를 선택하면 사이즈 선택이 가능합니다.</Text>
       }
-      {kindOf === 'clothes' &&
+      {cateName === 'clothes' &&
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
           <View style={styles.buttonContainer}>
@@ -45,7 +42,7 @@ function ProductSize({ sizes, setSizes, category }) {
           </View>
         </>
       }
-      {kindOf === 'shoes' &&
+      {cateName === 'shoes' &&
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 중복으로 선택 가능합니다.</Text>
           <View style={styles.buttonContainer}>
@@ -60,10 +57,10 @@ function ProductSize({ sizes, setSizes, category }) {
           </View>
         </>
       }
-      {category !== '' && kindOf === 'others' &&
+      {cateName !== '' && cateName === 'others' &&
         <>
           <Text style={styles.itemDesc}>판매중인 상품 사이즈를 추가해주세요.</Text>
-          <ManualSizeInput sizes={sizes} setSizes={setSizes} />
+          <ManualSizeInput sizes={sizes} setSizes={setSizes} cateName={cateName} />
         </>
       }
     </View>

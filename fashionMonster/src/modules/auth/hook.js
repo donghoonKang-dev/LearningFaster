@@ -25,12 +25,12 @@ export function useAuth() {
 
   return {
     signup,
-    emailCheck,
+    signupDispatch,
     login,
     loginDispatch,
-    logoutDispatch,
-    signupDispatch,
-    addRecommDispatch,
+    emailCheck,
     emailCheckDispatch,
+    logoutDispatch,
+    addRecommDispatch,
   };
 }
