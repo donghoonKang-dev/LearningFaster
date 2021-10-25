@@ -220,8 +220,8 @@ export const category = [
 export const clothesCategory = [
   '여성상의',
   '남성상의',
-  '여성 아우터',
-  '남성 아우터',
+  '여성아우터',
+  '남성아우터',
   '여성하의',
   '남성하의',
   '원피스',

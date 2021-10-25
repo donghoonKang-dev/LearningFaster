@@ -13,13 +13,18 @@ import ProductActualSize from '../components/ProductRegistration/ProductActualSi
 import ProductMixRate from '../components/ProductRegistration/ProductMixRate';
 import ProductMadeIn from '../components/ProductRegistration/ProductMadeIn';
 import ProductMinimumOrder from '../components/ProductRegistration/ProductMinimumOrder';
-import ProductDetail from '../components/ProductRegistration/ProductDetail';
+import ProductDesc from '../components/ProductRegistration/ProductDesc';
 import cateClassifier from '../utils/cateClassifier';
 import { useProduct } from '../modules/product/hook';
 import { useAuth } from '../modules/auth/hook';
 import { useDispatch } from 'react-redux';
 import { resetRegist } from '../modules/product/slice';
 import { THEME_WHITE } from '../styles/color';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Each child in a list should have a unique "key" prop',
+]);
 
 function ProductRegistration() {
   const { addProduct, addProductDispatch } = useProduct();
@@ -175,7 +180,7 @@ function ProductRegistration() {
               canEach={canEach}
               setCanEach={setCanEach}
             />
-            <ProductDetail
+            <ProductDesc
               refScroll={refScroll}
               desc={desc}
               setDesc={setDesc}

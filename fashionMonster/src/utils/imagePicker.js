@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { launchImageLibrary } from 'react-native-image-picker';
 
-export default function imagePicker(images, setImages) {
+export default function imagePicker(images, setImages, setUploading) {
   if (images.length === 20) return alert('사진은 최대 20장까지 등록 가능합니다.');
   launchImageLibrary({ mediaType: 'photo' }, (response) => {
     if (response.didCancel) {
@@ -16,7 +16,11 @@ export default function imagePicker(images, setImages) {
         uri:
           Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
       }));
-      axios.post('https://api.fstr.shop/seller/upload/image/product', formData).then((res) => setImages(prev => [...prev, ...res.data]));
+      setUploading(true);
+      axios
+        .post('https://api.fstr.shop/seller/upload/image/product', formData)
+        .then((res) => setImages(prev => [...prev, ...res.data]))
+        .finally(() => setUploading(false));
     }
   });
 };

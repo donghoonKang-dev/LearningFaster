@@ -8,24 +8,30 @@ import {
 } from 'react-native';
 import { THEME_LIGHTGRAY, THEME_GRAY } from '../../styles/color';
 
-function ColorButton({ colorData, onChangeColor, selected }) {
+function ColorButton({
+  colorData,
+  background,
+  color,
+  onChangeColor,
+  selected }) {
+
   return (
     <TouchableWithoutFeedback onPress={() => onChangeColor(colorData)}>
-      {colorData.background[0] === '#'
-        || (colorData.background[0] === 'h' && !selected)
+      {background?.indexOf('#') !== -1
+        || (background?.indexOf('http') !== -1 && !selected)
         ?
         <View
           style={[
             styles.colorBox,
             colorData.id % 3 === 2 && { marginHorizontal: '5%' },
             selected && colorData.id === 2 && { borderWidth: 1 },
-            selected && { backgroundColor: colorData.background }
+            selected && { backgroundColor: background }
           ]}
         >
           <Text
-            style={[styles.colorText, selected ? { color: colorData.color } : null]}
+            style={[styles.colorText, selected ? { color: color } : null]}
           >
-            {colorData.value}
+            {colorData.name}
           </Text>
         </View>
         :
@@ -37,11 +43,11 @@ function ColorButton({ colorData, onChangeColor, selected }) {
         >
           <ImageBackground
             style={styles.imgBg}
-            source={{ uri: colorData.background }}
+            source={{ uri: background }}
             imageStyle={{ borderRadius: 8 }}
           >
-            <Text style={[styles.colorText, { color: colorData.color }]}>
-              {colorData.value}
+            <Text style={[styles.colorText, { color: color }]}>
+              {colorData.name}
             </Text>
           </ImageBackground>
         </View>

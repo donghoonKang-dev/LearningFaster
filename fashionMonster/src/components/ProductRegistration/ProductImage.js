@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   TouchableWithoutFeedback,
+  ActivityIndicator
 } from 'react-native';
 import HelpIconPopup from '../Popup/HelpIconPopup';
 import imagePicker from '../../utils/imagePicker';
@@ -18,6 +19,7 @@ function ProductImage({ images, setImages, deleteImage }) {
   const iconRef = useRef();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [iconPositionX, setIconPositionX] = useState(0);
   const [iconPositionY, setIconPositionY] = useState(0);
 
@@ -72,7 +74,7 @@ function ProductImage({ images, setImages, deleteImage }) {
         <View style={styles.imageRegBox}>
           <TouchableOpacity
             style={{ alignItems: 'center' }}
-            onPress={() => { imagePicker(images, setImages) }}
+            onPress={() => { imagePicker(images, setImages, setUploading) }}
           >
             <MCIcon name="camera" size={26} color={THEME_GRAY} />
             <Text style={{ marginTop: 6, fontSize: 12, color: THEME_GRAY }}>
@@ -80,6 +82,7 @@ function ProductImage({ images, setImages, deleteImage }) {
             </Text>
           </TouchableOpacity>
         </View>
+        {uploading && <ActivityIndicator size="small" style={{ marginHorizontal: 50 }} />}
         {images.map((image, index) => renderImage(image, index))}
       </ScrollView>
     </View>

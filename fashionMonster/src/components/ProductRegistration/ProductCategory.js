@@ -3,8 +3,9 @@ import { StyleSheet, View, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import '@react-native-picker/picker';
 import EntIcon from 'react-native-vector-icons/Entypo';
+import { useUI } from '../../modules/ui'
 import { THEME_LIGHTGRAY, THEME_GRAY, THEME_BLACK, THEME_PURPLE, THEME_WHITE } from '../../styles/color';
-import { category } from '../../assets/data/category';
+import getCategory from '../../utils/getCategory';
 
 function ProductCategory({
   main,
@@ -15,6 +16,8 @@ function ProductCategory({
   setFullName,
   middle,
   setMiddle }) {
+  const { categoryList, loadCategoryDispatch } = useUI();
+
   const [mainName, setMainName] = useState('');
   const [subName, setSubName] = useState('');
 
@@ -35,8 +38,8 @@ function ProductCategory({
       setMain(value);
       if (value === 7) setSub(67); //원피스
       if (value === 8) setSub(68); //치마
-      if (value !== 0) setMiddle(category.find(v => v.id === value).middle);
-      if (value !== 0) setMainName(category.find(v => v.id === value).label);
+      if (value !== 0) setMiddle(categoryList?.map(category => getCategory(category))?.find(v => v.id === value).middle);
+      if (value !== 0) setMainName(categoryList?.map(category => getCategory(category))?.find(v => v.id === value).label);
     }
   };
 
@@ -47,10 +50,14 @@ function ProductCategory({
     }
     else {
       setSub(value);
-      setSubName(middle.find(v => v.id === value).label);
+      setSubName(middle?.find(v => v.id === value).label);
       setFullName(mainName + ' / ' + subName);
     }
   };
+
+  useEffect(() => {
+    loadCategoryDispatch();
+  }, []);
 
   useEffect(() => {
     if (subName) setFullName(mainName + ' / ' + subName);
@@ -61,8 +68,8 @@ function ProductCategory({
       <Text style={styles.itemTitle}>상품 카테고리</Text>
       <View style={styles.inputContainer}>
         <RNPickerSelect
-          placeholder={{ id: 0, label: '메인 카테고리를 선택해주세요.', value: 0 }}
-          items={category}
+          placeholder={{ id: 0, label: "메인 카테고리를 선택해주세요", value: 0 }}
+          items={categoryList?.map(category => getCategory(category))}
           style={pickerSelectStyles}
           onValueChange={(value) => selectMainCategory(value)}
           value={main}
@@ -74,7 +81,7 @@ function ProductCategory({
       </View>
       <View style={styles.inputContainer}>
         <RNPickerSelect
-          placeholder={{ id: 0, label: '세부 카테고리를 선택해주세요.', value: 0 }}
+          placeholder={{ id: 0, label: "세부 카테고리를 선택해주세요", value: 0 }}
           items={middle}
           style={pickerSelectStyles}
           onValueChange={(value) => selectSubCategory(value)}

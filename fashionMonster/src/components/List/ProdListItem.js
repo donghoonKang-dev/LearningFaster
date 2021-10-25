@@ -26,11 +26,12 @@ function ProdListItem({ productData, navigation }) {
   const { toggleActiveDispatch, removeProductDispatch } = useProduct();
 
   const goToDetail = () => {
-    navigation.navigate('ProductEdit', {
+    navigation.navigate('ProductDetail', {
       selectedId: productData.id,
       selectedIsUpdated: productData.state === 2 ? true : false,
-    })
-  }
+      selectedName: productData.name,
+    });
+  };
 
   const toggleValue = () => {
     toggleActiveDispatch({
@@ -55,6 +56,11 @@ function ProdListItem({ productData, navigation }) {
     )
   };
 
+  const timeExtractor = (data) => {
+    const date = dayjs(data);
+    return date.year() + '년 ' + date.month() + '월 ' + date.date() + '일 ' + date.hour() + '시 ' + date.minute() + '분'
+  }
+
   const renderRightActions = () => {
     return (
       <View style={styles.swipedRow}>
@@ -76,8 +82,25 @@ function ProdListItem({ productData, navigation }) {
             source={{ uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/original/product/${productData.thumbnail}` }}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.productName}>{productData.name}</Text>
-            <Text style={styles.productInfo}>{dayjs(productData.createdAt).format('YY년 MM월 DD일 HH시')}</Text>
+            {productData.UpdatedProduct &&
+              productData.UpdatedProduct.name !== productData.name
+              ?
+              <View style={styles.nameContainer}>
+                <Text
+                  style={styles.updatedName}
+                  ellipsizeMode='tail'
+                  numberOfLines={1}
+                >
+                  {productData.UpdatedProduct.name}
+                </Text>
+                <Text style={styles.originName}>{productData.name}</Text>
+              </View>
+              :
+              <Text style={[styles.updatedName, { marginBottom: 20 }]}>
+                {productData.name}
+              </Text>
+            }
+            <Text style={styles.productInfo}>{timeExtractor(productData.createdAt)}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text style={styles.productInfo}>{productData.price.toLocaleString() + ' 원'}</Text>
               <StateBadge state={productData.state} />
@@ -95,8 +118,8 @@ function ProdListItem({ productData, navigation }) {
           backgroundInactive={THEME_GRAY}
           containerStyle={{ marginRight: 12 }}
           changeValueImmediately={true}
-          circleSize={27}
-          barHeight={17}
+          circleSize={30}
+          barHeight={18}
           circleBorderWidth={1}
         />
       </View>
@@ -127,12 +150,23 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     justifyContent: 'space-between',
   },
-  productName: {
+  nameContainer: {
+    maxWidth: 120,
+    marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  updatedName: {
     fontSize: 16,
-    marginBottom: 15,
+  },
+  originName: {
+    marginLeft: 4,
+    textDecorationLine: 'line-through',
+    fontSize: 12,
+    color: THEME_GRAY,
   },
   productInfo: {
-    fontSize: 14,
+    fontSize: 12,
     color: THEME_GRAY,
   },
   switchContainer: {

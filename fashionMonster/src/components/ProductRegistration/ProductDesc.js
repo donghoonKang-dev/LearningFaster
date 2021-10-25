@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { THEME_LIGHTGRAY } from '../../styles/color';
 
-function ProductDetail({ refScroll, desc, setDesc }) {
+function ProductDesc({ refScroll, desc, setDesc }) {
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상세 설명</Text>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProductDetail;
+export default ProductDesc;

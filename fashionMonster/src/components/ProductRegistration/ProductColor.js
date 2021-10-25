@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import ColorButton from '../Button/ColorButton';
-import { colors as colorData } from '../../assets/data/colors';
+import { useUI } from '../../modules/ui';
+import getColor from '../../utils/getColor';
 
 function ProductColor({ colors, setColors }) {
+  const { colorList, loadColorDispatch } = useUI();
+
   function onChangeColor(colorData) {
     const isExist = colors.findIndex(color => color.id === colorData.id) !== -1;
     isExist
@@ -11,16 +14,22 @@ function ProductColor({ colors, setColors }) {
       : setColors([...colors, colorData]);
   };
 
+  useEffect(() => {
+    loadColorDispatch();
+  }, [])
+
   return (
     <View style={styles.itemContainer}>
       <Text style={styles.itemTitle}>상품 색상</Text>
       <View style={styles.buttonContainer}>
         {
-          colorData.map(
+          colorList?.map(
             (color) => (
               <ColorButton
                 key={color.id}
                 colorData={color}
+                background={getColor(color)?.background}
+                color={getColor(color)?.color}
                 onChangeColor={onChangeColor}
                 selected={colors.findIndex(v => v.id === color.id) !== -1}
               />

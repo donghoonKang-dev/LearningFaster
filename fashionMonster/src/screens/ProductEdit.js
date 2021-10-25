@@ -13,16 +13,23 @@ import ProductActualSize from '../components/ProductRegistration/ProductActualSi
 import ProductMixRate from '../components/ProductRegistration/ProductMixRate';
 import ProductMadeIn from '../components/ProductRegistration/ProductMadeIn';
 import ProductMinimumOrder from '../components/ProductRegistration/ProductMinimumOrder';
-import ProductDetail from '../components/ProductRegistration/ProductDetail';
+import ProductDesc from '../components/ProductRegistration/ProductDesc';
 import cateClassifier from '../utils/cateClassifier';
-import { category as cate } from '../assets/data/category';
 import { useProduct } from '../modules/product/hook';
 import { useAuth } from '../modules/auth/hook';
+import { useUI } from '../modules/ui';
 import { useDispatch } from 'react-redux';
 import { resetDetail } from '../modules/product/slice';
+import getCategory from '../utils/getCategory';
 import { THEME_WHITE } from '../styles/color';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Each child in a list should have a unique "key" prop',
+]);
 
 function ProductEdit({ route, navigation }) {
+  const { categoryList, loadCategoryDispatch } = useUI();
   const { loadDetailDispatch, loadDetail, updateProductDispatch } = useProduct();
   const {
     login: { data: userData },
@@ -47,8 +54,9 @@ function ProductEdit({ route, navigation }) {
   const [madeInDetail, setMadeInDetail] = useState('');
   const [canEach, setCanEach] = useState(false);
   const [desc, setDesc] = useState('');
+  const [cateArray, setCateArray] = useState('');
 
-  const goToBack = () => navigation.navigate('ProductManagement', { name: 'ProductManagement' });
+  const goToBack = () => navigation.goBack();
 
   const resetAllState = () => {
     setImages([]);
@@ -101,7 +109,13 @@ function ProductEdit({ route, navigation }) {
   };
 
   useEffect(() => {
+    loadCategoryDispatch();
     loadDetailDispatch({ type: route.params.selectedIsUpdated ? 'updated' : 'exist', productId: route.params.selectedId });
+  }, []);
+
+  useEffect(() => {
+    if (!categoryList) return;
+    setCateArray(categoryList.map(category => getCategory(category)));
   }, []);
 
   useEffect(() => {
@@ -125,7 +139,7 @@ function ProductEdit({ route, navigation }) {
     setPrice(data.price + '');
     setImages(data.pImages);
     setMainCate(data.CategoryMain.id);
-    setMiddle(cate.find(v => v.id === data.CategoryMain.id)?.middle);
+    if (cateArray.length !== 0) setMiddle(cateArray.find(v => v.id === data.CategoryMain.id)?.middle);
     setSubCate(data.CategoryMiddle.id);
     setColors(mappedColor);
     setMixRate(data.composition);
@@ -138,6 +152,7 @@ function ProductEdit({ route, navigation }) {
 
   useEffect(() => {
     setCateName(cateClassifier(category));
+    setSizes([]);
   }, [category]);
 
   useEffect(() => {
@@ -145,8 +160,6 @@ function ProductEdit({ route, navigation }) {
       dispatch(resetDetail());
     };
   }, [dispatch]);
-
-  console.log(sizes)
 
   return (
     <>
@@ -220,7 +233,7 @@ function ProductEdit({ route, navigation }) {
                   canEach={canEach}
                   setCanEach={setCanEach}
                 />
-                <ProductDetail
+                <ProductDesc
                   refScroll={refScroll}
                   desc={desc}
                   setDesc={setDesc}
